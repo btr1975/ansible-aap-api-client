@@ -23,7 +23,7 @@ class Inventory(_BaseConnection):
     :param ssl_verify: The SSL verification True or False or a path to a certificate
     """
 
-    uri = "/inventories/"
+    inventories_uri = "/inventories/"
 
     def get_all_inventories(self) -> dict:
         """Get all inventories
@@ -31,7 +31,7 @@ class Inventory(_BaseConnection):
         :rtype: Dict
         :returns: Response
         """
-        return self._get(uri=self.uri).json()
+        return self._get(uri=self.inventories_uri).json()
 
     def get_inventory(self, name: str) -> dict:
         """Get all instances of an inventory by name
@@ -47,7 +47,7 @@ class Inventory(_BaseConnection):
         if not isinstance(name, str):
             raise TypeError(f"name must be of type str, but received {type(name)}")
 
-        return self._get(uri=self.uri, params={"name": name}).json()
+        return self._get(uri=self.inventories_uri, params={"name": name}).json()
 
     def get_inventory_id(self, name: str) -> int:
         """Get the id of an inventory if one exists
@@ -64,12 +64,54 @@ class Inventory(_BaseConnection):
         if not isinstance(name, str):
             raise TypeError(f"name must be of type str, but received {type(name)}")
 
-        response = self._get(uri=self.uri, params={"name": name}).json().get("results")
+        response = self._get(uri=self.inventories_uri, params={"name": name}).json().get("results")
 
         if len(response) == 1:
             return response[0].get("id")
 
         raise ValueError(f"found {len(response)} inventories with name {name}")
+
+    def delete_inventory(self, inventory_id: int) -> int:
+        """Delete inventory
+
+        :type inventory_id: int
+        :param inventory_id: The inventory id
+
+        :rtype: Integer
+        :returns: Response Status Code
+
+        :raises TypeError: If inventory_id is not of type int
+        """
+        uri = f"{self.inventories_uri}{inventory_id}/"
+
+        if not isinstance(inventory_id, int):
+            raise TypeError(f"inventory_id must be of type int, but received {type(inventory_id)}")
+
+        return self._delete(uri=uri).status_code
+
+    def update_inventory(self, inventory_id: int, inventory: InventoryRequestSchema) -> dict:
+        """Update inventory
+
+        :type inventory_id: int
+        :param inventory_id: The inventory id
+        :type inventory: InventoryRequestSchema
+        :param inventory: The inventory data
+
+        :rtype: Dict
+        :returns: Response
+
+        :raises TypeError: If inventory is not a InventoryRequestSchema
+        :raises TypeError: If inventory_id is not of type int
+        """
+        uri = f"{self.inventories_uri}{inventory_id}/"
+
+        if not isinstance(inventory_id, int):
+            raise TypeError(f"inventory_id must be of type int, but received {type(inventory_id)}")
+
+        if not isinstance(inventory, InventoryRequestSchema):
+            raise TypeError(f"inventory must be of type InventoryRequestSchema, but received {type(inventory)}")
+
+        return self._patch(uri=uri, json_data=inventory.dict()).json()
 
     def create_inventory(self, inventory: InventoryRequestSchema) -> dict:
         """Create inventory
@@ -85,9 +127,9 @@ class Inventory(_BaseConnection):
         if not isinstance(inventory, InventoryRequestSchema):
             raise TypeError(f"inventory must be of type InventoryRequestSchema, but received {type(inventory)}")
 
-        return self._post(uri=self.uri, json_data=inventory.dict()).json()
+        return self._post(uri=self.inventories_uri, json_data=inventory.dict()).json()
 
-    def add_host(self, inventory_id: int, host: InventoryHostRequestSchema) -> dict:
+    def add_host_to_inventory(self, inventory_id: int, host: InventoryHostRequestSchema) -> dict:
         """Add host to inventory
 
         :type inventory_id: int
@@ -100,7 +142,7 @@ class Inventory(_BaseConnection):
 
         :raises TypeError: If host is not an InventoryHostRequestSchema
         """
-        uri = f"{self.uri}{inventory_id}/hosts/"
+        uri = f"{self.inventories_uri}{inventory_id}/hosts/"
 
         if not isinstance(inventory_id, int):
             raise TypeError(f"inventory_id must be of type int, but received {type(inventory_id)}")
@@ -110,7 +152,7 @@ class Inventory(_BaseConnection):
 
         return self._post(uri=uri, json_data=host.dict()).json()
 
-    def add_group(self, inventory_id: int, group: InventoryGroupRequestSchema) -> dict:
+    def add_group_to_inventory(self, inventory_id: int, group: InventoryGroupRequestSchema) -> dict:
         """Add group to inventory
 
         :type inventory_id: int
@@ -123,7 +165,7 @@ class Inventory(_BaseConnection):
 
         :raises TypeError: If group is not an InventoryGroupRequestSchema
         """
-        uri = f"{self.uri}{inventory_id}/groups/"
+        uri = f"{self.inventories_uri}{inventory_id}/groups/"
 
         if not isinstance(inventory_id, int):
             raise TypeError(f"inventory_id must be of type int, but received {type(inventory_id)}")

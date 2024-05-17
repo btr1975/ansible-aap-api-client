@@ -64,6 +64,32 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
 
         return response
 
+    def _patch(self, uri: str, json_data: Optional[dict] = None) -> requests.Response:
+        """Protected patch method
+
+        :type uri: str
+        :param uri: The uri to patch
+        :type json_data: Optional[dict]
+        :param json_data: The JSON data to patch
+
+        :rtype: requests.Response
+        :return: A response object
+        """
+        url = f"{self.base_url}{self.api_version}{uri}"
+        response = requests.patch(
+            url=url,
+            auth=(self.username, self.password),
+            headers=self.headers,
+            json=json_data,
+            verify=self.ssl_verify,
+            timeout=30,
+        )
+
+        if not response.ok:  # pragma: no cover
+            response.raise_for_status()
+
+        return response
+
     def _get(self, uri: str, params: Optional[dict] = None) -> requests.Response:
         """Protected GET method
 
@@ -81,6 +107,32 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
             auth=(self.username, self.password),
             params=params,
             headers=self.headers,
+            verify=self.ssl_verify,
+            timeout=30,
+        )
+
+        if not response.ok:  # pragma: no cover
+            response.raise_for_status()
+
+        return response
+
+    def _delete(self, uri: str, json_data: Optional[dict] = None) -> requests.Response:
+        """Protected delete method
+
+        :type uri: str
+        :param uri: The uri to delete
+        :type json_data: Optional[dict]
+        :param json_data: The JSON data to delete
+
+        :rtype: requests.Response
+        :return: A response object
+        """
+        url = f"{self.base_url}{self.api_version}{uri}"
+        response = requests.delete(
+            url=url,
+            auth=(self.username, self.password),
+            headers=self.headers,
+            json=json_data,
             verify=self.ssl_verify,
             timeout=30,
         )

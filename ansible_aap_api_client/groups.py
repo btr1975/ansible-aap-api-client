@@ -3,7 +3,7 @@ AAP Groups
 """
 
 from ansible_aap_api_client.base_connection import _BaseConnection
-from ansible_aap_api_client.schemas import InventoryHostRequestSchema
+from ansible_aap_api_client.schemas import InventoryHostRequestSchema, InventoryGroupRequestSchema
 
 
 class Group(_BaseConnection):
@@ -19,7 +19,7 @@ class Group(_BaseConnection):
     :param ssl_verify: The SSL verification True or False or a path to a certificate
     """
 
-    uri = "/groups/"
+    groups_uri = "/groups/"
 
     def get_all_groups(self) -> dict:
         """Get all groups
@@ -27,7 +27,7 @@ class Group(_BaseConnection):
         :rtype: Dict
         :returns: Response
         """
-        return self._get(uri=self.uri).json()
+        return self._get(uri=self.groups_uri).json()
 
     def get_group(self, name: str) -> dict:
         """Get all instances of a group by name
@@ -43,7 +43,7 @@ class Group(_BaseConnection):
         if not isinstance(name, str):
             raise TypeError(f"name must be of type str, but received {type(name)}")
 
-        return self._get(uri=self.uri, params={"name": name}).json()
+        return self._get(uri=self.groups_uri, params={"name": name}).json()
 
     def get_group_id(self, name: str) -> int:
         """Get the id of a group if one exists
@@ -60,14 +60,56 @@ class Group(_BaseConnection):
         if not isinstance(name, str):
             raise TypeError(f"name must be of type str, but received {type(name)}")
 
-        response = self._get(uri=self.uri, params={"name": name}).json().get("results")
+        response = self._get(uri=self.groups_uri, params={"name": name}).json().get("results")
 
         if len(response) == 1:
             return response[0].get("id")
 
         raise ValueError(f"found {len(response)} groups with name {name}")
 
-    def add_host(self, group_id: int, host: InventoryHostRequestSchema) -> dict:
+    def delete_group(self, group_id: int) -> int:
+        """Delete group
+
+        :type group_id: int
+        :param group_id: The group id
+
+        :rtype: Integer
+        :returns: Response Status Code
+
+        :raises TypeError: If inventory_id is not of type int
+        """
+        uri = f"{self.groups_uri}{group_id}/"
+
+        if not isinstance(group_id, int):
+            raise TypeError(f"group_id must be of type int, but received {type(group_id)}")
+
+        return self._delete(uri=uri).status_code
+
+    def update_group(self, group_id: int, group: InventoryGroupRequestSchema) -> dict:
+        """Update group
+
+        :type group_id: int
+        :param group_id: The group id
+        :type group: InventoryGroupRequestSchema
+        :param group: The group data
+
+        :rtype: Dict
+        :returns: Response
+
+        :raises TypeError: If inventory is not a InventoryRequestSchema
+        :raises TypeError: If inventory_id is not of type int
+        """
+        uri = f"{self.groups_uri}{group_id}/"
+
+        if not isinstance(group_id, int):
+            raise TypeError(f"group_id must be of type int, but received {type(group_id)}")
+
+        if not isinstance(group, InventoryGroupRequestSchema):
+            raise TypeError(f"group must be of type InventoryGroupRequestSchema, but received {type(group)}")
+
+        return self._patch(uri=uri, json_data=group.dict()).json()
+
+    def add_host_to_group(self, group_id: int, host: InventoryHostRequestSchema) -> dict:
         """Add host to group
 
         :type group_id: int
@@ -80,7 +122,7 @@ class Group(_BaseConnection):
 
         :raises TypeError: If host is not of type InventoryHostRequestSchema
         """
-        uri = f"{self.uri}{group_id}/hosts/"
+        uri = f"{self.groups_uri}{group_id}/hosts/"
 
         if not isinstance(group_id, int):
             raise TypeError(f"group_id must be of type int, but received {type(group_id)}")

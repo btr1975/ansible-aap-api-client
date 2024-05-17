@@ -95,11 +95,21 @@ def requests_add_group_inventory(requests_mock_fixture):
 
 
 @pytest.fixture
+def requests_delete_inventory(requests_mock_fixture):
+    return requests_mock_fixture.delete("https://localhost:5000/api/v2/inventories/2/", status_code=202)
+
+
+@pytest.fixture
 def requests_get_single_group(requests_mock_fixture):
     return requests_mock_fixture.get(
         "https://localhost:5000/api/v2/groups/",
         json=json.loads(get_fixture_data("single-group-response.json")),
     )
+
+
+@pytest.fixture
+def requests_delete_group(requests_mock_fixture):
+    return requests_mock_fixture.delete("https://localhost:5000/api/v2/groups/2/", status_code=202)
 
 
 @pytest.fixture
