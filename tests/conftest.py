@@ -92,3 +92,27 @@ def requests_add_group_inventory(requests_mock_fixture):
         "https://localhost:5000/api/v2/inventories/38/groups/",
         json=json.loads(get_fixture_data("added-group-to-inventory-response.json")),
     )
+
+
+@pytest.fixture
+def requests_get_single_group(requests_mock_fixture):
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/groups/",
+        json=json.loads(get_fixture_data("single-group-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_get_two_group(requests_mock_fixture):
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/groups/",
+        json=json.loads(get_fixture_data("two-group-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_add_host_group(requests_mock_fixture):
+    return requests_mock_fixture.post(
+        "https://localhost:5000/api/v2/groups/2/hosts/",
+        json=json.loads(get_fixture_data("added-host-to-group-response.json")),
+    )

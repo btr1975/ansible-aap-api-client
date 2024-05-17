@@ -1,0 +1,125 @@
+{
+    "count": 2,
+    "next": null,
+    "previous": null,
+    "results": [
+        {
+            "id": 2,
+            "type": "group",
+            "url": "/api/v2/groups/2/",
+            "related": {
+                "created_by": "/api/v2/users/35/",
+                "modified_by": "/api/v2/users/35/",
+                "variable_data": "/api/v2/groups/2/variable_data/",
+                "hosts": "/api/v2/groups/2/hosts/",
+                "potential_children": "/api/v2/groups/2/potential_children/",
+                "children": "/api/v2/groups/2/children/",
+                "all_hosts": "/api/v2/groups/2/all_hosts/",
+                "job_events": "/api/v2/groups/2/job_events/",
+                "job_host_summaries": "/api/v2/groups/2/job_host_summaries/",
+                "activity_stream": "/api/v2/groups/2/activity_stream/",
+                "inventory_sources": "/api/v2/groups/2/inventory_sources/",
+                "ad_hoc_commands": "/api/v2/groups/2/ad_hoc_commands/",
+                "inventory": "/api/v2/inventories/38/"
+            },
+            "summary_fields": {
+                "inventory": {
+                    "id": 38,
+                    "name": "test_inventory",
+                    "description": "This is a test inventory",
+                    "has_active_failures": false,
+                    "total_hosts": 1,
+                    "hosts_with_active_failures": 0,
+                    "total_groups": 2,
+                    "has_inventory_sources": false,
+                    "total_inventory_sources": 0,
+                    "inventory_sources_with_failures": 0,
+                    "organization_id": 1,
+                    "kind": ""
+                },
+                "created_by": {
+                    "id": 35,
+                    "username": "btr75",
+                    "first_name": "Me",
+                    "last_name": "Me"
+                },
+                "modified_by": {
+                    "id": 35,
+                    "username": "btr75",
+                    "first_name": "Me",
+                    "last_name": "Me"
+                },
+                "user_capabilities": {
+                    "edit": true,
+                    "delete": true,
+                    "copy": true
+                }
+            },
+            "created": "2024-05-17T17:21:57.300384Z",
+            "modified": "2024-05-17T17:21:57.300390Z",
+            "name": "test_group",
+            "description": "This is a test group",
+            "inventory": 38,
+            "variables": "{\"test_group_var\": \"test_group_value\"}"
+        },
+        {
+            "id": 3,
+            "type": "group",
+            "url": "/api/v2/groups/3/",
+            "related": {
+                "created_by": "/api/v2/users/35/",
+                "modified_by": "/api/v2/users/35/",
+                "variable_data": "/api/v2/groups/3/variable_data/",
+                "hosts": "/api/v2/groups/3/hosts/",
+                "potential_children": "/api/v2/groups/3/potential_children/",
+                "children": "/api/v2/groups/3/children/",
+                "all_hosts": "/api/v2/groups/3/all_hosts/",
+                "job_events": "/api/v2/groups/3/job_events/",
+                "job_host_summaries": "/api/v2/groups/3/job_host_summaries/",
+                "activity_stream": "/api/v2/groups/3/activity_stream/",
+                "inventory_sources": "/api/v2/groups/3/inventory_sources/",
+                "ad_hoc_commands": "/api/v2/groups/3/ad_hoc_commands/",
+                "inventory": "/api/v2/inventories/38/"
+            },
+            "summary_fields": {
+                "inventory": {
+                    "id": 38,
+                    "name": "test_inventory",
+                    "description": "This is a test inventory",
+                    "has_active_failures": false,
+                    "total_hosts": 1,
+                    "hosts_with_active_failures": 0,
+                    "total_groups": 2,
+                    "has_inventory_sources": false,
+                    "total_inventory_sources": 0,
+                    "inventory_sources_with_failures": 0,
+                    "organization_id": 1,
+                    "kind": ""
+                },
+                "created_by": {
+                    "id": 35,
+                    "username": "btr75",
+                    "first_name": "Me",
+                    "last_name": "Me"
+                },
+                "modified_by": {
+                    "id": 35,
+                    "username": "btr75",
+                    "first_name": "Me",
+                    "last_name": "Me"
+                },
+                "user_capabilities": {
+                    "edit": true,
+                    "delete": true,
+                    "copy": true
+                }
+            },
+            "created": "2024-05-17T19:04:07.922119Z",
+            "modified": "2024-05-17T19:04:07.922124Z",
+            "name": "test_group_2",
+            "description": "This is a test group 2",
+            "inventory": 38,
+            "variables": "{\"test_group_var\": \"test_group_value\"}"
+        }
+    ]
+}
