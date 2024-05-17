@@ -2,14 +2,14 @@
 # NOTICE THE FIRST LINE INCLUDES THE requirements.txt
 #
 -r requirements.txt
-build
-black
-tomli
-pytest-cov
-sphinx
-pylint
-myst-parser
-sphinx_rtd_theme
-sphinxcontrib-mermaid
-twine
-requests-mock
+build~=1.2.1
+black~=24.4.2
+tomli~=2.0.1
+pytest-cov~=5.0.0
+sphinx~=7.3.7
+pylint~=3.2.0
+myst-parser~=3.0.1
+sphinx_rtd_theme~=2.0.0
+sphinxcontrib-mermaid~=0.9.2
+twine~=5.1.0
+requests-mock~=1.12.1
