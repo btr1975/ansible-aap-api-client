@@ -36,6 +36,42 @@ class _BaseSchema:
 
         return json.dumps(self.dict(), indent=indent)
 
+    @staticmethod
+    def validate_string(name: str, value: str) -> None:
+        """Validate a string
+
+        :type value: str
+        :param value: Value to validate
+        :type name: str
+        :param name: Name of the value
+        """
+        if not isinstance(value, str):
+            raise TypeError(f"{name} must be a string, but received {type(value)}")
+
+    @staticmethod
+    def validate_boolean(name: str, value: bool) -> None:
+        """Validate a boolean
+
+        :type value: bool
+        :param value: Value to validate
+        :type name: str
+        :param name: Name of the value
+        """
+        if not isinstance(value, bool):
+            raise TypeError(f"{name} must be a boolean, but received {type(value)}")
+
+    @staticmethod
+    def validate_integer(name: str, value: int) -> None:
+        """Validate an integer
+
+        :type value: int
+        :param value: Value to validate
+        :type name: str
+        :param name: Name of the value
+        """
+        if not isinstance(value, int):
+            raise TypeError(f"{name} must be an integer, but received {type(value)}")
+
 
 @dataclass
 class InventoryRequestSchema(_BaseSchema):
@@ -69,6 +105,16 @@ class InventoryRequestSchema(_BaseSchema):
         if isinstance(self.variables, dict):
             self.variables = json.dumps(self.variables)
 
+        self.validate_string("name", self.name)
+        self.validate_string("description", self.description)
+        self.validate_integer("organization", self.organization)
+        self.validate_string("kind", self.kind)
+
+        if self.host_filter:
+            self.validate_string("host_filter", self.host_filter)
+
+        self.validate_boolean("prevent_instance_group_fallback", self.prevent_instance_group_fallback)
+
 
 @dataclass
 class InventoryHostRequestSchema(_BaseSchema):
@@ -96,6 +142,11 @@ class InventoryHostRequestSchema(_BaseSchema):
         if isinstance(self.variables, dict):
             self.variables = json.dumps(self.variables)
 
+        self.validate_string("name", self.name)
+        self.validate_string("description", self.description)
+        self.validate_boolean("enabled", self.enabled)
+        self.validate_string("instance_id", self.instance_id)
+
 
 @dataclass
 class InventoryGroupRequestSchema(_BaseSchema):
@@ -116,3 +167,6 @@ class InventoryGroupRequestSchema(_BaseSchema):
     def __post_init__(self):
         if isinstance(self.variables, dict):
             self.variables = json.dumps(self.variables)
+
+        self.validate_string("name", self.name)
+        self.validate_string("description", self.description)
