@@ -19,8 +19,8 @@ class Inventory(_BaseConnection):
     :param username: The username to use
     :type password: str
     :param password: The password to use
-    :type ssl_verify: Optional[bool] = True
-    :param ssl_verify: The SSL verification flag
+    :type ssl_verify: Optional[Union[bool, str]] = True
+    :param ssl_verify: The SSL verification True or False or a path to a certificate
     """
 
     uri = "/inventories/"
@@ -41,7 +41,12 @@ class Inventory(_BaseConnection):
 
         :rtype: Dict
         :returns: Response
+
+        :raises TypeError: If name is not of type str
         """
+        if not isinstance(name, str):
+            raise TypeError(f"name must be of type str, but received {type(name)}")
+
         return self._get(uri=self.uri, params={"name": name}).json()
 
     def get_inventory_id(self, name: str) -> int:
@@ -54,7 +59,11 @@ class Inventory(_BaseConnection):
         :returns: The id of the inventory
 
         :raises ValueError: If zero or more than one instance is found
+        :raises TypeError: If name is not of type str
         """
+        if not isinstance(name, str):
+            raise TypeError(f"name must be of type str, but received {type(name)}")
+
         response = self._get(uri=self.uri, params={"name": name}).json().get("results")
 
         if len(response) == 1:
@@ -93,7 +102,10 @@ class Inventory(_BaseConnection):
         """
         uri = f"{self.uri}{inventory_id}/hosts/"
 
-        if not isinstance(host, InventoryRequestSchema):
+        if not isinstance(inventory_id, int):
+            raise TypeError(f"inventory_id must be of type int, but received {type(inventory_id)}")
+
+        if not isinstance(host, InventoryHostRequestSchema):
             raise TypeError(f"host must be of type InventoryHostRequestSchema, but received {type(host)}")
 
         return self._post(uri=uri, json_data=host.dict()).json()
@@ -112,6 +124,9 @@ class Inventory(_BaseConnection):
         :raises TypeError: If group is not an InventoryGroupRequestSchema
         """
         uri = f"{self.uri}{inventory_id}/groups/"
+
+        if not isinstance(inventory_id, int):
+            raise TypeError(f"inventory_id must be of type int, but received {type(inventory_id)}")
 
         if not isinstance(group, InventoryGroupRequestSchema):
             raise TypeError(f"group must be of type InventoryGroupRequestSchema, but received {type(group)}")

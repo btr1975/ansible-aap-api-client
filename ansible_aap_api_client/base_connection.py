@@ -2,7 +2,7 @@
 A base connection class for the AAP API client.
 """
 
-from typing import Optional
+from typing import Optional, Union
 import requests
 
 
@@ -15,16 +15,26 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
     :param username: The username to use
     :type password: str
     :param password: The password to use
-    :type ssl_verify: Optional[bool] = True
-    :param ssl_verify: The SSL verification flag
+    :type ssl_verify: Optional[Union[bool, str]] = True
+    :param ssl_verify: The SSL verification True or False or a path to a certificate
 
     """
 
-    def __init__(self, base_url: str, username: str, password: str, ssl_verify: Optional[bool] = True) -> None:
+    def __init__(
+        self, base_url: str, username: str, password: str, ssl_verify: Optional[Union[bool, str]] = True
+    ) -> None:
         self.base_url = base_url
         self.username = username
         self.password = password
-        self.ssl_verify = ssl_verify
+        if isinstance(ssl_verify, str):
+            self.ssl_verify = ssl_verify
+
+        elif isinstance(ssl_verify, bool):
+            self.ssl_verify = ssl_verify
+
+        else:
+            raise TypeError(f"ssl_verify must be of type bool or str, but received {type(ssl_verify)}")
+
         self.api_version = "/api/v2"
         self.headers = {"Content-Type": "application/json"}
 
@@ -49,7 +59,7 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
             timeout=30,
         )
 
-        if not response.ok:
+        if not response.ok:  # pragma: no cover
             response.raise_for_status()
 
         return response
@@ -75,7 +85,7 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
             timeout=30,
         )
 
-        if not response.ok:
+        if not response.ok:  # pragma: no cover
             response.raise_for_status()
 
         return response

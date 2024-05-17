@@ -15,8 +15,8 @@ class Group(_BaseConnection):
     :param username: The username to use
     :type password: str
     :param password: The password to use
-    :type ssl_verify: Optional[bool] = True
-    :param ssl_verify: The SSL verification flag
+    :type ssl_verify: Optional[Union[bool, str]] = True
+    :param ssl_verify: The SSL verification True or False or a path to a certificate
     """
 
     uri = "/groups/"
@@ -37,7 +37,12 @@ class Group(_BaseConnection):
 
         :rtype: Dict
         :returns: Response
+
+        :raises TypeError: If name is not of type str
         """
+        if not isinstance(name, str):
+            raise TypeError(f"name must be of type str, but received {type(name)}")
+
         return self._get(uri=self.uri, params={"name": name}).json()
 
     def get_group_id(self, name: str) -> int:
@@ -50,7 +55,11 @@ class Group(_BaseConnection):
         :returns: The id of the group
 
         :raises ValueError: If zero or more than one instance is found
+        :raises TypeError: If name is not of type str
         """
+        if not isinstance(name, str):
+            raise TypeError(f"name must be of type str, but received {type(name)}")
+
         response = self._get(uri=self.uri, params={"name": name}).json().get("results")
 
         if len(response) == 1:
@@ -68,8 +77,13 @@ class Group(_BaseConnection):
 
         :rtype: Dict
         :returns: Response
+
+        :raises TypeError: If host is not of type InventoryHostRequestSchema
         """
         uri = f"{self.uri}{group_id}/hosts/"
+
+        if not isinstance(group_id, int):
+            raise TypeError(f"group_id must be of type int, but received {type(group_id)}")
 
         if not isinstance(host, InventoryHostRequestSchema):
             raise TypeError(f"host must be of type InventoryHostRequestSchema, but received {type(host)}")

@@ -26,6 +26,7 @@ IF "%1" == "pytest" (
 
 IF "%1" == "format" (
     black ansible_aap_api_client/
+    black tests/
     GOTO END
 )
 

@@ -1,0 +1,72 @@
+{
+    "id": 35,
+    "type": "host",
+    "url": "/api/v2/hosts/35/",
+    "related": {
+        "named_url": "/api/v2/hosts/test_host++test_inventory++Default/",
+        "created_by": "/api/v2/users/35/",
+        "modified_by": "/api/v2/users/35/",
+        "variable_data": "/api/v2/hosts/35/variable_data/",
+        "groups": "/api/v2/hosts/35/groups/",
+        "all_groups": "/api/v2/hosts/35/all_groups/",
+        "job_events": "/api/v2/hosts/35/job_events/",
+        "job_host_summaries": "/api/v2/hosts/35/job_host_summaries/",
+        "activity_stream": "/api/v2/hosts/35/activity_stream/",
+        "inventory_sources": "/api/v2/hosts/35/inventory_sources/",
+        "smart_inventories": "/api/v2/hosts/35/smart_inventories/",
+        "ad_hoc_commands": "/api/v2/hosts/35/ad_hoc_commands/",
+        "ad_hoc_command_events": "/api/v2/hosts/35/ad_hoc_command_events/",
+        "ansible_facts": "/api/v2/hosts/35/ansible_facts/",
+        "inventory": "/api/v2/inventories/38/"
+    },
+    "summary_fields": {
+        "inventory": {
+            "id": 38,
+            "name": "test_inventory",
+            "description": "This is a test inventory",
+            "has_active_failures": false,
+            "total_hosts": 0,
+            "hosts_with_active_failures": 0,
+            "total_groups": 1,
+            "has_inventory_sources": false,
+            "total_inventory_sources": 0,
+            "inventory_sources_with_failures": 0,
+            "organization_id": 1,
+            "kind": ""
+        },
+        "created_by": {
+            "id": 35,
+            "username": "btr75",
+            "first_name": "Me",
+            "last_name": "Me"
+        },
+        "modified_by": {
+            "id": 35,
+            "username": "btr75",
+            "first_name": "Me",
+            "last_name": "Me"
+        },
+        "user_capabilities": {
+            "edit": true,
+            "delete": true
+        },
+        "groups": {
+            "count": 0,
+            "results": []
+        },
+        "recent_jobs": []
+    },
+    "created": "2024-05-17T17:37:02.698411Z",
+    "modified": "2024-05-17T17:37:02.698416Z",
+    "name": "test_host",
+    "description": "This is a test host",
+    "inventory": 38,
+    "enabled": true,
+    "instance_id": "",
+    "variables": "{\"test_host_var\": \"test_host_value\"}",
+    "has_active_failures": false,
+    "has_inventory_sources": false,
+    "last_job": null,
+    "last_job_host_summary": null,
+    "ansible_facts_modified": null
+}

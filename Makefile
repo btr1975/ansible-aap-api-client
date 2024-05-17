@@ -33,6 +33,7 @@ coverage:
 
 format:
 	@black ansible_aap_api_client/
+	@black tests/
 
 pylint:
 	@pylint ansible_aap_api_client/
