@@ -62,10 +62,10 @@ class Group(_BaseConnection):
 
         response = self._get(uri=self.groups_uri, params={"name": name}).json().get("results")
 
-        if len(response) == 1:
-            return response[0].get("id")
+        if len(response) != 1:
+            raise ValueError(f"found {len(response)} groups with name {name}")
 
-        raise ValueError(f"found {len(response)} groups with name {name}")
+        return response[0]["id"]
 
     def delete_group(self, group_id: int) -> int:
         """Delete group

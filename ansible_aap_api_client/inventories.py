@@ -66,10 +66,10 @@ class Inventory(_BaseConnection):
 
         response = self._get(uri=self.inventories_uri, params={"name": name}).json().get("results")
 
-        if len(response) == 1:
-            return response[0].get("id")
+        if len(response) != 1:
+            raise ValueError(f"found {len(response)} inventories with name {name}")
 
-        raise ValueError(f"found {len(response)} inventories with name {name}")
+        return response[0]["id"]
 
     def delete_inventory(self, inventory_id: int) -> int:
         """Delete inventory

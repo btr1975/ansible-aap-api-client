@@ -126,3 +126,24 @@ def requests_add_host_group(requests_mock_fixture):
         "https://localhost:5000/api/v2/groups/2/hosts/",
         json=json.loads(get_fixture_data("added-host-to-group-response.json")),
     )
+
+
+@pytest.fixture
+def requests_get_single_host(requests_mock_fixture):
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/hosts/",
+        json=json.loads(get_fixture_data("single-host-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_get_two_host(requests_mock_fixture):
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/hosts/",
+        json=json.loads(get_fixture_data("two-host-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_delete_host(requests_mock_fixture):
+    return requests_mock_fixture.delete("https://localhost:5000/api/v2/hosts/2/", status_code=202)
