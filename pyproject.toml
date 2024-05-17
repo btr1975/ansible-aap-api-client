@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ansible-aap-api-client"
 dynamic = ["version", "readme", "dependencies"]
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 description = "A client to interact with Ansible AAP REST API"
 keywords = [
 ]
@@ -31,7 +31,6 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
