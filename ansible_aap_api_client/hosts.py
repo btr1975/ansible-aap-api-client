@@ -60,7 +60,7 @@ class Host(_BaseConnection):
         if not isinstance(name, str):
             raise TypeError(f"name must be of type str, but received {type(name)}")
 
-        response = self._get(uri=self.hosts_uri, params={"name": name}).json().get("results")
+        response = self.get_host(name=name).get("results")
 
         if len(response) != 1:
             raise ValueError(f"Expected 1 result, but received {len(response)}")

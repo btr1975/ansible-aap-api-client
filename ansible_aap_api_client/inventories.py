@@ -64,7 +64,7 @@ class Inventory(_BaseConnection):
         if not isinstance(name, str):
             raise TypeError(f"name must be of type str, but received {type(name)}")
 
-        response = self._get(uri=self.inventories_uri, params={"name": name}).json().get("results")
+        response = self.get_inventory(name=name).get("results")
 
         if len(response) != 1:
             raise ValueError(f"found {len(response)} inventories with name {name}")
