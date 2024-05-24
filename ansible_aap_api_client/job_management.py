@@ -1,0 +1,77 @@
+"""
+AAP Job Management
+"""
+
+from typing import Optional, Union
+import time
+from ansible_aap_api_client.inventory_management import InventoryManagement
+from ansible_aap_api_client.job_templates import JobTemplate
+from ansible_aap_api_client.jobs import Job
+
+
+class JobManagement(InventoryManagement, JobTemplate, Job):
+    """Job management class
+
+    :type base_url: str
+    :param base_url: The base url to use
+    :type username: str
+    :param username: The username to use
+    :type password: str
+    :param password: The password to use
+    :type ssl_verify: Union[bool, str]
+    :param ssl_verify: The SSL verification True or False or a path to a certificate
+    :type job_template_name: str
+    :param job_template_name: The name of the job template
+    :type inventory_name: str
+    :param inventory_name: The name of the inventory
+    """
+
+    def __init__(  # pylint: disable=too-many-arguments
+        self,
+        base_url: str,
+        username: str,
+        password: str,
+        ssl_verify: Union[bool, str],
+        job_template_name: str,
+        inventory_name: str,
+    ) -> None:
+        super().__init__(base_url=base_url, username=username, password=password, ssl_verify=ssl_verify)
+
+        self.job_template_name = job_template_name
+        self.job_template_id = self.get_job_template_id(name=self.job_template_name)
+        self.inventory_name = inventory_name
+        self.inventory_id = self.get_inventory_id(name=self.inventory_name)
+        self.job_id = self.launch_job_template(
+            job_template_id=self.job_template_id, inventory_id=self.inventory_id
+        ).get("id")
+
+    def poll_completion(self, print_status: Optional[bool] = False) -> str:
+        """Poll the completion of a job
+
+        :type print_status: Optional[bool] = False
+        :param print_status: Print the status of the job
+
+        :rtype: String
+        :returns: The completed status of the job
+        """
+        ok_statuses = ["successful", "failed", "error", "cancelled"]
+
+        job_status = "new"
+
+        if print_status:
+            print(f"Polling job_id {self.job_id} current status {job_status}")
+
+        while job_status not in ok_statuses:
+            time.sleep(5)
+            job_status = self.get_job_status(job_id=self.job_id)
+
+            if print_status:
+                print(f"Polling job_id {self.job_id} current status {job_status}")
+
+            if job_status in ok_statuses:
+                break
+
+        if print_status:
+            print(f"Polling job_id {self.job_id} completed status {job_status}")
+
+        return job_status

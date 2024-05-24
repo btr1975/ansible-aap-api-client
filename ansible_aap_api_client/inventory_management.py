@@ -36,35 +36,35 @@ class InventoryBuilder(InventoryManagement):
     :param username: The username to use
     :type password: str
     :param password: The password to use
-    :type ssl_verify: Optional[Union[bool, str]] = True
+    :type ssl_verify: Union[bool, str]
     :param ssl_verify: The SSL verification True or False or a path to a certificate
     """
 
     IOS_GROUP_VARS = {
         "ansible_connection": "ansible.netcommon.network_cli",
         "ansible_become": True,
-        "ansibel_become_method": "enable",
+        "ansible_become_method": "enable",
         "ansible_network_os": "ios",
     }
 
     IOSXR_GROUP_VARS = {
         "ansible_connection": "ansible.netcommon.network_cli",
         "ansible_become": True,
-        "ansibel_become_method": "enable",
+        "ansible_become_method": "enable",
         "ansible_network_os": "iosxr",
     }
 
     NXOS_GROUP_VARS = {
         "ansible_connection": "ansible.netcommon.network_cli",
         "ansible_become": True,
-        "ansibel_become_method": "enable",
+        "ansible_become_method": "enable",
         "ansible_network_os": "nxos",
     }
 
     EOS_GROUP_VARS = {
         "ansible_connection": "ansible.netcommon.network_cli",
         "ansible_become": True,
-        "ansibel_become_method": "enable",
+        "ansible_become_method": "enable",
         "ansible_network_os": "eos",
     }
 

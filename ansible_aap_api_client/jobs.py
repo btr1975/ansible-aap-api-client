@@ -2,6 +2,7 @@
 AAP Jobs
 """
 
+from typing import Optional, Literal
 from ansible_aap_api_client.base_connection import _BaseConnection
 
 
@@ -39,7 +40,44 @@ class Job(_BaseConnection):
 
         :raises TypeError: If name is not of type str
         """
+        uri = f"{self.jobs_uri}{job_id}/"
         if not isinstance(job_id, int):
             raise TypeError(f"job_id must be of type int, but received {type(job_id)}")
 
-        return self._get(uri=self.jobs_uri, params={"id": job_id}).json().get("results")[0]
+        return self._get(uri=uri).json()
+
+    def get_job_stdout(self, job_id: int, output_format: Optional[Literal["txt", "json", "html"]] = "txt") -> str:
+        """Get the stdout of a job by id, this is the ansible run log
+
+        :type job_id: int
+        :param job_id: The ID of the job
+        :type output_format: Optional[Literal["txt", "json", "html"]] = "txt"
+        :param output_format: The format of the output
+
+        :rtype: str
+        :returns: The stdout of the job
+
+        :raises TypeError: If name is not of type str
+        """
+        uri = f"{self.jobs_uri}{job_id}/stdout/"
+
+        if not isinstance(job_id, int):
+            raise TypeError(f"job_id must be of type int, but received {type(job_id)}")
+
+        return self._get(uri=uri, params={"format": output_format}).text
+
+    def get_job_status(self, job_id: int) -> str:
+        """Get the status of a job by id
+
+        :type job_id: int
+        :param job_id: The ID of the job
+
+        :rtype: str
+        :returns: The status of the job
+
+        :raises TypeError: If name is not of type str
+        """
+        if not isinstance(job_id, int):
+            raise TypeError(f"job_id must be of type int, but received {type(job_id)}")
+
+        return self.get_job(job_id=job_id).get("status")
