@@ -2,7 +2,7 @@
 Data schemas
 """
 
-from typing import Union, Optional
+from typing import Union, Optional, Literal
 import json
 from dataclasses import dataclass
 
@@ -170,3 +170,80 @@ class InventoryGroupRequestSchema(_BaseSchema):
 
         self.validate_string("name", self.name)
         self.validate_string("description", self.description)
+
+
+@dataclass
+class OrganizationRequestSchema(_BaseSchema):
+    """Organization Request Schema
+
+    :type name: str
+    :cvar name: Name of the Group
+    :type description: str
+    :cvar description: Description of the Group
+    :type max_hosts: Optional[int] = 0
+    :cvar max_hosts: The maximum hosts 0 means unlimited
+    :type default_environment: Optional[int] = None
+    :cvar default_environment: The id of the execution environment
+    """
+
+    name: str
+    description: str
+    max_hosts: Optional[int] = 0
+    default_environment: Optional[int] = None
+
+    def __post_init__(self):
+        self.validate_string("name", self.name)
+        self.validate_string("description", self.description)
+        self.validate_integer("max_hosts", self.max_hosts)
+
+        if self.default_environment:
+            self.validate_integer("default_environment", self.default_environment)
+
+
+@dataclass
+class JobTemplateRequestSchema(_BaseSchema):  # pylint: disable=too-many-instance-attributes
+    """Job Template Request Schema"""
+
+    name: Optional[str] = ""
+    description: Optional[str] = ""
+    job_type: Optional[Literal["run", "check"]] = "run"
+    inventory: Optional[int] = None
+    project: Optional[int] = None
+    playbook: Optional[str] = ""
+    scm_branch: Optional[str] = ""
+    forks: Optional[int] = 0
+    limit: Optional[str] = ""
+    verbosity: Optional[Literal[0, 1, 2, 3, 4, 5]] = 0
+    extra_vars: Optional[str] = ""
+    job_tags: Optional[str] = ""
+    force_handlers: Optional[bool] = False
+    skip_tags: Optional[str] = ""
+    start_at_task: Optional[str] = ""
+    timeout: Optional[int] = 0
+    use_fact_cache: Optional[bool] = False
+    execution_environment: Optional[int] = None
+    host_config_key: Optional[str] = ""
+    ask_scm_branch_on_launch: Optional[bool] = False
+    ask_diff_mode_on_launch: Optional[bool] = False
+    ask_variables_on_launch: Optional[bool] = False
+    ask_limit_on_launch: Optional[bool] = False
+    ask_tags_on_launch: Optional[bool] = False
+    ask_skip_tags_on_launch: Optional[bool] = False
+    ask_job_type_on_launch: Optional[bool] = False
+    ask_verbosity_on_launch: Optional[bool] = False
+    ask_inventory_on_launch: Optional[bool] = False
+    ask_credential_on_launch: Optional[bool] = False
+    ask_execution_environment_on_launch: Optional[bool] = False
+    ask_labels_on_launch: Optional[bool] = False
+    ask_forks_on_launch: Optional[bool] = False
+    ask_job_slice_count_on_launch: Optional[bool] = False
+    ask_timeout_on_launch: Optional[bool] = False
+    ask_instance_groups_on_launch: Optional[bool] = False
+    survey_enabled: Optional[bool] = False
+    become_enabled: Optional[bool] = False
+    diff_mode: Optional[bool] = False
+    allow_simultaneous: Optional[bool] = False
+    job_slice_count: Optional[int] = 1
+    webhook_service: Optional[Literal["", "github", "gitlab", "bitbucket_dc"]] = None
+    webhook_credential: Optional[int] = None
+    prevent_instance_group_fallback: Optional[bool] = False

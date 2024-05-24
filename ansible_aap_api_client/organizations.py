@@ -2,9 +2,8 @@
 AAP API client for organizations
 """
 
-
 from ansible_aap_api_client.base_connection import _BaseConnection
-from ansible_aap_api_client.schemas import InventoryHostRequestSchema
+from ansible_aap_api_client.schemas import OrganizationRequestSchema
 
 
 class Organization(_BaseConnection):
@@ -85,3 +84,47 @@ class Organization(_BaseConnection):
             raise TypeError(f"organization_id must be of type int, but received {type(organization_id)}")
 
         return self._delete(uri=uri).status_code
+
+    def update_organization(self, organization_id: int, organization: OrganizationRequestSchema) -> dict:
+        """Update a organization
+
+        :type organization_id: int
+        :param organization_id: The id of the OrganizationRequestSchema
+        :type organization: InventoryHostRequestSchema
+        :param organization: The organization object
+
+        :rtype: dict
+        :returns: The updated host
+
+        :raises TypeError: If organization_id is not of type int
+        :raises TypeError: If organization is not of type OrganizationRequestSchema
+        """
+        uri = f"{self.organizations_uri}{organization_id}/"
+
+        if not isinstance(organization_id, int):
+            raise TypeError(f"organization_id must be of type int, but received {type(organization_id)}")
+
+        if not isinstance(organization, OrganizationRequestSchema):
+            raise TypeError(
+                f"organization must be of type OrganizationRequestSchema, but received {type(organization)}"
+            )
+
+        return self._patch(uri=uri, json_data=organization.dict()).json()
+
+    def create_organization(self, organization: OrganizationRequestSchema):
+        """Create an organization
+
+        :type organization: OrganizationRequestSchema
+        :param organization: The organization object
+
+        :rtype: dict
+        :returns: The created organization
+
+        :raises TypeError: If organization is not of type OrganizationRequestSchema
+        """
+        if not isinstance(organization, OrganizationRequestSchema):
+            raise TypeError(
+                f"organization must be of type OrganizationRequestSchema, but received {type(organization)}"
+            )
+
+        return self._post(uri=self.organizations_uri, json_data=organization.dict()).json()
