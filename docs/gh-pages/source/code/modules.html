@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ansible_aap_api_client &mdash; ansible-aap-api-client v0.1.0 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/my_theme.css?v=f7a27adb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ansible_aap_api_client package" href="ansible_aap_api_client.html" />
+    <link rel="prev" title="ansible-aap-api-client documentation" href="../../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ansible-aap-api-client v0.1.0
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">ansible_aap_api_client</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html">ansible_aap_api_client package</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ansible-aap-api-client v0.1.0</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">ansible_aap_api_client</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/source/code/modules.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ansible-aap-api-client">
+<h1>ansible_aap_api_client<a class="headerlink" href="#ansible-aap-api-client" title="Link to this heading"></a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ansible_aap_api_client.html">ansible_aap_api_client package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.ansible_aap_api_client_cli">ansible_aap_api_client.ansible_aap_api_client_cli module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.ansible_aap_api_client_cli.cli"><code class="docutils literal notranslate"><span class="pre">cli()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.ansible_aap_api_client_cli.cli_argument_parser"><code class="docutils literal notranslate"><span class="pre">cli_argument_parser()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.base_connection">ansible_aap_api_client.base_connection module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.groups">ansible_aap_api_client.groups module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.groups.Group"><code class="docutils literal notranslate"><span class="pre">Group</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.groups.Group.add_host_to_group"><code class="docutils literal notranslate"><span class="pre">Group.add_host_to_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.groups.Group.delete_group"><code class="docutils literal notranslate"><span class="pre">Group.delete_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.groups.Group.get_all_groups"><code class="docutils literal notranslate"><span class="pre">Group.get_all_groups()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.groups.Group.get_group"><code class="docutils literal notranslate"><span class="pre">Group.get_group()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.groups.Group.get_group_id"><code class="docutils literal notranslate"><span class="pre">Group.get_group_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.groups.Group.groups_uri"><code class="docutils literal notranslate"><span class="pre">Group.groups_uri</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.groups.Group.update_group"><code class="docutils literal notranslate"><span class="pre">Group.update_group()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.hosts">ansible_aap_api_client.hosts module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.hosts.Host"><code class="docutils literal notranslate"><span class="pre">Host</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.hosts.Host.delete_host"><code class="docutils literal notranslate"><span class="pre">Host.delete_host()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.hosts.Host.get_all_hosts"><code class="docutils literal notranslate"><span class="pre">Host.get_all_hosts()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.hosts.Host.get_host"><code class="docutils literal notranslate"><span class="pre">Host.get_host()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.hosts.Host.get_host_id"><code class="docutils literal notranslate"><span class="pre">Host.get_host_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.hosts.Host.hosts_uri"><code class="docutils literal notranslate"><span class="pre">Host.hosts_uri</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.hosts.Host.update_host"><code class="docutils literal notranslate"><span class="pre">Host.update_host()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.inventories">ansible_aap_api_client.inventories module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory"><code class="docutils literal notranslate"><span class="pre">Inventory</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.add_group_to_inventory"><code class="docutils literal notranslate"><span class="pre">Inventory.add_group_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.add_host_to_inventory"><code class="docutils literal notranslate"><span class="pre">Inventory.add_host_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.create_inventory"><code class="docutils literal notranslate"><span class="pre">Inventory.create_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.delete_inventory"><code class="docutils literal notranslate"><span class="pre">Inventory.delete_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.get_all_inventories"><code class="docutils literal notranslate"><span class="pre">Inventory.get_all_inventories()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.get_inventory"><code class="docutils literal notranslate"><span class="pre">Inventory.get_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.get_inventory_id"><code class="docutils literal notranslate"><span class="pre">Inventory.get_inventory_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.inventories_uri"><code class="docutils literal notranslate"><span class="pre">Inventory.inventories_uri</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventories.Inventory.update_inventory"><code class="docutils literal notranslate"><span class="pre">Inventory.update_inventory()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.inventory_management">ansible_aap_api_client.inventory_management module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.EOS_GROUP_VARS"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.EOS_GROUP_VARS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.IOSXR_GROUP_VARS"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.IOSXR_GROUP_VARS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.IOS_GROUP_VARS"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.IOS_GROUP_VARS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.NXOS_GROUP_VARS"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.NXOS_GROUP_VARS</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_host_to_inventory"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.add_eos_host_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_hosts_to_inventory"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.add_eos_hosts_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_host_to_inventory"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.add_ios_host_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_hosts_to_inventory"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.add_ios_hosts_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_host_to_inventory"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.add_iosxr_host_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_hosts_to_inventory"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.add_iosxr_hosts_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_host_to_inventory"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.add_nxos_host_to_inventory()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_hosts_to_inventory"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder.add_nxos_hosts_to_inventory()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryManagement"><code class="docutils literal notranslate"><span class="pre">InventoryManagement</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.job_management">ansible_aap_api_client.job_management module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.job_management.JobManagement"><code class="docutils literal notranslate"><span class="pre">JobManagement</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.job_management.JobManagement.poll_completion"><code class="docutils literal notranslate"><span class="pre">JobManagement.poll_completion()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.job_templates">ansible_aap_api_client.job_templates module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.job_templates.JobTemplate"><code class="docutils literal notranslate"><span class="pre">JobTemplate</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.job_templates.JobTemplate.get_all_job_templates"><code class="docutils literal notranslate"><span class="pre">JobTemplate.get_all_job_templates()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.job_templates.JobTemplate.get_job_template"><code class="docutils literal notranslate"><span class="pre">JobTemplate.get_job_template()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.job_templates.JobTemplate.get_job_template_id"><code class="docutils literal notranslate"><span class="pre">JobTemplate.get_job_template_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.job_templates.JobTemplate.job_templates_uri"><code class="docutils literal notranslate"><span class="pre">JobTemplate.job_templates_uri</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.job_templates.JobTemplate.launch_job_template"><code class="docutils literal notranslate"><span class="pre">JobTemplate.launch_job_template()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.jobs">ansible_aap_api_client.jobs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.jobs.Job"><code class="docutils literal notranslate"><span class="pre">Job</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.jobs.Job.get_all_jobs"><code class="docutils literal notranslate"><span class="pre">Job.get_all_jobs()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.jobs.Job.get_job"><code class="docutils literal notranslate"><span class="pre">Job.get_job()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.jobs.Job.get_job_status"><code class="docutils literal notranslate"><span class="pre">Job.get_job_status()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.jobs.Job.get_job_stdout"><code class="docutils literal notranslate"><span class="pre">Job.get_job_stdout()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.jobs.Job.jobs_uri"><code class="docutils literal notranslate"><span class="pre">Job.jobs_uri</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.organizations">ansible_aap_api_client.organizations module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.organizations.Organization"><code class="docutils literal notranslate"><span class="pre">Organization</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.organizations.Organization.create_organization"><code class="docutils literal notranslate"><span class="pre">Organization.create_organization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.organizations.Organization.delete_organization"><code class="docutils literal notranslate"><span class="pre">Organization.delete_organization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.organizations.Organization.get_all_organizations"><code class="docutils literal notranslate"><span class="pre">Organization.get_all_organizations()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.organizations.Organization.get_organization"><code class="docutils literal notranslate"><span class="pre">Organization.get_organization()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.organizations.Organization.get_organization_id"><code class="docutils literal notranslate"><span class="pre">Organization.get_organization_id()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.organizations.Organization.organizations_uri"><code class="docutils literal notranslate"><span class="pre">Organization.organizations_uri</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.organizations.Organization.update_organization"><code class="docutils literal notranslate"><span class="pre">Organization.update_organization()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.schemas">ansible_aap_api_client.schemas module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryGroupRequestSchema"><code class="docutils literal notranslate"><span class="pre">InventoryGroupRequestSchema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryGroupRequestSchema.description"><code class="docutils literal notranslate"><span class="pre">InventoryGroupRequestSchema.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryGroupRequestSchema.name"><code class="docutils literal notranslate"><span class="pre">InventoryGroupRequestSchema.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryGroupRequestSchema.variables"><code class="docutils literal notranslate"><span class="pre">InventoryGroupRequestSchema.variables</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryHostRequestSchema"><code class="docutils literal notranslate"><span class="pre">InventoryHostRequestSchema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryHostRequestSchema.description"><code class="docutils literal notranslate"><span class="pre">InventoryHostRequestSchema.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryHostRequestSchema.enabled"><code class="docutils literal notranslate"><span class="pre">InventoryHostRequestSchema.enabled</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryHostRequestSchema.instance_id"><code class="docutils literal notranslate"><span class="pre">InventoryHostRequestSchema.instance_id</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryHostRequestSchema.name"><code class="docutils literal notranslate"><span class="pre">InventoryHostRequestSchema.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryHostRequestSchema.variables"><code class="docutils literal notranslate"><span class="pre">InventoryHostRequestSchema.variables</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema"><code class="docutils literal notranslate"><span class="pre">InventoryRequestSchema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema.description"><code class="docutils literal notranslate"><span class="pre">InventoryRequestSchema.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema.host_filter"><code class="docutils literal notranslate"><span class="pre">InventoryRequestSchema.host_filter</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema.kind"><code class="docutils literal notranslate"><span class="pre">InventoryRequestSchema.kind</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema.name"><code class="docutils literal notranslate"><span class="pre">InventoryRequestSchema.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema.organization"><code class="docutils literal notranslate"><span class="pre">InventoryRequestSchema.organization</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema.prevent_instance_group_fallback"><code class="docutils literal notranslate"><span class="pre">InventoryRequestSchema.prevent_instance_group_fallback</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema.variables"><code class="docutils literal notranslate"><span class="pre">InventoryRequestSchema.variables</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.allow_simultaneous"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.allow_simultaneous</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_credential_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_credential_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_diff_mode_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_diff_mode_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_execution_environment_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_execution_environment_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_forks_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_forks_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_instance_groups_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_instance_groups_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_inventory_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_inventory_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_job_slice_count_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_job_slice_count_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_job_type_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_job_type_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_labels_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_labels_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_limit_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_limit_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_scm_branch_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_scm_branch_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_skip_tags_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_skip_tags_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_tags_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_tags_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_timeout_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_timeout_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_variables_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_variables_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.ask_verbosity_on_launch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.ask_verbosity_on_launch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.become_enabled"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.become_enabled</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.description"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.diff_mode"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.diff_mode</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.execution_environment"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.execution_environment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.extra_vars"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.extra_vars</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.force_handlers"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.force_handlers</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.forks"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.forks</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.host_config_key"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.host_config_key</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.inventory"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.inventory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.job_slice_count"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.job_slice_count</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.job_tags"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.job_tags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.job_type"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.job_type</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.limit"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.limit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.name"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.name</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.playbook"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.playbook</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.prevent_instance_group_fallback"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.prevent_instance_group_fallback</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.project"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.project</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.scm_branch"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.scm_branch</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.skip_tags"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.skip_tags</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.start_at_task"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.start_at_task</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.survey_enabled"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.survey_enabled</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.timeout"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.timeout</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.use_fact_cache"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.use_fact_cache</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.verbosity"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.verbosity</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.webhook_credential"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.webhook_credential</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema.webhook_service"><code class="docutils literal notranslate"><span class="pre">JobTemplateRequestSchema.webhook_service</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.OrganizationRequestSchema"><code class="docutils literal notranslate"><span class="pre">OrganizationRequestSchema</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.OrganizationRequestSchema.default_environment"><code class="docutils literal notranslate"><span class="pre">OrganizationRequestSchema.default_environment</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.OrganizationRequestSchema.description"><code class="docutils literal notranslate"><span class="pre">OrganizationRequestSchema.description</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.OrganizationRequestSchema.max_hosts"><code class="docutils literal notranslate"><span class="pre">OrganizationRequestSchema.max_hosts</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.html#ansible_aap_api_client.schemas.OrganizationRequestSchema.name"><code class="docutils literal notranslate"><span class="pre">OrganizationRequestSchema.name</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.version">ansible_aap_api_client.version module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../index.html" class="btn btn-neutral float-left" title="ansible-aap-api-client documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ansible_aap_api_client.html" class="btn btn-neutral float-right" title="ansible_aap_api_client package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Copyright (c) 2024 Benjamin P. Trachtenberg.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

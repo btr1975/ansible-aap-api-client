@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ansible_aap_api_client.schemas &mdash; ansible-aap-api-client v0.1.0 0.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/my_theme.css?v=f7a27adb" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
+        <script>mermaid.initialize({startOnLoad:true});</script>
+        <script src="https://unpkg.com/d3/dist/d3.min.js"></script>
+        <script>
+            window.addEventListener("load", function () {
+              var svgs = d3.selectAll(".mermaid svg");
+              svgs.each(function() {
+                var svg = d3.select(this);
+                svg.html("<g>" + svg.html() + "</g>");
+                var inner = svg.select("g");
+                var zoom = d3.zoom().on("zoom", function(event) {
+                  inner.attr("transform", event.transform);
+                });
+                svg.call(zoom);
+              });
+            });
+            </script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search"  style="background: #2980B9" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ansible-aap-api-client v0.1.0
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">PLACE-HOLDER-FOR-YOU</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ansible-aap-api-client v0.1.0</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">ansible_aap_api_client.schemas</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for ansible_aap_api_client.schemas</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Data schemas</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Literal</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">_BaseSchema</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Base Dataclass Schema&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a dict representation of the Dataclass</span>
+
+<span class="sd">        :rtype: dict</span>
+<span class="sd">        :returns: A dict representation of the Dataclass</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span>
+
+    <span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pretty</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a JSON representation of the Dataclass</span>
+
+<span class="sd">        :type pretty: bool</span>
+<span class="sd">        :param pretty: Get pretty JSON</span>
+
+<span class="sd">        :rtype: str</span>
+<span class="sd">        :returns: A JSON representation of the Dataclass</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">pretty</span><span class="p">:</span>
+            <span class="n">indent</span> <span class="o">=</span> <span class="mi">4</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">indent</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dict</span><span class="p">(),</span> <span class="n">indent</span><span class="o">=</span><span class="n">indent</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_string</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate a string</span>
+
+<span class="sd">        :type value: str</span>
+<span class="sd">        :param value: Value to validate</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :param name: Name of the value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a string, but received </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_boolean</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate a boolean</span>
+
+<span class="sd">        :type value: bool</span>
+<span class="sd">        :param value: Value to validate</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :param name: Name of the value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be a boolean, but received </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_integer</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validate an integer</span>
+
+<span class="sd">        :type value: int</span>
+<span class="sd">        :param value: Value to validate</span>
+<span class="sd">        :type name: str</span>
+<span class="sd">        :param name: Name of the value</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be an integer, but received </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="InventoryRequestSchema">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryRequestSchema">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">InventoryRequestSchema</span><span class="p">(</span><span class="n">_BaseSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inventory Request Schema</span>
+
+<span class="sd">    :type name: str</span>
+<span class="sd">    :cvar name: Name of the Inventory</span>
+<span class="sd">    :type description: str</span>
+<span class="sd">    :cvar description: Description of the Inventory</span>
+<span class="sd">    :type organization: str</span>
+<span class="sd">    :cvar organization: Organization the Inventory belongs to</span>
+<span class="sd">    :type kind: Optional[str] = &quot;&quot;</span>
+<span class="sd">    :cvar kind: Kind of the Inventory</span>
+<span class="sd">    :type host_filter: Optional[str] = &quot;&quot;</span>
+<span class="sd">    :cvar host_filter: Host filter of the Inventory</span>
+<span class="sd">    :type variables: Optional[Union[str, dict]] = &quot;---&quot;</span>
+<span class="sd">    :cvar variables: Variables of the all group of the Inventory in JSON or YAML format</span>
+<span class="sd">    :type prevent_instance_group_fallback: Optional[bool] = False</span>
+<span class="sd">    :cvar prevent_instance_group_fallback: Whether to prevent fallback</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">organization</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">kind</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">host_filter</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;---&quot;</span>
+    <span class="n">prevent_instance_group_fallback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_integer</span><span class="p">(</span><span class="s2">&quot;organization&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">organization</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;kind&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kind</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">host_filter</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;host_filter&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">host_filter</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_boolean</span><span class="p">(</span><span class="s2">&quot;prevent_instance_group_fallback&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">prevent_instance_group_fallback</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="InventoryHostRequestSchema">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryHostRequestSchema">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">InventoryHostRequestSchema</span><span class="p">(</span><span class="n">_BaseSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inventory Host Request Schema</span>
+
+<span class="sd">    :type name: str</span>
+<span class="sd">    :cvar name: Name of the Host</span>
+<span class="sd">    :type description: str</span>
+<span class="sd">    :cvar description: Description of the Host</span>
+<span class="sd">    :type enabled: Optional[bool] = True</span>
+<span class="sd">    :cvar enabled: Whether to enable the Host</span>
+<span class="sd">    :type instance_id: Optional[str] = &quot;&quot;</span>
+<span class="sd">    :cvar instance_id: Instance ID of the Host</span>
+<span class="sd">    :type variables: Optional[Union[str, dict]] = &quot;---&quot;</span>
+<span class="sd">    :cvar variables: Variables of the host in JSON or YAML format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">enabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">instance_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;---&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_boolean</span><span class="p">(</span><span class="s2">&quot;enabled&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;instance_id&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance_id</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="InventoryGroupRequestSchema">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.schemas.InventoryGroupRequestSchema">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">InventoryGroupRequestSchema</span><span class="p">(</span><span class="n">_BaseSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inventory Group Request Schema</span>
+
+<span class="sd">    :type name: str</span>
+<span class="sd">    :cvar name: Name of the Group</span>
+<span class="sd">    :type description: str</span>
+<span class="sd">    :cvar description: Description of the Group</span>
+<span class="sd">    :type variables: Optional[Union[str, dict]] = &quot;---&quot;</span>
+<span class="sd">    :cvar variables: Variables of the group in JSON or YAML format</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">variables</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;---&quot;</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">variables</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">variables</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="OrganizationRequestSchema">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.schemas.OrganizationRequestSchema">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">OrganizationRequestSchema</span><span class="p">(</span><span class="n">_BaseSchema</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Organization Request Schema</span>
+
+<span class="sd">    :type name: str</span>
+<span class="sd">    :cvar name: Name of the Group</span>
+<span class="sd">    :type description: str</span>
+<span class="sd">    :cvar description: Description of the Group</span>
+<span class="sd">    :type max_hosts: Optional[int] = 0</span>
+<span class="sd">    :cvar max_hosts: The maximum hosts 0 means unlimited</span>
+<span class="sd">    :type default_environment: Optional[int] = None</span>
+<span class="sd">    :cvar default_environment: The id of the execution environment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">description</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">max_hosts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">default_environment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">description</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate_integer</span><span class="p">(</span><span class="s2">&quot;max_hosts&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_hosts</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_environment</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">validate_integer</span><span class="p">(</span><span class="s2">&quot;default_environment&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_environment</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="JobTemplateRequestSchema">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.schemas.JobTemplateRequestSchema">[docs]</a>
+<span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">JobTemplateRequestSchema</span><span class="p">(</span><span class="n">_BaseSchema</span><span class="p">):</span>  <span class="c1"># pylint: disable=too-many-instance-attributes</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Job Template Request Schema&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">description</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">job_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;run&quot;</span><span class="p">,</span> <span class="s2">&quot;check&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="s2">&quot;run&quot;</span>
+    <span class="n">inventory</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">project</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">playbook</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">scm_branch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">forks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">limit</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">verbosity</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">extra_vars</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">job_tags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">force_handlers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">skip_tags</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">start_at_task</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">use_fact_cache</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">execution_environment</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">host_config_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">ask_scm_branch_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_diff_mode_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_variables_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_limit_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_tags_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_skip_tags_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_job_type_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_verbosity_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_inventory_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_credential_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_execution_environment_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_labels_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_forks_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_job_slice_count_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_timeout_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">ask_instance_groups_on_launch</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">survey_enabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">become_enabled</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">diff_mode</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">allow_simultaneous</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">job_slice_count</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">webhook_service</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;github&quot;</span><span class="p">,</span> <span class="s2">&quot;gitlab&quot;</span><span class="p">,</span> <span class="s2">&quot;bitbucket_dc&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">webhook_credential</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">prevent_instance_group_fallback</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Copyright (c) 2024 Benjamin P. Trachtenberg.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
