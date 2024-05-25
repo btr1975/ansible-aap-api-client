@@ -42,7 +42,7 @@ class JobManagement(InventoryManagement, JobTemplate, Job):
         self.inventory_name = inventory_name
         self.inventory_id = self.get_inventory_id(name=self.inventory_name)
         self.job_id = self.launch_job_template(
-            job_template_id=self.job_template_id, inventory_id=self.inventory_id
+            job_template_id=self.job_template_id, inventory=self.inventory_id
         ).get("id")
 
     def poll_completion(self, print_status: Optional[bool] = False) -> str:
