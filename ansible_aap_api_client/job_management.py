@@ -41,9 +41,9 @@ class JobManagement(InventoryManagement, JobTemplate, Job):
         self.job_template_id = self.get_job_template_id(name=self.job_template_name)
         self.inventory_name = inventory_name
         self.inventory_id = self.get_inventory_id(name=self.inventory_name)
-        self.job_id = self.launch_job_template(
-            job_template_id=self.job_template_id, inventory=self.inventory_id
-        ).get("id")
+        self.job_id = self.launch_job_template(job_template_id=self.job_template_id, inventory=self.inventory_id).get(
+            "id"
+        )
 
     def poll_completion(self, print_status: Optional[bool] = False) -> str:
         """Poll the completion of a job
