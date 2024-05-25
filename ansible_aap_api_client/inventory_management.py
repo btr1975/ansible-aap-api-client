@@ -28,7 +28,7 @@ class InventoryManagement(Inventory, Group, Host):
 
 
 class InventoryBuilder(InventoryManagement):
-    """Inventory builder class
+    """Inventory builder class, this builds an inventory with groups and hosts
 
     :type base_url: str
     :param base_url: The base url to use
@@ -96,6 +96,7 @@ class InventoryBuilder(InventoryManagement):
             inventory_id=self.inventory_id,
             group=self._get_group_request_schema("eos"),
         ).get("id")
+        self.custom_groups = {}
 
     def _get_group_request_schema(self, nos: str) -> InventoryGroupRequestSchema:
         """Protected method to get group request schema
@@ -226,5 +227,60 @@ class InventoryBuilder(InventoryManagement):
         responses = []
         for host in hosts:
             responses.append(self.add_eos_host_to_inventory(host=host))
+
+        return responses
+
+    def add_custom_group_to_inventory(self, group: InventoryGroupRequestSchema) -> dict:
+        """Add custom group to inventory
+
+        :type group: InventoryGroupRequestSchema
+        :param group: The group to add
+
+        :rtype: dict
+        :return: The response
+        """
+        response = self.add_group_to_inventory(inventory_id=self.inventory_id, group=group)
+        self.custom_groups[group.name] = response.get("id")
+        return response
+
+    def add_host_to_custom_group_to_inventory(self, group_name: str, host: InventoryHostRequestSchema) -> dict:
+        """Add host to custom group to inventory
+
+        :type group_name: str
+        :param group_name: The group name to add the host to
+        :type host: InventoryHostRequestSchema
+        :param host: The host to add
+
+        :rtype: dict
+        :return: The response
+
+        :raises KeyError: If the group_name does not exist
+        """
+        if not self.custom_groups.get(group_name):
+            raise KeyError(f"Group {group_name} has not been created")
+
+        return self.add_host_to_group(group_id=self.custom_groups[group_name], host=host)
+
+    def add_hosts_to_custom_group_to_inventory(
+        self, group_name: str, hosts: List[InventoryHostRequestSchema]
+    ) -> List[dict]:
+        """Add hosts to custom group to inventory
+
+        :type group_name: str
+        :param group_name: The group name to add the hosts to
+        :type hosts: List[InventoryHostRequestSchema]
+        :param hosts: The hosts to add
+
+        :rtype: List[dict]
+        :return: The responses
+
+        :raises KeyError: If the group_name does not exist
+        """
+        if not self.custom_groups.get(group_name):
+            raise KeyError(f"Group {group_name} has not been created")
+
+        responses = []
+        for host in hosts:
+            responses.append(self.add_host_to_group(group_id=self.custom_groups[group_name], host=host))
 
         return responses
