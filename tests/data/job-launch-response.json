@@ -1,0 +1,158 @@
+{
+    "job": 54,
+    "ignored_fields": {},
+    "id": 54,
+    "type": "job",
+    "url": "/api/v2/jobs/54/",
+    "related": {
+        "created_by": "/api/v2/users/35/",
+        "modified_by": "/api/v2/users/35/",
+        "labels": "/api/v2/jobs/54/labels/",
+        "inventory": "/api/v2/inventories/53/",
+        "project": "/api/v2/projects/36/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/jobs/54/credentials/",
+        "unified_job_template": "/api/v2/job_templates/37/",
+        "stdout": "/api/v2/jobs/54/stdout/",
+        "execution_environment": "/api/v2/execution_environments/1/",
+        "job_events": "/api/v2/jobs/54/job_events/",
+        "job_host_summaries": "/api/v2/jobs/54/job_host_summaries/",
+        "activity_stream": "/api/v2/jobs/54/activity_stream/",
+        "notifications": "/api/v2/jobs/54/notifications/",
+        "create_schedule": "/api/v2/jobs/54/create_schedule/",
+        "job_template": "/api/v2/job_templates/37/",
+        "cancel": "/api/v2/jobs/54/cancel/",
+        "relaunch": "/api/v2/jobs/54/relaunch/"
+    },
+    "summary_fields": {
+        "organization": {
+            "id": 1,
+            "name": "Default",
+            "description": ""
+        },
+        "inventory": {
+            "id": 53,
+            "name": "my-home-inventory",
+            "description": "This is my home",
+            "has_active_failures": false,
+            "total_hosts": 1,
+            "hosts_with_active_failures": 0,
+            "total_groups": 4,
+            "has_inventory_sources": false,
+            "total_inventory_sources": 0,
+            "inventory_sources_with_failures": 0,
+            "organization_id": 1,
+            "kind": ""
+        },
+        "execution_environment": {
+            "id": 1,
+            "name": "AWX EE (latest)",
+            "description": "",
+            "image": "quay.io/ansible/awx-ee:latest"
+        },
+        "project": {
+            "id": 36,
+            "name": "ansible_networks",
+            "description": "",
+            "status": "successful",
+            "scm_type": "git",
+            "allow_override": false
+        },
+        "job_template": {
+            "id": 37,
+            "name": "tst",
+            "description": ""
+        },
+        "unified_job_template": {
+            "id": 37,
+            "name": "tst",
+            "description": "",
+            "unified_job_type": "job"
+        },
+        "created_by": {
+            "id": 35,
+            "username": "btr75",
+            "first_name": "Me",
+            "last_name": "Me"
+        },
+        "modified_by": {
+            "id": 35,
+            "username": "btr75",
+            "first_name": "Me",
+            "last_name": "Me"
+        },
+        "user_capabilities": {
+            "delete": true,
+            "start": true
+        },
+        "labels": {
+            "count": 0,
+            "results": []
+        },
+        "credentials": [
+            {
+                "id": 37,
+                "name": "my-vault",
+                "description": "",
+                "kind": "vault",
+                "cloud": false
+            }
+        ]
+    },
+    "created": "2024-05-31T19:29:08.910231Z",
+    "modified": "2024-05-31T19:29:08.926333Z",
+    "name": "tst",
+    "description": "",
+    "job_type": "run",
+    "inventory": 53,
+    "project": 36,
+    "playbook": "playbook_just_the_facts_mam.yml",
+    "scm_branch": "",
+    "forks": 0,
+    "limit": "",
+    "verbosity": 0,
+    "extra_vars": "{}",
+    "job_tags": "",
+    "force_handlers": false,
+    "skip_tags": "",
+    "start_at_task": "",
+    "timeout": 0,
+    "use_fact_cache": false,
+    "organization": 1,
+    "unified_job_template": 37,
+    "launch_type": "manual",
+    "status": "pending",
+    "execution_environment": 1,
+    "failed": false,
+    "started": null,
+    "finished": null,
+    "canceled_on": null,
+    "elapsed": 0.0,
+    "job_args": "",
+    "job_cwd": "",
+    "job_env": {},
+    "job_explanation": "",
+    "execution_node": "",
+    "controller_node": "",
+    "result_traceback": "",
+    "event_processing_finished": false,
+    "launched_by": {
+        "id": 35,
+        "name": "btr75",
+        "type": "user",
+        "url": "/api/v2/users/35/"
+    },
+    "work_unit_id": null,
+    "job_template": 37,
+    "passwords_needed_to_start": [],
+    "allow_simultaneous": false,
+    "artifacts": {},
+    "scm_revision": "",
+    "instance_group": null,
+    "diff_mode": false,
+    "job_slice_number": 0,
+    "job_slice_count": 1,
+    "webhook_service": "",
+    "webhook_credential": null,
+    "webhook_guid": ""
+}

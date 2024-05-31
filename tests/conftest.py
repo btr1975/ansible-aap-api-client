@@ -5,7 +5,12 @@ import requests_mock
 base_path = os.path.join(os.path.abspath(os.path.dirname(__name__)))
 sys.path.append(os.path.join(base_path))
 
-from ansible_aap_api_client import InventoryRequestSchema, InventoryGroupRequestSchema, InventoryHostRequestSchema
+from ansible_aap_api_client import (
+    InventoryRequestSchema,
+    InventoryGroupRequestSchema,
+    InventoryHostRequestSchema,
+    OrganizationRequestSchema,
+)
 
 
 @pytest.fixture
@@ -45,6 +50,15 @@ def inventory_group_request_schema() -> InventoryGroupRequestSchema:
         name="test_group",
         description="This is a test group",
         variables={"test_group_var": "test_group_value"},
+    )
+
+
+@pytest.fixture
+def organization_request_schema() -> OrganizationRequestSchema:
+    return OrganizationRequestSchema(
+        name="test_inventory",
+        description="This is a test inventory",
+        max_hosts=50,
     )
 
 
@@ -151,9 +165,66 @@ def requests_delete_host(requests_mock_fixture):
 
 @pytest.fixture
 def requests_single_job(requests_mock_fixture):
-    return requests_mock_fixture.get("https://localhost:5000/api/v2/jobs/35/", json=json.loads(get_fixture_data("single-job-response.json")))
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/jobs/35/", json=json.loads(get_fixture_data("single-job-response.json"))
+    )
 
 
 @pytest.fixture
 def requests_job_stdout(requests_mock_fixture):
-    return requests_mock_fixture.get("https://localhost:5000/api/v2/jobs/35/stdout/", text=get_fixture_data("job-stdout.txt"))
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/jobs/35/stdout/", text=get_fixture_data("job-stdout.txt")
+    )
+
+
+@pytest.fixture
+def requests_get_single_organization(requests_mock_fixture):
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/organizations/",
+        json=json.loads(get_fixture_data("single-host-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_get_two_organization(requests_mock_fixture):
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/organizations/",
+        json=json.loads(get_fixture_data("two-host-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_delete_organization(requests_mock_fixture):
+    return requests_mock_fixture.delete("https://localhost:5000/api/v2/organizations/1/", status_code=202)
+
+
+@pytest.fixture
+def requests_create_organization(requests_mock_fixture):
+    return requests_mock_fixture.post(
+        "https://localhost:5000/api/v2/organizations/",
+        json=json.loads(get_fixture_data("created-organization-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_get_singe_job_template(requests_mock_fixture):
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/job_templates/",
+        json=json.loads(get_fixture_data("single-job-template-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_get_two_job_template(requests_mock_fixture):
+    return requests_mock_fixture.get(
+        "https://localhost:5000/api/v2/job_templates/",
+        json=json.loads(get_fixture_data("two-job-template-response.json")),
+    )
+
+
+@pytest.fixture
+def requests_job_template_job_launch(requests_mock_fixture):
+    return requests_mock_fixture.post(
+        "https://localhost:5000/api/v2/job_templates/7/launch/",
+        json=json.loads(get_fixture_data("job-launch-response.json")),
+    )

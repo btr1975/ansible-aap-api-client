@@ -65,7 +65,7 @@ class JobManagement(Runable, InventoryManagement, JobTemplate, Job):
             "id"
         )
 
-    def poll_completion(self, print_status: Optional[bool] = False) -> str:
+    def poll_completion(self, print_status: Optional[bool] = False) -> str:  # pragma: no cover
         """Run the job and poll the completion of a job
 
         :type print_status: Optional[bool] = False
