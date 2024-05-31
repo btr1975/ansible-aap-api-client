@@ -10,7 +10,7 @@ from ansible_aap_api_client.jobs import Job
 from ansible_aap_api_client.interfaces.runable import Runable
 
 
-class JobManagement(Runable, InventoryManagement, JobTemplate, Job):
+class JobManagement(Runable, InventoryManagement, JobTemplate, Job):  # pylint: disable=too-many-ancestors
     """Job management class, to run a job template against an inventory
 
     :type base_url: str

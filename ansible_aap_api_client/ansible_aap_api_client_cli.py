@@ -3,6 +3,7 @@ CLI for ansible_aap_api_client
 """
 
 from argparse import ArgumentParser
+from ansible_aap_api_client.job_management import JobManagement
 
 
 def cli_argument_parser() -> ArgumentParser:
@@ -48,8 +49,6 @@ def cli() -> None:  # pragma: no cover
         args = arg_parser.parse_args()
 
         if args.which_sub == "run-job-template":
-            from ansible_aap_api_client import JobManagement
-
             job_mgmnt_obj = JobManagement(
                 base_url=args.base_url,
                 username=args.username,

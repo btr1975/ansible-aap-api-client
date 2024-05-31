@@ -11,5 +11,6 @@ ansible-aap-api-client documentation
    :caption: Contents:
 
    source/code/modules
+   source/cli/index
    source/examples/index
 
