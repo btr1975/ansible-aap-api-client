@@ -60,7 +60,8 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">PLACE-HOLDER-FOR-YOU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/code/modules.html">ansible_aap_api_client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/examples/index.html">ansible-aap-api-client examples</a></li>
 </ul>
 
         </div>
@@ -104,6 +105,11 @@
 <span class="sd">    :returns: The argument parser</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">arg_parser</span> <span class="o">=</span> <span class="n">ArgumentParser</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="s2">&quot;ansible-aap-api-client-cli&quot;</span><span class="p">)</span>
+
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-b&quot;</span><span class="p">,</span> <span class="s2">&quot;--base-url&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Base URL for the Tower/AAP&quot;</span><span class="p">)</span>
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-u&quot;</span><span class="p">,</span> <span class="s2">&quot;--username&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The username&quot;</span><span class="p">)</span>
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-p&quot;</span><span class="p">,</span> <span class="s2">&quot;--password&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The password&quot;</span><span class="p">)</span>
+
     <span class="n">subparsers</span> <span class="o">=</span> <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_subparsers</span><span class="p">(</span>
         <span class="n">title</span><span class="o">=</span><span class="s2">&quot;commands&quot;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s2">&quot;Valid commands: a single command is required&quot;</span><span class="p">,</span>
@@ -112,15 +118,13 @@
     <span class="p">)</span>
     <span class="n">subparsers</span><span class="o">.</span><span class="n">required</span> <span class="o">=</span> <span class="kc">True</span>
 
-    <span class="c1"># This is the sub parser to print hello</span>
-    <span class="n">arg_parser_hello</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Say Hello&quot;</span><span class="p">)</span>
-    <span class="n">arg_parser_hello</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">which_sub</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
-    <span class="n">arg_parser_hello</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--name&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Your name&quot;</span><span class="p">)</span>
-
-    <span class="c1"># This is the sub parser to print goodbye</span>
-    <span class="n">arg_parser_goodbye</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;goodbye&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Say Goodbye&quot;</span><span class="p">)</span>
-    <span class="n">arg_parser_goodbye</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">which_sub</span><span class="o">=</span><span class="s2">&quot;goodbye&quot;</span><span class="p">)</span>
-    <span class="n">arg_parser_goodbye</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-n&quot;</span><span class="p">,</span> <span class="s2">&quot;--name&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Your name&quot;</span><span class="p">)</span>
+    <span class="c1"># This is the sub parser to jon a job template</span>
+    <span class="n">arg_parser_run_job_template</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">&quot;run-job-template&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;Run a job template in Tower/AAP&quot;</span><span class="p">)</span>
+    <span class="n">arg_parser_run_job_template</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">which_sub</span><span class="o">=</span><span class="s2">&quot;run-job-template&quot;</span><span class="p">)</span>
+    <span class="n">arg_parser_run_job_template</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;-t&quot;</span><span class="p">,</span> <span class="s2">&quot;--template-name&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name of the Job Template&quot;</span>
+    <span class="p">)</span>
+    <span class="n">arg_parser_run_job_template</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">&quot;-i&quot;</span><span class="p">,</span> <span class="s2">&quot;--inventory-name&quot;</span><span class="p">,</span> <span class="n">required</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name of Inventory&quot;</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">arg_parser</span></div>
 
@@ -128,7 +132,7 @@
 
 <div class="viewcode-block" id="cli">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.ansible_aap_api_client_cli.cli">[docs]</a>
-<span class="k">def</span> <span class="nf">cli</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">cli</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Function to run the command line</span>
 <span class="sd">    :rtype: None</span>
 <span class="sd">    :returns: Nothing it is the CLI</span>
@@ -139,7 +143,21 @@
         <span class="n">arg_parser</span> <span class="o">=</span> <span class="n">cli_argument_parser</span><span class="p">()</span>
         <span class="n">args</span> <span class="o">=</span> <span class="n">arg_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">which_sub</span> <span class="o">==</span> <span class="s2">&quot;run-job-template&quot;</span><span class="p">:</span>
+            <span class="kn">from</span> <span class="nn">ansible_aap_api_client</span> <span class="kn">import</span> <span class="n">JobManagement</span>
+
+            <span class="n">job_mgmnt_obj</span> <span class="o">=</span> <span class="n">JobManagement</span><span class="p">(</span>
+                <span class="n">base_url</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">base_url</span><span class="p">,</span>
+                <span class="n">username</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">username</span><span class="p">,</span>
+                <span class="n">password</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">password</span><span class="p">,</span>
+                <span class="n">ssl_verify</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                <span class="n">job_template_name</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">template_name</span><span class="p">,</span>
+                <span class="n">inventory_name</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">inventory_name</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">poll_completion</span><span class="p">(</span><span class="n">print_status</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">get_job_stdout</span><span class="p">(</span><span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">job_id</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span><span class="p">))</span>
 
     <span class="k">except</span> <span class="ne">AttributeError</span> <span class="k">as</span> <span class="n">error</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> !!! </span><span class="si">{</span><span class="n">error</span><span class="si">}</span><span class="s2"> !!! </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
