@@ -1,0 +1,192 @@
+{
+    "id": 35,
+    "type": "job",
+    "url": "/api/v2/jobs/35/",
+    "related": {
+        "created_by": "/api/v2/users/35/",
+        "labels": "/api/v2/jobs/35/labels/",
+        "project": "/api/v2/projects/36/",
+        "organization": "/api/v2/organizations/1/",
+        "credentials": "/api/v2/jobs/35/credentials/",
+        "unified_job_template": "/api/v2/job_templates/37/",
+        "stdout": "/api/v2/jobs/35/stdout/",
+        "execution_environment": "/api/v2/execution_environments/1/",
+        "job_events": "/api/v2/jobs/35/job_events/",
+        "job_host_summaries": "/api/v2/jobs/35/job_host_summaries/",
+        "activity_stream": "/api/v2/jobs/35/activity_stream/",
+        "notifications": "/api/v2/jobs/35/notifications/",
+        "create_schedule": "/api/v2/jobs/35/create_schedule/",
+        "job_template": "/api/v2/job_templates/37/",
+        "cancel": "/api/v2/jobs/35/cancel/",
+        "relaunch": "/api/v2/jobs/35/relaunch/"
+    },
+    "summary_fields": {
+        "organization": {
+            "id": 1,
+            "name": "Default",
+            "description": ""
+        },
+        "execution_environment": {
+            "id": 1,
+            "name": "AWX EE (latest)",
+            "description": "",
+            "image": "quay.io/ansible/awx-ee:latest"
+        },
+        "project": {
+            "id": 36,
+            "name": "ansible_networks",
+            "description": "",
+            "status": "successful",
+            "scm_type": "git",
+            "allow_override": false
+        },
+        "job_template": {
+            "id": 37,
+            "name": "tst",
+            "description": ""
+        },
+        "unified_job_template": {
+            "id": 37,
+            "name": "tst",
+            "description": "",
+            "unified_job_type": "job"
+        },
+        "instance_group": {
+            "id": 2,
+            "name": "default",
+            "is_container_group": false
+        },
+        "created_by": {
+            "id": 35,
+            "username": "btr75",
+            "first_name": "Me",
+            "last_name": "Me"
+        },
+        "user_capabilities": {
+            "delete": true,
+            "start": true
+        },
+        "labels": {
+            "count": 0,
+            "results": []
+        },
+        "credentials": [
+            {
+                "id": 37,
+                "name": "my-vault",
+                "description": "",
+                "kind": "vault",
+                "cloud": false
+            }
+        ]
+    },
+    "created": "2024-05-23T22:09:40.239655Z",
+    "modified": "2024-05-23T22:09:40.310606Z",
+    "name": "tst",
+    "description": "",
+    "job_type": "run",
+    "inventory": null,
+    "project": 36,
+    "playbook": "playbook_just_the_facts_mam.yml",
+    "scm_branch": "",
+    "forks": 0,
+    "limit": "",
+    "verbosity": 0,
+    "extra_vars": "{}",
+    "job_tags": "",
+    "force_handlers": false,
+    "skip_tags": "",
+    "start_at_task": "",
+    "timeout": 0,
+    "use_fact_cache": false,
+    "organization": 1,
+    "unified_job_template": 37,
+    "launch_type": "manual",
+    "status": "successful",
+    "execution_environment": 1,
+    "failed": false,
+    "started": "2024-05-23T22:09:40.337592Z",
+    "finished": "2024-05-23T22:09:45.511502Z",
+    "canceled_on": null,
+    "elapsed": 5.174,
+    "job_args": "[\"podman\", \"run\", \"--rm\", \"--tty\", \"--interactive\", \"--workdir\", \"/runner/project\", \"-v\", \"/tmp/awx_35_hko_6qym/:/runner/:Z\", \"--env-file\", \"/tmp/awx_35_hko_6qym/artifacts/35/env.list\", \"--quiet\", \"--name\", \"ansible_runner_35\", \"--user=root\", \"--network\", \"slirp4netns:enable_ipv6=true\", \"quay.io/ansible/awx-ee:latest\", \"ansible-playbook\", \"-u\", \"root\", \"--ask-vault-pass\", \"-i\", \"/runner/inventory\", \"-e\", \"@/runner/env/extravars\", \"playbook_just_the_facts_mam.yml\"]",
+    "job_cwd": "/runner/project",
+    "job_env": {
+        "JOB_ID": "35",
+        "AWX_HOST": "https://towerhost",
+        "INVENTORY_ID": "43",
+        "MAX_EVENT_RES": "700000",
+        "PROJECT_REVISION": "60b1fea1a75d48d8ecf8688e516be3b431c66294",
+        "ANSIBLE_ROLES_PATH": "/runner/requirements_roles:./roles:/home/btr75/.ansible/roles:./roles:/home/btr75/.ansible/roles:~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles",
+        "RUNNER_OMIT_EVENTS": "False",
+        "ANSIBLE_FORCE_COLOR": "True",
+        "AWX_PRIVATE_DATA_DIR": "/tmp/awx_35_hko_6qym",
+        "ANSIBLE_UNSAFE_WRITES": "1",
+        "AWX_ISOLATED_DATA_DIR": "/runner/artifacts/35",
+        "ANSIBLE_BASE_TEAM_MODEL": "main.Team",
+        "ANSIBLE_STDOUT_CALLBACK": "awx_display",
+        "ANSIBLE_CALLBACK_PLUGINS": "/runner/artifacts/35/callback",
+        "ANSIBLE_COLLECTIONS_PATH": "/runner/requirements_collections:~/.ansible/collections:/usr/share/ansible/collections",
+        "ANSIBLE_COLLECTIONS_PATHS": "/runner/requirements_collections:~/.ansible/collections:/usr/share/ansible/collections",
+        "ANSIBLE_HOST_KEY_CHECKING": "False",
+        "RUNNER_ONLY_FAILED_EVENTS": "False",
+        "ANSIBLE_BASE_ROLE_PRECREATE": "{}",
+        "ANSIBLE_RETRY_FILES_ENABLED": "False",
+        "ANSIBLE_SSH_CONTROL_PATH_DIR": "/runner/cp",
+        "ANSIBLE_BASE_ALL_REST_FILTERS": "('ansible_base.rest_filters.rest_framework.type_filter_backend.TypeFilterBackend', 'ansible_base.rest_filters.rest_framework.field_lookup_backend.FieldLookupBackend', 'rest_framework.filters.SearchFilter', 'ansible_base.rest_filters.rest_framework.order_backend.OrderByBackend')",
+        "ANSIBLE_BASE_CREATOR_DEFAULTS": "['change', 'delete', 'execute', 'use', 'adhoc', 'approve', 'update', 'view']",
+        "ANSIBLE_BASE_PERMISSION_MODEL": "main.Permission",
+        "ANSIBLE_BASE_ROLE_CREATOR_NAME": "{cls.__name__} Creator",
+        "ANSIBLE_BASE_ALLOW_CUSTOM_ROLES": "True",
+        "ANSIBLE_BASE_ALLOW_TEAM_PARENTS": "True",
+        "ANSIBLE_BASE_CUSTOM_VIEW_PARENT": "awx.api.generics.APIView",
+        "ANSIBLE_BASE_ORGANIZATION_MODEL": "main.Organization",
+        "ANSIBLE_BASE_BYPASS_ACTION_FLAGS": "{}",
+        "ANSIBLE_BASE_ALLOW_TEAM_ORG_ADMIN": "False",
+        "ANSIBLE_BASE_ALLOW_TEAM_ORG_PERMS": "True",
+        "ANSIBLE_INVENTORY_UNPARSED_FAILED": "True",
+        "ANSIBLE_PARAMIKO_RECORD_HOST_KEYS": "False",
+        "ANSIBLE_BASE_ROLE_SYSTEM_ACTIVATED": "True",
+        "ANSIBLE_BASE_BYPASS_SUPERUSER_FLAGS": "['is_superuser']",
+        "ANSIBLE_BASE_RESOURCE_CONFIG_MODULE": "awx.resource_api",
+        "ANSIBLE_BASE_ALLOW_CUSTOM_TEAM_ROLES": "False",
+        "ANSIBLE_BASE_CACHE_PARENT_PERMISSIONS": "True",
+        "ANSIBLE_BASE_ALLOW_SINGLETON_ROLES_API": "False",
+        "ANSIBLE_BASE_CHECK_RELATED_PERMISSIONS": "['use', 'change', 'view']",
+        "ANSIBLE_BASE_ALLOW_SINGLETON_TEAM_ROLES": "False",
+        "ANSIBLE_BASE_ALLOW_SINGLETON_USER_ROLES": "True",
+        "ANSIBLE_BASE_REST_FILTERS_RESERVED_NAMES": "('page', 'page_size', 'format', 'order', 'order_by', 'search', 'type', 'host_filter', 'count_disabled', 'no_truncate', 'limit', 'validate')"
+    },
+    "job_explanation": "",
+    "execution_node": "awx-1",
+    "controller_node": "awx-1",
+    "result_traceback": "",
+    "event_processing_finished": true,
+    "launched_by": {
+        "id": 35,
+        "name": "btr75",
+        "type": "user",
+        "url": "/api/v2/users/35/"
+    },
+    "work_unit_id": "hYsR7p9E",
+    "job_template": 37,
+    "passwords_needed_to_start": [],
+    "allow_simultaneous": false,
+    "artifacts": {},
+    "scm_revision": "60b1fea1a75d48d8ecf8688e516be3b431c66294",
+    "instance_group": 2,
+    "diff_mode": false,
+    "job_slice_number": 0,
+    "job_slice_count": 1,
+    "webhook_service": "",
+    "webhook_credential": null,
+    "webhook_guid": "",
+    "host_status_counts": {
+        "ok": 1
+    },
+    "playbook_counts": {
+        "play_count": 1,
+        "task_count": 10
+    },
+    "custom_virtualenv": null
+}

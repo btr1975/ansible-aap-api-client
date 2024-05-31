@@ -147,3 +147,13 @@ def requests_get_two_host(requests_mock_fixture):
 @pytest.fixture
 def requests_delete_host(requests_mock_fixture):
     return requests_mock_fixture.delete("https://localhost:5000/api/v2/hosts/2/", status_code=202)
+
+
+@pytest.fixture
+def requests_single_job(requests_mock_fixture):
+    return requests_mock_fixture.get("https://localhost:5000/api/v2/jobs/35/", json=json.loads(get_fixture_data("single-job-response.json")))
+
+
+@pytest.fixture
+def requests_job_stdout(requests_mock_fixture):
+    return requests_mock_fixture.get("https://localhost:5000/api/v2/jobs/35/stdout/", text=get_fixture_data("job-stdout.txt"))
