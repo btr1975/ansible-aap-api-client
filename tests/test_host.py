@@ -43,3 +43,12 @@ def test_delete_host_bad(requests_delete_host):
     obj = Host(base_url="https://localhost:5000", username="test", password="test")
     with pytest.raises(TypeError):
         obj.delete_host(host_id="bad")
+
+
+def test_update_host_bad(requests_delete_host):
+    obj = Host(base_url="https://localhost:5000", username="test", password="test")
+    with pytest.raises(TypeError):
+        obj.update_host(host_id="bad", host="bad")
+
+    with pytest.raises(TypeError):
+        obj.update_host(host_id=2, host="bad")

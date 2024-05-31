@@ -82,3 +82,12 @@ def test_delete_inventory_bad(requests_delete_inventory):
     inventory = Inventory(base_url="https://localhost:5000", username="test", password="test")
     with pytest.raises(TypeError):
         inventory.delete_inventory(inventory_id="bad")
+
+
+def test_update_inventory_bad(requests_delete_inventory):
+    inventory = Inventory(base_url="https://localhost:5000", username="test", password="test")
+    with pytest.raises(TypeError):
+        inventory.update_inventory(inventory_id="bad", inventory="bad")
+
+    with pytest.raises(TypeError):
+        inventory.update_inventory(inventory_id=2, inventory="bad")
