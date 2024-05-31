@@ -18,14 +18,28 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
     :type ssl_verify: Optional[Union[bool, str]] = True
     :param ssl_verify: The SSL verification True or False or a path to a certificate
 
+    :raises TypeError: If the base_url, username, password is not a string
+    :raises TypeError: If ssl_verify is not a bool or str
     """
 
     def __init__(
         self, base_url: str, username: str, password: str, ssl_verify: Optional[Union[bool, str]] = True
     ) -> None:
+        if not isinstance(base_url, str):
+            raise TypeError(f"base_url must be of type str, but received {type(base_url)}")
+
         self.base_url = base_url
+
+        if not isinstance(username, str):
+            raise TypeError(f"username must be of type str, but received {type(username)}")
+
         self.username = username
+
+        if not isinstance(password, str):
+            raise TypeError(f"password must be of type str, but received {type(password)}")
+
         self.password = password
+
         if isinstance(ssl_verify, str):
             self.ssl_verify = ssl_verify
 

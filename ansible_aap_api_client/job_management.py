@@ -7,10 +7,11 @@ import time
 from ansible_aap_api_client.inventory_management import InventoryManagement
 from ansible_aap_api_client.job_templates import JobTemplate
 from ansible_aap_api_client.jobs import Job
+from ansible_aap_api_client.interfaces.runable import Runable
 
 
-class JobManagement(InventoryManagement, JobTemplate, Job):
-    """Job management class
+class JobManagement(Runable, InventoryManagement, JobTemplate, Job):
+    """Job management class, to run a job template against an inventory
 
     :type base_url: str
     :param base_url: The base url to use
@@ -24,6 +25,9 @@ class JobManagement(InventoryManagement, JobTemplate, Job):
     :param job_template_name: The name of the job template
     :type inventory_name: str
     :param inventory_name: The name of the inventory
+
+    :raises TypeError: If job_template_name is not of type str
+    :raises TypeError: If inventory_name is not of type str
     """
 
     def __init__(  # pylint: disable=too-many-arguments
@@ -37,23 +41,47 @@ class JobManagement(InventoryManagement, JobTemplate, Job):
     ) -> None:
         super().__init__(base_url=base_url, username=username, password=password, ssl_verify=ssl_verify)
 
+        if not isinstance(job_template_name, str):
+            raise TypeError(f"job_template_name must be of type str, but received {type(job_template_name)}")
+
+        if not isinstance(inventory_name, str):
+            raise TypeError(f"inventory_name must be of type str, but received {type(inventory_name)}")
+
         self.job_template_name = job_template_name
-        self.job_template_id = self.get_job_template_id(name=self.job_template_name)
+        self.job_template_id = None
         self.inventory_name = inventory_name
+        self.inventory_id = None
+        self.job_id = None
+
+    def run(self) -> None:
+        """Run the job management
+
+        :rtype: None
+        :return: Runs the inventory builder
+        """
+        self.job_template_id = self.get_job_template_id(name=self.job_template_name)
         self.inventory_id = self.get_inventory_id(name=self.inventory_name)
         self.job_id = self.launch_job_template(job_template_id=self.job_template_id, inventory=self.inventory_id).get(
             "id"
         )
 
     def poll_completion(self, print_status: Optional[bool] = False) -> str:
-        """Poll the completion of a job
+        """Run the job and poll the completion of a job
 
         :type print_status: Optional[bool] = False
         :param print_status: Print the status of the job
 
         :rtype: String
         :returns: The completed status of the job
+
+        :raises TypeError: If print_status is not of type bool
         """
+        if not isinstance(print_status, bool):
+            raise TypeError(f"print_status must be of type bool, but received {type(print_status)}")
+
+        if not self.job_id:
+            self.run()
+
         ok_statuses = ["successful", "failed", "error", "cancelled"]
 
         job_status = "new"
