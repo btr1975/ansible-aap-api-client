@@ -60,7 +60,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">PLACE-HOLDER-FOR-YOU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/code/modules.html">ansible_aap_api_client</a></li>
 </ul>
 
         </div>
@@ -97,12 +97,13 @@
 <span class="kn">from</span> <span class="nn">ansible_aap_api_client.inventory_management</span> <span class="kn">import</span> <span class="n">InventoryManagement</span>
 <span class="kn">from</span> <span class="nn">ansible_aap_api_client.job_templates</span> <span class="kn">import</span> <span class="n">JobTemplate</span>
 <span class="kn">from</span> <span class="nn">ansible_aap_api_client.jobs</span> <span class="kn">import</span> <span class="n">Job</span>
+<span class="kn">from</span> <span class="nn">ansible_aap_api_client.interfaces.runable</span> <span class="kn">import</span> <span class="n">Runable</span>
 
 
 <div class="viewcode-block" id="JobManagement">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.job_management.JobManagement">[docs]</a>
-<span class="k">class</span> <span class="nc">JobManagement</span><span class="p">(</span><span class="n">InventoryManagement</span><span class="p">,</span> <span class="n">JobTemplate</span><span class="p">,</span> <span class="n">Job</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Job management class</span>
+<span class="k">class</span> <span class="nc">JobManagement</span><span class="p">(</span><span class="n">Runable</span><span class="p">,</span> <span class="n">InventoryManagement</span><span class="p">,</span> <span class="n">JobTemplate</span><span class="p">,</span> <span class="n">Job</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Job management class, to run a job template against an inventory</span>
 
 <span class="sd">    :type base_url: str</span>
 <span class="sd">    :param base_url: The base url to use</span>
@@ -116,6 +117,9 @@
 <span class="sd">    :param job_template_name: The name of the job template</span>
 <span class="sd">    :type inventory_name: str</span>
 <span class="sd">    :param inventory_name: The name of the inventory</span>
+
+<span class="sd">    :raises TypeError: If job_template_name is not of type str</span>
+<span class="sd">    :raises TypeError: If inventory_name is not of type str</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>  <span class="c1"># pylint: disable=too-many-arguments</span>
@@ -129,25 +133,52 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">base_url</span><span class="o">=</span><span class="n">base_url</span><span class="p">,</span> <span class="n">username</span><span class="o">=</span><span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="n">password</span><span class="p">,</span> <span class="n">ssl_verify</span><span class="o">=</span><span class="n">ssl_verify</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">job_template_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;job_template_name must be of type str, but received </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">job_template_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inventory_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inventory_name must be of type str, but received </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">inventory_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">job_template_name</span> <span class="o">=</span> <span class="n">job_template_name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">job_template_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_job_template_id</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">job_template_name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">job_template_id</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inventory_name</span> <span class="o">=</span> <span class="n">inventory_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">job_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+<div class="viewcode-block" id="JobManagement.run">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.job_management.JobManagement.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the job management</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Runs the inventory builder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">job_template_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_job_template_id</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">job_template_name</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_inventory_id</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory_name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">job_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">launch_job_template</span><span class="p">(</span>
-            <span class="n">job_template_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">job_template_id</span><span class="p">,</span> <span class="n">inventory_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span>
-        <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">job_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">launch_job_template</span><span class="p">(</span><span class="n">job_template_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">job_template_id</span><span class="p">,</span> <span class="n">inventory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
+            <span class="s2">&quot;id&quot;</span>
+        <span class="p">)</span></div>
+
 
 <div class="viewcode-block" id="JobManagement.poll_completion">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.job_management.JobManagement.poll_completion">[docs]</a>
     <span class="k">def</span> <span class="nf">poll_completion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">print_status</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Poll the completion of a job</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the job and poll the completion of a job</span>
 
 <span class="sd">        :type print_status: Optional[bool] = False</span>
 <span class="sd">        :param print_status: Print the status of the job</span>
 
 <span class="sd">        :rtype: String</span>
 <span class="sd">        :returns: The completed status of the job</span>
+
+<span class="sd">        :raises TypeError: If print_status is not of type bool</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">print_status</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;print_status must be of type bool, but received </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">print_status</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">job_id</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+
         <span class="n">ok_statuses</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;successful&quot;</span><span class="p">,</span> <span class="s2">&quot;failed&quot;</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="s2">&quot;cancelled&quot;</span><span class="p">]</span>
 
         <span class="n">job_status</span> <span class="o">=</span> <span class="s2">&quot;new&quot;</span>

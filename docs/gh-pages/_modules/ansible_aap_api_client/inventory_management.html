@@ -60,7 +60,7 @@
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../source/index.html">PLACE-HOLDER-FOR-YOU</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../source/code/modules.html">ansible_aap_api_client</a></li>
 </ul>
 
         </div>
@@ -101,6 +101,7 @@
 <span class="p">)</span>
 <span class="kn">from</span> <span class="nn">ansible_aap_api_client.hosts</span> <span class="kn">import</span> <span class="n">Host</span>
 <span class="kn">from</span> <span class="nn">ansible_aap_api_client.groups</span> <span class="kn">import</span> <span class="n">Group</span>
+<span class="kn">from</span> <span class="nn">ansible_aap_api_client.interfaces.runable</span> <span class="kn">import</span> <span class="n">Runable</span>
 
 
 <div class="viewcode-block" id="InventoryManagement">
@@ -122,8 +123,8 @@
 
 <div class="viewcode-block" id="InventoryBuilder">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder">[docs]</a>
-<span class="k">class</span> <span class="nc">InventoryBuilder</span><span class="p">(</span><span class="n">InventoryManagement</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inventory builder class</span>
+<span class="k">class</span> <span class="nc">InventoryBuilder</span><span class="p">(</span><span class="n">Runable</span><span class="p">,</span> <span class="n">InventoryManagement</span><span class="p">):</span>  <span class="c1"># pylint: disable=too-many-instance-attributes</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Inventory builder class, this builds an inventory with groups and hosts</span>
 
 <span class="sd">    :type base_url: str</span>
 <span class="sd">    :param base_url: The base url to use</span>
@@ -133,6 +134,8 @@
 <span class="sd">    :param password: The password to use</span>
 <span class="sd">    :type ssl_verify: Union[bool, str]</span>
 <span class="sd">    :param ssl_verify: The SSL verification True or False or a path to a certificate</span>
+
+<span class="sd">    :raises TypeError: If inventory is not an instance of InventoryRequestSchema</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">IOS_GROUP_VARS</span> <span class="o">=</span> <span class="p">{</span>
@@ -173,24 +176,78 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">base_url</span><span class="p">,</span> <span class="n">username</span><span class="p">,</span> <span class="n">password</span><span class="p">,</span> <span class="n">ssl_verify</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">inventory</span><span class="p">,</span> <span class="n">InventoryRequestSchema</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;inventory must be an instance of InventoryRequestSchema but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">inventory</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory</span> <span class="o">=</span> <span class="n">inventory</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">inventory_name</span> <span class="o">=</span> <span class="n">inventory</span><span class="o">.</span><span class="n">name</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_inventory</span><span class="p">(</span><span class="n">inventory</span><span class="o">=</span><span class="n">inventory</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span> <span class="o">=</span> <span class="kc">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ios_group_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ios_hosts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">iosxr_group_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">iosxr_hosts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nxos_group_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nxos_hosts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">eos_group_id</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">eos_hosts</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_groups</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_groups_data</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_hosts</span> <span class="o">=</span> <span class="p">[]</span>
+
+<div class="viewcode-block" id="InventoryBuilder.run">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.run">[docs]</a>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Run the inventory builder</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Runs the inventory builder</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_inventory</span><span class="p">(</span><span class="n">inventory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">ios_group_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_group_to_inventory</span><span class="p">(</span>
             <span class="n">inventory_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span><span class="p">,</span>
             <span class="n">group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_group_request_schema</span><span class="p">(</span><span class="s2">&quot;ios&quot;</span><span class="p">),</span>
         <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ios_hosts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ios_group_id</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">iosxr_group_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_group_to_inventory</span><span class="p">(</span>
             <span class="n">inventory_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span><span class="p">,</span>
             <span class="n">group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_group_request_schema</span><span class="p">(</span><span class="s2">&quot;iosxr&quot;</span><span class="p">),</span>
         <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">iosxr_hosts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iosxr_group_id</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">nxos_group_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_group_to_inventory</span><span class="p">(</span>
             <span class="n">inventory_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span><span class="p">,</span>
             <span class="n">group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_group_request_schema</span><span class="p">(</span><span class="s2">&quot;nxos&quot;</span><span class="p">),</span>
         <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">nxos_hosts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nxos_group_id</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">eos_group_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_group_to_inventory</span><span class="p">(</span>
             <span class="n">inventory_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span><span class="p">,</span>
             <span class="n">group</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_group_request_schema</span><span class="p">(</span><span class="s2">&quot;eos&quot;</span><span class="p">),</span>
         <span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">eos_hosts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">eos_group_id</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_groups</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_group_to_inventory</span><span class="p">(</span><span class="n">inventory_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">inventory_id</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="n">group</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">custom_groups_data</span><span class="p">[</span><span class="n">group</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;id&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">custom_hosts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">custom_groups_data</span><span class="p">[</span><span class="n">host</span><span class="p">[</span><span class="s2">&quot;group_name&quot;</span><span class="p">]],</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">[</span><span class="s2">&quot;host&quot;</span><span class="p">])</span></div>
+
 
     <span class="k">def</span> <span class="nf">_get_group_request_schema</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nos</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InventoryGroupRequestSchema</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Protected method to get group request schema</span>
@@ -222,130 +279,243 @@
 
 <div class="viewcode-block" id="InventoryBuilder.add_ios_host_to_inventory">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_host_to_inventory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_ios_host_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">add_ios_host_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add IOS host to inventory</span>
 
 <span class="sd">        :type host: InventoryHostRequestSchema</span>
 <span class="sd">        :param host: The host to add</span>
 
-<span class="sd">        :rtype: dict</span>
-<span class="sd">        :return: The response</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the host to the inventory</span>
+
+<span class="sd">        :raises TypeError: If host is not an instance of InventoryHostRequestSchema</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">ios_group_id</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;host must be an instance of InventoryHostRequestSchema but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">host</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ios_hosts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">host</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="InventoryBuilder.add_ios_hosts_to_inventory">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_hosts_to_inventory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_ios_hosts_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">add_ios_hosts_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add multiple IOS hosts to inventory</span>
 
 <span class="sd">        :type hosts: List[InventoryHostRequestSchema]</span>
 <span class="sd">        :param hosts: The hosts to add</span>
 
-<span class="sd">        :rtype: List[dict]</span>
-<span class="sd">        :return: The responses</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
-            <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_ios_host_to_inventory</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">))</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the hosts to the inventory</span>
 
-        <span class="k">return</span> <span class="n">responses</span></div>
+<span class="sd">        :raises TypeError: If hosts is not a list of InventoryHostRequestSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hosts must be a list of InventoryHostRequestSchema but received a list of </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">ios_hosts</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="InventoryBuilder.add_iosxr_host_to_inventory">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_host_to_inventory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_iosxr_host_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">add_iosxr_host_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add IOS-XR host to inventory</span>
 
 <span class="sd">        :type host: InventoryHostRequestSchema</span>
 <span class="sd">        :param host: The host to add</span>
 
-<span class="sd">        :rtype: dict</span>
-<span class="sd">        :return: The response</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the host to the inventory</span>
+
+<span class="sd">        :raises TypeError: If host is not an instance of InventoryHostRequestSchema</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">iosxr_group_id</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;host must be an instance of InventoryHostRequestSchema but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">host</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">iosxr_hosts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">host</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="InventoryBuilder.add_iosxr_hosts_to_inventory">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_hosts_to_inventory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_iosxr_hosts_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">add_iosxr_hosts_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add multiple IOS-XR hosts to inventory</span>
 
 <span class="sd">        :type hosts: List[InventoryHostRequestSchema]</span>
 <span class="sd">        :param hosts: The hosts to add</span>
 
-<span class="sd">        :rtype: List[dict]</span>
-<span class="sd">        :return: The responses</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
-            <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_iosxr_host_to_inventory</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">))</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the hosts to the inventory</span>
 
-        <span class="k">return</span> <span class="n">responses</span></div>
+<span class="sd">        :raises TypeError: If hosts is not a list of InventoryHostRequestSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hosts must be a list of InventoryHostRequestSchema but received a list of </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">iosxr_hosts</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="InventoryBuilder.add_nxos_host_to_inventory">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_host_to_inventory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_nxos_host_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">add_nxos_host_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add NX-OS host to inventory</span>
 
 <span class="sd">        :type host: InventoryHostRequestSchema</span>
 <span class="sd">        :param host: The host to add</span>
 
-<span class="sd">        :rtype: dict</span>
-<span class="sd">        :return: The response</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the host to the inventory</span>
+
+<span class="sd">        :raises TypeError: If host is not an instance of InventoryHostRequestSchema</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">nxos_group_id</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;host must be an instance of InventoryHostRequestSchema but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">host</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nxos_hosts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">host</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="InventoryBuilder.add_nxos_hosts_to_inventory">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_hosts_to_inventory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_nxos_hosts_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">add_nxos_hosts_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add multiple NX-OS hosts to inventory</span>
 
 <span class="sd">        :type hosts: List[InventoryHostRequestSchema]</span>
 <span class="sd">        :param hosts: The hosts to add</span>
 
-<span class="sd">        :rtype: List[dict]</span>
-<span class="sd">        :return: The responses</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
-            <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_nxos_host_to_inventory</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">))</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the hosts to the inventory</span>
 
-        <span class="k">return</span> <span class="n">responses</span></div>
+<span class="sd">        :raises TypeError: If hosts is not a list of InventoryHostRequestSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hosts must be a list of InventoryHostRequestSchema but received a list of </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">nxos_hosts</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="InventoryBuilder.add_eos_host_to_inventory">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_host_to_inventory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_eos_host_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">add_eos_host_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add EOS host to inventory</span>
 
 <span class="sd">        :type host: InventoryHostRequestSchema</span>
 <span class="sd">        :param host: The host to add</span>
 
-<span class="sd">        :rtype: dict</span>
-<span class="sd">        :return: The response</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the host to the inventory</span>
+
+<span class="sd">        :raises TypeError: If host is not an instance of InventoryHostRequestSchema</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_host_to_group</span><span class="p">(</span><span class="n">group_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">eos_group_id</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;host must be an instance of InventoryHostRequestSchema but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">host</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">eos_hosts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">host</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="InventoryBuilder.add_eos_hosts_to_inventory">
 <a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_hosts_to_inventory">[docs]</a>
-    <span class="k">def</span> <span class="nf">add_eos_hosts_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">dict</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">add_eos_hosts_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add multiple EOS hosts to inventory</span>
 
 <span class="sd">        :type hosts: List[InventoryHostRequestSchema]</span>
 <span class="sd">        :param hosts: The hosts to add</span>
 
-<span class="sd">        :rtype: List[dict]</span>
-<span class="sd">        :return: The responses</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">responses</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
-            <span class="n">responses</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">add_eos_host_to_inventory</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">))</span>
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the hosts to the inventory</span>
 
-        <span class="k">return</span> <span class="n">responses</span></div>
+<span class="sd">        :raises TypeError: If hosts is not a list of InventoryHostRequestSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hosts must be a list of InventoryHostRequestSchema but received a list of </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">eos_hosts</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="InventoryBuilder.add_custom_group_to_inventory">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_custom_group_to_inventory">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_custom_group_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">InventoryGroupRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add custom group to inventory</span>
+
+<span class="sd">        :type group: InventoryGroupRequestSchema</span>
+<span class="sd">        :param group: The group to add</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the custom group to the inventory</span>
+
+<span class="sd">        :raises TypeError: If group is not an instance of InventoryGroupRequestSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">InventoryGroupRequestSchema</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;group must be an instance of InventoryGroupRequestSchema but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">group</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_groups</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">group</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="InventoryBuilder.add_custom_groups_to_inventory">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_custom_groups_to_inventory">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_custom_groups_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">groups</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryGroupRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add custom group to inventory</span>
+
+<span class="sd">        :type groups: List[InventoryGroupRequestSchema]</span>
+<span class="sd">        :param groups: The groups to add</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the custom groups to the inventory</span>
+
+<span class="sd">        :raises TypeError: If groups is not a list of InventoryGroupRequestSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">InventoryGroupRequestSchema</span><span class="p">)</span> <span class="k">for</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">groups</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;groups must be a list of InventoryGroupRequestSchema but received a list of </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_groups</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="InventoryBuilder.add_host_to_custom_group_to_inventory">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_host_to_custom_group_to_inventory">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_host_to_custom_group_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add host to custom group to inventory</span>
+
+<span class="sd">        :type group_name: str</span>
+<span class="sd">        :param group_name: The group name to add the host to</span>
+<span class="sd">        :type host: InventoryHostRequestSchema</span>
+<span class="sd">        :param host: The host to add</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the host to the inventory</span>
+
+<span class="sd">        :raises TypeError: If group_name is not a string or host is not an instance of InventoryHostRequestSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;group_name must be a string but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">group_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;host must be an instance of InventoryHostRequestSchema but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">host</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">custom_hosts</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;group_name&quot;</span><span class="p">:</span> <span class="n">group_name</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">})</span></div>
+
+
+<div class="viewcode-block" id="InventoryBuilder.add_hosts_to_custom_group_to_inventory">
+<a class="viewcode-back" href="../../source/code/ansible_aap_api_client.html#ansible_aap_api_client.inventory_management.InventoryBuilder.add_hosts_to_custom_group_to_inventory">[docs]</a>
+    <span class="k">def</span> <span class="nf">add_hosts_to_custom_group_to_inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">hosts</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">InventoryHostRequestSchema</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add hosts to custom group to inventory</span>
+
+<span class="sd">        :type group_name: str</span>
+<span class="sd">        :param group_name: The group name to add the hosts to</span>
+<span class="sd">        :type hosts: List[InventoryHostRequestSchema]</span>
+<span class="sd">        :param hosts: The hosts to add</span>
+
+<span class="sd">        :rtype: None</span>
+<span class="sd">        :return: Adds the hosts to the inventory</span>
+
+<span class="sd">        :raises TypeError: If group_name is not a string or hosts is not a list of InventoryHostRequestSchema</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">group_name</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;group_name must be a string but received a </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">group_name</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">host</span><span class="p">,</span> <span class="n">InventoryHostRequestSchema</span><span class="p">)</span> <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;hosts must be a list of InventoryHostRequestSchema but received a list of </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">hosts</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">host</span> <span class="ow">in</span> <span class="n">hosts</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">custom_hosts</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">&quot;group_name&quot;</span><span class="p">:</span> <span class="n">group_name</span><span class="p">,</span> <span class="s2">&quot;host&quot;</span><span class="p">:</span> <span class="n">host</span><span class="p">})</span></div>
 </div>
 
 </pre></div>

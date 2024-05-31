@@ -21,6 +21,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="ansible_aap_api_client.interfaces package" href="ansible_aap_api_client.interfaces.html" />
     <link rel="prev" title="ansible_aap_api_client" href="modules.html" /> 
 </head>
 
@@ -47,6 +48,10 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="modules.html">ansible_aap_api_client</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">ansible_aap_api_client package</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#subpackages">Subpackages</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.interfaces.html">ansible_aap_api_client.interfaces package</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ansible_aap_api_client.ansible_aap_api_client_cli">ansible_aap_api_client.ansible_aap_api_client_cli module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#ansible_aap_api_client.ansible_aap_api_client_cli.cli"><code class="docutils literal notranslate"><span class="pre">cli()</span></code></a></li>
@@ -101,6 +106,7 @@
 </li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="../examples/index.html">ansible-aap-api-client examples</a></li>
 </ul>
 
         </div>
@@ -130,6 +136,25 @@
              
   <section id="ansible-aap-api-client-package">
 <h1>ansible_aap_api_client package<a class="headerlink" href="#ansible-aap-api-client-package" title="Link to this heading"></a></h1>
+<section id="subpackages">
+<h2>Subpackages<a class="headerlink" href="#subpackages" title="Link to this heading"></a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ansible_aap_api_client.interfaces.html">ansible_aap_api_client.interfaces package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.interfaces.html#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.interfaces.html#module-ansible_aap_api_client.interfaces.runable">ansible_aap_api_client.interfaces.runable module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.interfaces.html#ansible_aap_api_client.interfaces.runable.Runable"><code class="docutils literal notranslate"><span class="pre">Runable</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="ansible_aap_api_client.interfaces.html#ansible_aap_api_client.interfaces.runable.Runable.run"><code class="docutils literal notranslate"><span class="pre">Runable.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="ansible_aap_api_client.interfaces.html#module-ansible_aap_api_client.interfaces">Module contents</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
 <section id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading"></a></h2>
 </section>
@@ -636,8 +661,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansible_aap_api_client.inventory_management.</span></span><span class="sig-name descname"><span class="pre">InventoryBuilder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl_verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inventory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryRequestSchema" title="ansible_aap_api_client.schemas.InventoryRequestSchema"><span class="pre">InventoryRequestSchema</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#ansible_aap_api_client.inventory_management.InventoryManagement" title="ansible_aap_api_client.inventory_management.InventoryManagement"><code class="xref py py-class docutils literal notranslate"><span class="pre">InventoryManagement</span></code></a></p>
-<p>Inventory builder class</p>
+<dd><p>Bases: <a class="reference internal" href="ansible_aap_api_client.interfaces.html#ansible_aap_api_client.interfaces.runable.Runable" title="ansible_aap_api_client.interfaces.runable.Runable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Runable</span></code></a>, <a class="reference internal" href="#ansible_aap_api_client.inventory_management.InventoryManagement" title="ansible_aap_api_client.inventory_management.InventoryManagement"><code class="xref py py-class docutils literal notranslate"><span class="pre">InventoryManagement</span></code></a></p>
+<p>Inventory builder class, this builds an inventory with groups and hosts</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -646,6 +671,9 @@
 <li><p><strong>password</strong> (<em>str</em>) – The password to use</p></li>
 <li><p><strong>ssl_verify</strong> (<em>Union</em><em>[</em><em>bool</em><em>, </em><em>str</em><em>]</em>) – The SSL verification True or False or a path to a certificate</p></li>
 </ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If inventory is not an instance of InventoryRequestSchema</p>
 </dd>
 </dl>
 <dl class="py attribute">
@@ -669,137 +697,261 @@
 <dd></dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_custom_group_to_inventory">
+<span class="sig-name descname"><span class="pre">add_custom_group_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryGroupRequestSchema" title="ansible_aap_api_client.schemas.InventoryGroupRequestSchema"><span class="pre">InventoryGroupRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_custom_group_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_custom_group_to_inventory" title="Link to this definition"></a></dt>
+<dd><p>Add custom group to inventory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>group</strong> (<a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryGroupRequestSchema" title="ansible_aap_api_client.schemas.InventoryGroupRequestSchema"><em>InventoryGroupRequestSchema</em></a>) – The group to add</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adds the custom group to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If group is not an instance of InventoryGroupRequestSchema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_custom_groups_to_inventory">
+<span class="sig-name descname"><span class="pre">add_custom_groups_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">groups</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryGroupRequestSchema" title="ansible_aap_api_client.schemas.InventoryGroupRequestSchema"><span class="pre">InventoryGroupRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_custom_groups_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_custom_groups_to_inventory" title="Link to this definition"></a></dt>
+<dd><p>Add custom group to inventory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>groups</strong> (<em>List</em><em>[</em><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryGroupRequestSchema" title="ansible_aap_api_client.schemas.InventoryGroupRequestSchema"><em>InventoryGroupRequestSchema</em></a><em>]</em>) – The groups to add</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adds the custom groups to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If groups is not a list of InventoryGroupRequestSchema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_host_to_inventory">
-<span class="sig-name descname"><span class="pre">add_eos_host_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_eos_host_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_host_to_inventory" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_eos_host_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_eos_host_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_host_to_inventory" title="Link to this definition"></a></dt>
 <dd><p>Add EOS host to inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>host</strong> (<a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a>) – The host to add</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
+<dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The response</p>
+<dd class="field-odd"><p>Adds the host to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If host is not an instance of InventoryHostRequestSchema</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_hosts_to_inventory">
-<span class="sig-name descname"><span class="pre">add_eos_hosts_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_eos_hosts_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_hosts_to_inventory" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_eos_hosts_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_eos_hosts_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_eos_hosts_to_inventory" title="Link to this definition"></a></dt>
 <dd><p>Add multiple EOS hosts to inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>hosts</strong> (<em>List</em><em>[</em><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a><em>]</em>) – The hosts to add</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>List[dict]</p>
+<dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The responses</p>
+<dd class="field-odd"><p>Adds the hosts to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If hosts is not a list of InventoryHostRequestSchema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_host_to_custom_group_to_inventory">
+<span class="sig-name descname"><span class="pre">add_host_to_custom_group_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_host_to_custom_group_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_host_to_custom_group_to_inventory" title="Link to this definition"></a></dt>
+<dd><p>Add host to custom group to inventory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_name</strong> (<em>str</em>) – The group name to add the host to</p></li>
+<li><p><strong>host</strong> (<a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a>) – The host to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adds the host to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If group_name is not a string or host is not an instance of InventoryHostRequestSchema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_hosts_to_custom_group_to_inventory">
+<span class="sig-name descname"><span class="pre">add_hosts_to_custom_group_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_hosts_to_custom_group_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_hosts_to_custom_group_to_inventory" title="Link to this definition"></a></dt>
+<dd><p>Add hosts to custom group to inventory</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group_name</strong> (<em>str</em>) – The group name to add the hosts to</p></li>
+<li><p><strong>hosts</strong> (<em>List</em><em>[</em><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a><em>]</em>) – The hosts to add</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Adds the hosts to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If group_name is not a string or hosts is not a list of InventoryHostRequestSchema</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_host_to_inventory">
-<span class="sig-name descname"><span class="pre">add_ios_host_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_ios_host_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_host_to_inventory" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_ios_host_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_ios_host_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_host_to_inventory" title="Link to this definition"></a></dt>
 <dd><p>Add IOS host to inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>host</strong> (<a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a>) – The host to add</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
+<dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The response</p>
+<dd class="field-odd"><p>Adds the host to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If host is not an instance of InventoryHostRequestSchema</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_hosts_to_inventory">
-<span class="sig-name descname"><span class="pre">add_ios_hosts_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_ios_hosts_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_hosts_to_inventory" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_ios_hosts_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_ios_hosts_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_ios_hosts_to_inventory" title="Link to this definition"></a></dt>
 <dd><p>Add multiple IOS hosts to inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>hosts</strong> (<em>List</em><em>[</em><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a><em>]</em>) – The hosts to add</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>List[dict]</p>
+<dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The responses</p>
+<dd class="field-odd"><p>Adds the hosts to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If hosts is not a list of InventoryHostRequestSchema</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_host_to_inventory">
-<span class="sig-name descname"><span class="pre">add_iosxr_host_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_iosxr_host_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_host_to_inventory" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_iosxr_host_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_iosxr_host_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_host_to_inventory" title="Link to this definition"></a></dt>
 <dd><p>Add IOS-XR host to inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>host</strong> (<a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a>) – The host to add</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
+<dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The response</p>
+<dd class="field-odd"><p>Adds the host to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If host is not an instance of InventoryHostRequestSchema</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_hosts_to_inventory">
-<span class="sig-name descname"><span class="pre">add_iosxr_hosts_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_iosxr_hosts_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_hosts_to_inventory" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_iosxr_hosts_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_iosxr_hosts_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_iosxr_hosts_to_inventory" title="Link to this definition"></a></dt>
 <dd><p>Add multiple IOS-XR hosts to inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>hosts</strong> (<em>List</em><em>[</em><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a><em>]</em>) – The hosts to add</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>List[dict]</p>
+<dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The responses</p>
+<dd class="field-odd"><p>Adds the hosts to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If hosts is not a list of InventoryHostRequestSchema</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_host_to_inventory">
-<span class="sig-name descname"><span class="pre">add_nxos_host_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_nxos_host_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_host_to_inventory" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_nxos_host_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_nxos_host_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_host_to_inventory" title="Link to this definition"></a></dt>
 <dd><p>Add NX-OS host to inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>host</strong> (<a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a>) – The host to add</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>dict</p>
+<dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The response</p>
+<dd class="field-odd"><p>Adds the host to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If host is not an instance of InventoryHostRequestSchema</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_hosts_to_inventory">
-<span class="sig-name descname"><span class="pre">add_nxos_hosts_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_nxos_hosts_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_hosts_to_inventory" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">add_nxos_hosts_to_inventory</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hosts</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><span class="pre">InventoryHostRequestSchema</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.add_nxos_hosts_to_inventory"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.add_nxos_hosts_to_inventory" title="Link to this definition"></a></dt>
 <dd><p>Add multiple NX-OS hosts to inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>hosts</strong> (<em>List</em><em>[</em><a class="reference internal" href="#ansible_aap_api_client.schemas.InventoryHostRequestSchema" title="ansible_aap_api_client.schemas.InventoryHostRequestSchema"><em>InventoryHostRequestSchema</em></a><em>]</em>) – The hosts to add</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>List[dict]</p>
+<dd class="field-even"><p>None</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>The responses</p>
+<dd class="field-odd"><p>Adds the hosts to the inventory</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If hosts is not a list of InventoryHostRequestSchema</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.inventory_management.InventoryBuilder.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/inventory_management.html#InventoryBuilder.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.inventory_management.InventoryBuilder.run" title="Link to this definition"></a></dt>
+<dd><p>Run the inventory builder</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Runs the inventory builder</p>
 </dd>
 </dl>
 </dd></dl>
@@ -830,8 +982,8 @@
 <dl class="py class">
 <dt class="sig sig-object py" id="ansible_aap_api_client.job_management.JobManagement">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansible_aap_api_client.job_management.</span></span><span class="sig-name descname"><span class="pre">JobManagement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">base_url</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">username</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">password</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ssl_verify</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">job_template_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inventory_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ansible_aap_api_client/job_management.html#JobManagement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.job_management.JobManagement" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#ansible_aap_api_client.inventory_management.InventoryManagement" title="ansible_aap_api_client.inventory_management.InventoryManagement"><code class="xref py py-class docutils literal notranslate"><span class="pre">InventoryManagement</span></code></a>, <a class="reference internal" href="#ansible_aap_api_client.job_templates.JobTemplate" title="ansible_aap_api_client.job_templates.JobTemplate"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobTemplate</span></code></a>, <a class="reference internal" href="#ansible_aap_api_client.jobs.Job" title="ansible_aap_api_client.jobs.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code></a></p>
-<p>Job management class</p>
+<dd><p>Bases: <a class="reference internal" href="ansible_aap_api_client.interfaces.html#ansible_aap_api_client.interfaces.runable.Runable" title="ansible_aap_api_client.interfaces.runable.Runable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Runable</span></code></a>, <a class="reference internal" href="#ansible_aap_api_client.inventory_management.InventoryManagement" title="ansible_aap_api_client.inventory_management.InventoryManagement"><code class="xref py py-class docutils literal notranslate"><span class="pre">InventoryManagement</span></code></a>, <a class="reference internal" href="#ansible_aap_api_client.job_templates.JobTemplate" title="ansible_aap_api_client.job_templates.JobTemplate"><code class="xref py py-class docutils literal notranslate"><span class="pre">JobTemplate</span></code></a>, <a class="reference internal" href="#ansible_aap_api_client.jobs.Job" title="ansible_aap_api_client.jobs.Job"><code class="xref py py-class docutils literal notranslate"><span class="pre">Job</span></code></a></p>
+<p>Job management class, to run a job template against an inventory</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -843,11 +995,17 @@
 <li><p><strong>inventory_name</strong> (<em>str</em>) – The name of the inventory</p></li>
 </ul>
 </dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If job_template_name is not of type str</p></li>
+<li><p><strong>TypeError</strong> – If inventory_name is not of type str</p></li>
+</ul>
+</dd>
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.job_management.JobManagement.poll_completion">
 <span class="sig-name descname"><span class="pre">poll_completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/job_management.html#JobManagement.poll_completion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.job_management.JobManagement.poll_completion" title="Link to this definition"></a></dt>
-<dd><p>Poll the completion of a job</p>
+<dd><p>Run the job and poll the completion of a job</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>print_status</strong> (<em>Optional</em><em>[</em><em>bool</em><em>] </em><em>= False</em>) – Print the status of the job</p>
@@ -857,6 +1015,23 @@
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>The completed status of the job</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>TypeError</strong> – If print_status is not of type bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.job_management.JobManagement.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/job_management.html#JobManagement.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.job_management.JobManagement.run" title="Link to this definition"></a></dt>
+<dd><p>Run the job management</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Runs the inventory builder</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1629,6 +1804,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="modules.html" class="btn btn-neutral float-left" title="ansible_aap_api_client" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ansible_aap_api_client.interfaces.html" class="btn btn-neutral float-right" title="ansible_aap_api_client.interfaces package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

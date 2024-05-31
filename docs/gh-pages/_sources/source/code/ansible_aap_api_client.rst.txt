@@ -1,6 +1,14 @@
 ansible\_aap\_api\_client package
 =================================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   ansible_aap_api_client.interfaces
+
 Submodules
 ----------
 
