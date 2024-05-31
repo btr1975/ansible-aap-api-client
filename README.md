@@ -1,5 +1,10 @@
 # ansible-aap-api-client
 
+| BRANCH | STATUS |
+| ------ |--------|
+| main | [![Unit-Testing, Coverage, Linting](https://github.com/btr1975/ansible-aap-api-client/actions/workflows/test-coverage-lint.yml/badge.svg?branch=main)](https://github.com/btr1975/ansible-aap-api-client/actions/workflows/test-coverage-lint.yml) |
+| develop | [![Unit-Testing, Coverage, Linting](https://github.com/btr1975/ansible-aap-api-client/actions/workflows/test-coverage-lint.yml/badge.svg?branch=develop)](https://github.com/btr1975/ansible-aap-api-client/actions/workflows/test-coverage-lint.yml) |
+
 ## Description
 * A client to interact with Ansible AAP REST API
 
