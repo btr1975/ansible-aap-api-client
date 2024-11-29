@@ -70,8 +70,8 @@ class JobTemplate(_BaseConnection):
 
         :type job_template_id: int
         :param job_template_id: The id of the job template
-        :type kwargs: **kwargs
-        :param kwargs: The key word args to launch the job with
+
+        :param kwargs: The key word args to launch the job with, example: inventory=1, extra_vars={"key": "value"}
 
         :rtype: Dict
         :returns: Response

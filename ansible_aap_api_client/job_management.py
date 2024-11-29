@@ -53,23 +53,27 @@ class JobManagement(Runable, InventoryManagement, JobTemplate, Job):  # pylint: 
         self.inventory_id = None
         self.job_id = None
 
-    def run(self) -> None:
+    def run(self, **kwargs) -> None:
         """Run the job management
+
+        :param kwargs: The keyword arguments to pass to the launch_job_template method
 
         :rtype: None
         :return: Runs the inventory builder
         """
         self.job_template_id = self.get_job_template_id(name=self.job_template_name)
         self.inventory_id = self.get_inventory_id(name=self.inventory_name)
-        self.job_id = self.launch_job_template(job_template_id=self.job_template_id, inventory=self.inventory_id).get(
-            "id"
-        )
+        self.job_id = self.launch_job_template(
+            job_template_id=self.job_template_id, inventory=self.inventory_id, **kwargs
+        ).get("id")
 
-    def poll_completion(self, print_status: Optional[bool] = False) -> str:  # pragma: no cover
+    def poll_completion(self, print_status: Optional[bool] = False, **kwargs) -> str:  # pragma: no cover
         """Run the job and poll the completion of a job
 
         :type print_status: Optional[bool] = False
         :param print_status: Print the status of the job
+
+        :param kwargs: The keyword arguments to pass to the launch_job_template method
 
         :rtype: String
         :returns: The completed status of the job
@@ -80,7 +84,7 @@ class JobManagement(Runable, InventoryManagement, JobTemplate, Job):  # pylint: 
             raise TypeError(f"print_status must be of type bool, but received {type(print_status)}")
 
         if not self.job_id:
-            self.run()
+            self.run(**kwargs)
 
         ok_statuses = ["successful", "failed", "error", "cancelled"]
 
