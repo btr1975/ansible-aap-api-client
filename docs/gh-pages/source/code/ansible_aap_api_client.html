@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ansible_aap_api_client package &mdash; ansible-aap-api-client v0.1.0 0.1.0 documentation</title>
+  <title>ansible_aap_api_client package &mdash; ansible-aap-api-client v0.1.2 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/my_theme.css?v=f7a27adb" />
 
@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/documentation_options.js?v=92734c54"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -34,7 +34,7 @@
           
           
           <a href="../../index.html" class="icon icon-home">
-            ansible-aap-api-client v0.1.0
+            ansible-aap-api-client v0.1.2
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -116,7 +116,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">ansible-aap-api-client v0.1.0</a>
+          <a href="../../index.html">ansible-aap-api-client v0.1.2</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -1005,11 +1005,14 @@
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.job_management.JobManagement.poll_completion">
-<span class="sig-name descname"><span class="pre">poll_completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/job_management.html#JobManagement.poll_completion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.job_management.JobManagement.poll_completion" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">poll_completion</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">print_status</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/job_management.html#JobManagement.poll_completion"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.job_management.JobManagement.poll_completion" title="Link to this definition"></a></dt>
 <dd><p>Run the job and poll the completion of a job</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>print_status</strong> (<em>Optional</em><em>[</em><em>bool</em><em>] </em><em>= False</em>) – Print the status of the job</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>print_status</strong> (<em>Optional</em><em>[</em><em>bool</em><em>] </em><em>= False</em>) – Print the status of the job</p></li>
+<li><p><strong>kwargs</strong> – The keyword arguments to pass to the launch_job_template method</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>String</p>
@@ -1025,14 +1028,17 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.job_management.JobManagement.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/job_management.html#JobManagement.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.job_management.JobManagement.run" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/job_management.html#JobManagement.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.job_management.JobManagement.run" title="Link to this definition"></a></dt>
 <dd><p>Run the job management</p>
 <dl class="field-list simple">
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>None</p>
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>kwargs</strong> – The keyword arguments to pass to the launch_job_template method</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>Runs the inventory builder</p>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Runs the inventory builder</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1128,7 +1134,7 @@
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>job_template_id</strong> (<em>int</em>) – The id of the job template</p></li>
-<li><p><strong>kwargs</strong> (<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) – The key word args to launch the job with</p></li>
+<li><p><strong>kwargs</strong> – The key word args to launch the job with, example: inventory=1, extra_vars={“key”: “value”}</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -1811,7 +1817,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright Copyright (c) 2024 Benjamin P. Trachtenberg.</p>
+    <p>&#169; Copyright Copyright (c) 2024-2025 Benjamin P. Trachtenberg.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

@@ -33,7 +33,7 @@ ansible-aap-api-client run job template
        inventory_name=HOME_INVENTORY_NAME,
    )
 
-   job_mgmnt_obj.run()
+   job_mgmnt_obj.run(extra_vars={"some_extra_var": "some_value"})
 
 
 ansible-aap-api-client run job template poll and get output
@@ -71,6 +71,6 @@ ansible-aap-api-client run job template poll and get output
        inventory_name=HOME_INVENTORY_NAME,
    )
 
-   job_mgmnt_obj.poll_completion(print_status=True)
+   job_mgmnt_obj.poll_completion(print_status=True, extra_vars={"some_extra_var": "some_value"})
 
    print(job_mgmnt_obj.get_job_stdout(job_mgmnt_obj.job_id, "txt"))

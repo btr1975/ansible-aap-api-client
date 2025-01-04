@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ansible_aap_api_client.interfaces.runable &mdash; ansible-aap-api-client v0.1.0 0.1.0 documentation</title>
+  <title>ansible_aap_api_client.interfaces.runable &mdash; ansible-aap-api-client v0.1.2 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/my_theme.css?v=f7a27adb" />
 
@@ -14,7 +14,7 @@
   
         <script src="../../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../../_static/documentation_options.js?v=92734c54"></script>
         <script src="../../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="https://unpkg.com/mermaid@10.2.0/dist/mermaid.min.js"></script>
@@ -48,7 +48,7 @@
           
           
           <a href="../../../index.html" class="icon icon-home">
-            ansible-aap-api-client v0.1.0
+            ansible-aap-api-client v0.1.2
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
@@ -61,6 +61,8 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../source/code/modules.html">ansible_aap_api_client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/cli/index.html">ansible-aap-api-client cli</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../source/examples/index.html">ansible-aap-api-client examples</a></li>
 </ul>
 
         </div>
@@ -69,7 +71,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../../index.html">ansible-aap-api-client v0.1.0</a>
+          <a href="../../../index.html">ansible-aap-api-client v0.1.2</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -103,8 +105,13 @@
 <div class="viewcode-block" id="Runable.run">
 <a class="viewcode-back" href="../../../source/code/ansible_aap_api_client.interfaces.html#ansible_aap_api_client.interfaces.runable.Runable.run">[docs]</a>
     <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Abstract method to run an object</span>
+
+<span class="sd">        :param args: Arguments</span>
+<span class="sd">        :type args: Tuple</span>
+<span class="sd">        :param kwargs: Keyword arguments</span>
+<span class="sd">        :type kwargs: Dict</span>
 
 <span class="sd">        :rtype: None</span>
 <span class="sd">        :returns: Nothing</span>
@@ -120,7 +127,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright Copyright (c) 2024 Benjamin P. Trachtenberg.</p>
+    <p>&#169; Copyright Copyright (c) 2024-2025 Benjamin P. Trachtenberg.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

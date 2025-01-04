@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ansible-aap-api-client run job template &mdash; ansible-aap-api-client v0.1.0 0.1.0 documentation</title>
+  <title>ansible-aap-api-client run job template &mdash; ansible-aap-api-client v0.1.2 0.1.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/my_theme.css?v=f7a27adb" />
 
@@ -15,7 +15,7 @@
   
         <script src="../../_static/jquery.js?v=5d32c60e"></script>
         <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=01f34227"></script>
+        <script src="../../_static/documentation_options.js?v=92734c54"></script>
         <script src="../../_static/doctools.js?v=9a2dae69"></script>
         <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -33,7 +33,7 @@
           
           
           <a href="../../index.html" class="icon icon-home">
-            ansible-aap-api-client v0.1.0
+            ansible-aap-api-client v0.1.2
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -46,6 +46,7 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../code/modules.html">ansible_aap_api_client</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli/index.html">ansible-aap-api-client cli</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">ansible-aap-api-client examples</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="create-inventory.html">ansible-aap-api-client create basic inventory</a></li>
 <li class="toctree-l2"><a class="reference internal" href="create-inventory.html#ansible-aap-api-client-create-a-more-complex-inventory">ansible-aap-api-client create a more complex inventory</a></li>
@@ -62,7 +63,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">ansible-aap-api-client v0.1.0</a>
+          <a href="../../index.html">ansible-aap-api-client v0.1.2</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -113,7 +114,7 @@
     <span class="n">inventory_name</span><span class="o">=</span><span class="n">HOME_INVENTORY_NAME</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+<span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">extra_vars</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_extra_var&quot;</span><span class="p">:</span> <span class="s2">&quot;some_value&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 </section>
@@ -149,7 +150,7 @@
     <span class="n">inventory_name</span><span class="o">=</span><span class="n">HOME_INVENTORY_NAME</span><span class="p">,</span>
 <span class="p">)</span>
 
-<span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">poll_completion</span><span class="p">(</span><span class="n">print_status</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">poll_completion</span><span class="p">(</span><span class="n">print_status</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">extra_vars</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;some_extra_var&quot;</span><span class="p">:</span> <span class="s2">&quot;some_value&quot;</span><span class="p">})</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">get_job_stdout</span><span class="p">(</span><span class="n">job_mgmnt_obj</span><span class="o">.</span><span class="n">job_id</span><span class="p">,</span> <span class="s2">&quot;txt&quot;</span><span class="p">))</span>
 </pre></div>
@@ -166,7 +167,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright Copyright (c) 2024 Benjamin P. Trachtenberg.</p>
+    <p>&#169; Copyright Copyright (c) 2024-2025 Benjamin P. Trachtenberg.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
