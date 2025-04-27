@@ -1,40 +1,61 @@
 @ECHO OFF
 REM Makefile for project needs
 REM Author: Ben Trachtenberg
-REM Version: 1.0.5
+REM Version: 2.0.0
 REM
 
+IF "%1" == "all" (
+    uv run black ansible_aap_api_client/
+    uv run black tests/
+    uv run pylint ansible_aap_api_client\
+    uv run pytest --cov --cov-report=html -vvv
+    uv run bandit -c pyproject.toml -r .
+    uv export --no-dev --no-emit-project --no-editable > requirements.txt
+    uv export --no-emit-project --no-editable > requirements-dev.txt
+    GOTO END
+)
+
 IF "%1" == "build" (
-    python -m build
+    uv build --wheel --sdist
     GOTO END
 )
 
 IF "%1" == "coverage" (
-    pytest --cov --cov-report=html -vvv
+    uv run pytest --cov --cov-report=html -vvv
     GOTO END
 )
 
 IF "%1" == "pylint" (
-    pylint ansible_aap_api_client\
+    uv run pylint ansible_aap_api_client\
     GOTO END
 )
 
 IF "%1" == "pytest" (
-    pytest --cov -vvv
+    uv run pytest --cov -vvv
     GOTO END
 )
 
 IF "%1" == "format" (
-    black ansible_aap_api_client/
-    black tests/
+    uv run black ansible_aap_api_client/
+    uv run black tests/
     GOTO END
 )
 
+IF "%1" == "check-security" (
+    uv run bandit -c pyproject.toml -r .
+    GOTO END
+)
+
+IF "%1" == "pip-export" (
+    uv export --no-dev --no-emit-project --no-editable > requirements.txt
+    uv export --no-emit-project --no-editable > requirements-dev.txt
+    GOTO END
+)
 
 IF "%1" == "gh-pages" (
     rmdir /s /q docs\source\code
-    sphinx-apidoc -o ./docs/source/code ./ansible_aap_api_client
-    sphinx-build ./docs ./docs/gh-pages
+    uv run sphinx-apidoc -o ./docs/source/code ./ansible_aap_api_client
+    uv run sphinx-build ./docs ./docs/gh-pages
     GOTO END
 )
 

@@ -1,9 +1,10 @@
 # Makefile for project needs
 # Author: Ben Trachtenberg
-# Version: 1.0.6
+# Version: 2.0.0
 #
 
-.PHONY: info build build-container coverage format pylint pytest start-container stop-container remove-container gh-pages
+.PHONY: info build build-container coverage format pylint pytest start-container stop-container remove-container \
+        gh-pages check-security pip-export
 
 info:
 	@echo "make options"
@@ -18,36 +19,38 @@ info:
 	@echo "    remove-container    To remove the container"
 	@echo "    gh-pages           To create the GitHub pages"
 
+all: format pylint coverage check-security pip-export
+
 build:
-	@python -m build
-
-
-build-container:
-	@cd containers && podman build --ssh=default --build-arg=build_branch=main -t ansible-aap-api-client:latest -f Containerfile
-
-
-
+	@uv build --wheel --sdist
 
 coverage:
-	@pytest --cov --cov-report=html -vvv
+	@uv run pytest --cov --cov-report=html -vvv
 
 format:
-	@black ansible_aap_api_client/
-	@black tests/
+	@uv run black ansible_aap_api_client/
+	@uv run black tests/
 
 pylint:
-	@pylint ansible_aap_api_client/
+	@uv run pylint ansible_aap_api_client/
 
 pytest:
-	@pytest --cov -vvv
-
+	@uv run pytest --cov -vvv
 
 gh-pages:
 	@rm -rf ./docs/source/code
-	@sphinx-apidoc -o ./docs/source/code ./ansible_aap_api_client
-	@sphinx-build ./docs ./docs/gh-pages
+	@uv run sphinx-apidoc -o ./docs/source/code ./ansible_aap_api_client
+	@uv run sphinx-build ./docs ./docs/gh-pages
 
+check-security:
+	@uv run bandit -c pyproject.toml -r .
 
+pip-export:
+	@uv export --no-dev --no-emit-project --no-editable > requirements.txt
+	@uv export --no-emit-project --no-editable > requirements-dev.txt
+
+build-container:
+	@cd containers && podman build --ssh=default --build-arg=build_branch=main -t ansible-aap-api-client:latest -f Containerfile
 
 start-container:
 	@podman run -itd --name ansible-aap-api-client -p 8080:8080 localhost/ansible-aap-api-client:latest
