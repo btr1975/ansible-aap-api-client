@@ -12,28 +12,29 @@
 #
 import os
 import sys
-import tomli
+
+try:
+    import tomli as toml  # For python < 3.11
+
+except ImportError:
+    import tomllib as toml  # For python >= 3.11
+
 base_path = os.path.split(os.path.join(os.path.abspath(os.path.dirname(__name__))))[0]
 sys.path.append(base_path)
 sys.path.append(os.path.join(base_path, 'docs', '_ext'))
 
-# Reads version.py and converts to a dict of keys
-version_py = {}
-with open(os.path.join(base_path, 'ansible_aap_api_client', 'version.py'), 'r', encoding='utf-8') as f:
-    exec(f.read(), version_py)
-
 # Reads pyproject.toml and converts to python objects
 with open(os.path.join(base_path, 'pyproject.toml'), 'r', encoding='utf-8') as file:
-    toml = file.read()
-pyproject_toml = tomli.loads(toml)
+    toml_data = file.read()
+pyproject_toml = toml.loads(toml_data)
 
 
 
 # -- Project information -----------------------------------------------------
 
-release = version_py['__version__']
+release = f"{pyproject_toml['project']['version']}"
 project = f"{pyproject_toml['project']['name']} v{release}"
-copyright = version_py['__copyright__']
+copyright = "Copyright (c) 2024-2025 Benjamin P. Trachtenberg"
 
 # Reads authors from pyproject.toml and adds name to list
 authors = []
@@ -86,7 +87,7 @@ elif html_theme == 'sphinx_rtd_theme':
         # 'analytics_id': 'G-XXXXXXXXXX',
         # 'analytics_anonymize_ip': False,
         'logo_only': False,
-        'display_version': True,
+        # 'display_version': True,
         'prev_next_buttons_location': 'bottom',
         'style_external_links': False,
         'vcs_pageview_mode': '',

@@ -7,7 +7,8 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "ansible-aap-api-client"
-dynamic = ["version", "readme"]
+dynamic = ["readme"]
+version = "0.1.4"
 requires-python = ">=3.9"
 description = "A client to interact with Ansible AAP REST API"
 keywords = [
@@ -38,6 +39,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 
 dependencies = [
@@ -46,7 +48,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "bandit>=1.8.3",
+    "bandit>=1.8.6",
     "black>=25.1.0",
     "myst-parser>=3.0.1",
     "pylint>=3.3.6",
@@ -56,7 +58,7 @@ dev = [
     "sphinx>=7.4.7",
     "sphinx-rtd-theme>=3.0.2",
     "sphinxcontrib-mermaid>=1.0.0",
-    "tomli>=2.2.1",
+    "tomli>=2.2.1; python_version < '3.11'",
 ]
 
 [project.urls]
@@ -82,7 +84,6 @@ include = [
 zip-safe = false
 
 [tool.setuptools.dynamic]
-version = {attr = "ansible_aap_api_client.version.__version__"}
 readme = {file = "README.md", content-type = "text/markdown"}
 
 [tool.pytest.ini_options]
