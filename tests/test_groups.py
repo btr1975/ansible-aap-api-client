@@ -3,7 +3,7 @@ from ansible_aap_api_client import Group
 
 
 def test_get_all_groups(requests_get_two_group):
-    obj = Group(base_url="https://localhost:5000", username="test", password="test")
+    obj = Group(base_url="https://localhost:5000", username="test", password="test", ssl_verify=False)
     response = obj.get_all_groups()
 
 

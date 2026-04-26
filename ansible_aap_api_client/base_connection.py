@@ -3,7 +3,7 @@ A base connection class for the AAP API client.
 """
 
 from typing import Optional, Union
-import requests
+import niquests as requests
 
 
 class _BaseConnection:  # pylint: disable=too-few-public-methods
@@ -28,29 +28,34 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
         if not isinstance(base_url, str):
             raise TypeError(f"base_url must be of type str, but received {type(base_url)}")
 
-        self.base_url = base_url
+        self._base_url = base_url
 
         if not isinstance(username, str):
             raise TypeError(f"username must be of type str, but received {type(username)}")
 
-        self.username = username
+        self._username = username
 
         if not isinstance(password, str):
             raise TypeError(f"password must be of type str, but received {type(password)}")
 
-        self.password = password
+        self._password = password
 
         if isinstance(ssl_verify, str):
-            self.ssl_verify = ssl_verify
+            self._ssl_verify = ssl_verify
 
         elif isinstance(ssl_verify, bool):
-            self.ssl_verify = ssl_verify
+            self._ssl_verify = ssl_verify
 
         else:
             raise TypeError(f"ssl_verify must be of type bool or str, but received {type(ssl_verify)}")
 
-        self.api_version = "/api/v2"
-        self.headers = {"Content-Type": "application/json"}
+        self._api_version = "/api/v2"
+        self._headers = {"Content-Type": "application/json"}
+
+        self._session = requests.Session()
+        self._session.auth = (self._username, self._password)
+        self._session.headers = self._headers
+        self._session.verify = self._ssl_verify
 
     def _post(self, uri: str, json_data: Optional[dict] = None) -> requests.Response:
         """Protected post method
@@ -63,13 +68,10 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
         :rtype: requests.Response
         :return: A response object
         """
-        url = f"{self.base_url}{self.api_version}{uri}"
-        response = requests.post(
+        url = f"{self._base_url}{self._api_version}{uri}"
+        response = self._session.post(
             url=url,
-            auth=(self.username, self.password),
-            headers=self.headers,
             json=json_data,
-            verify=self.ssl_verify,
             timeout=30,
         )
 
@@ -89,13 +91,10 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
         :rtype: requests.Response
         :return: A response object
         """
-        url = f"{self.base_url}{self.api_version}{uri}"
-        response = requests.patch(
+        url = f"{self._base_url}{self._api_version}{uri}"
+        response = self._session.patch(
             url=url,
-            auth=(self.username, self.password),
-            headers=self.headers,
             json=json_data,
-            verify=self.ssl_verify,
             timeout=30,
         )
 
@@ -115,13 +114,10 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
         :rtype: requests.Response
         :returns: A response object
         """
-        url = f"{self.base_url}{self.api_version}{uri}"
-        response = requests.get(
+        url = f"{self._base_url}{self._api_version}{uri}"
+        response = self._session.get(
             url=url,
-            auth=(self.username, self.password),
             params=params,
-            headers=self.headers,
-            verify=self.ssl_verify,
             timeout=30,
         )
 
@@ -141,13 +137,10 @@ class _BaseConnection:  # pylint: disable=too-few-public-methods
         :rtype: requests.Response
         :return: A response object
         """
-        url = f"{self.base_url}{self.api_version}{uri}"
-        response = requests.delete(
+        url = f"{self._base_url}{self._api_version}{uri}"
+        response = self._session.delete(
             url=url,
-            auth=(self.username, self.password),
-            headers=self.headers,
             json=json_data,
-            verify=self.ssl_verify,
             timeout=30,
         )
 
