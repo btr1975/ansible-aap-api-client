@@ -1,6 +1,9 @@
 import os, sys, json
 import pytest
+import requests
 import requests_mock
+import niquests
+import niquests.sessions
 
 base_path = os.path.join(os.path.abspath(os.path.dirname(__name__)))
 sys.path.append(os.path.join(base_path))
@@ -15,8 +18,19 @@ from ansible_aap_api_client import (
 
 @pytest.fixture
 def requests_mock_fixture():
-    with requests_mock.Mocker() as m:
-        yield m
+    # niquests.Session is not a subclass of requests.Session, so requests_mock
+    # cannot intercept calls made by niquests directly. Temporarily replace
+    # niquests.Session with requests.Session so that requests_mock can work.
+    _orig_session = niquests.Session
+    _orig_sessions_session = niquests.sessions.Session
+    niquests.Session = requests.Session
+    niquests.sessions.Session = requests.Session
+    try:
+        with requests_mock.Mocker() as m:
+            yield m
+    finally:
+        niquests.Session = _orig_session
+        niquests.sessions.Session = _orig_sessions_session
 
 
 def get_fixture_data(file_name: str) -> str:
