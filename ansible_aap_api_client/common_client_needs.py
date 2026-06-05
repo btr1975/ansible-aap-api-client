@@ -9,6 +9,8 @@ class _CommonClientNeeds:
     """Common needs for APIs"""
 
     GROUPS_URI = "/groups/"
+    HOSTS_URI = "/hosts/"
+    INVENTORIES_URI = "/inventories/"
 
     @staticmethod
     def url_join(base_url: str, *args) -> str:
