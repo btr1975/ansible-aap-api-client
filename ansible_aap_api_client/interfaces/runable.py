@@ -13,10 +13,21 @@ class Runable(ABC):  # pylint: disable=too-few-public-methods
         """Abstract method to run an object
 
         :param args: Arguments
-        :type args: Tuple
         :param kwargs: Keyword arguments
-        :type kwargs: Dict
 
-        :rtype: None
+        :returns: Nothing
+        """
+
+
+class AsyncRunable(ABC):  # pylint: disable=too-few-public-methods
+    """Interface for a runable object"""
+
+    @abstractmethod
+    async def run(self, *args, **kwargs) -> None:
+        """Abstract method to run an object asynchronously
+
+        :param args: Arguments
+        :param kwargs: Keyword arguments
+
         :returns: Nothing
         """
