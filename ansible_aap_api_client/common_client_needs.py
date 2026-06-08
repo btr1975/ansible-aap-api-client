@@ -8,9 +8,12 @@ import urllib.parse
 class _CommonClientNeeds:
     """Common needs for APIs"""
 
-    GROUPS_URI = "/groups/"
-    HOSTS_URI = "/hosts/"
-    INVENTORIES_URI = "/inventories/"
+    GROUPS_URI = "groups"
+    HOSTS_URI = "hosts"
+    INVENTORIES_URI = "inventories"
+    JOB_TEMPLATES_URI = "job_templates"
+    JOBS_URI = "jobs"
+    ORGANIZATIONS_URI = "organizations"
 
     @staticmethod
     def url_join(base_url: str, *args) -> str:
@@ -21,9 +24,11 @@ class _CommonClientNeeds:
 
         :return: The joined URL
         """
-        joined_parts = "/".join(args)
+        args_strings = list(map(str, args))
 
-        return urllib.parse.urljoin(f"{base_url}", joined_parts)
+        joined_parts = "/".join(args_strings)
+
+        return urllib.parse.urljoin(f"{base_url}", f"{joined_parts}/")
 
     @staticmethod
     def get_url_scheme(url: str) -> str:

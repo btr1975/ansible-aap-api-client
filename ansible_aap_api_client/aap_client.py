@@ -1,9 +1,9 @@
 """
-Async APP Client
+APP Client
 """
 
 from typing import Literal
-from niquests import AsyncSession
+from niquests import Session
 from ansible_aap_api_client.common_client_needs import _CommonClientNeeds
 from ansible_aap_api_client.schemas import (
     InventoryGroupRequestSchema,
@@ -13,8 +13,8 @@ from ansible_aap_api_client.schemas import (
 )
 
 
-class AsyncAAPClient(_CommonClientNeeds):
-    """Asynchronous APP Client
+class AAPClient(_CommonClientNeeds):
+    """APP Client
 
     :param str base_url: Base URL for APP Client example: https://example.com
     :param str username: APP Username
@@ -42,23 +42,23 @@ class AsyncAAPClient(_CommonClientNeeds):
         self._base_url = base_url
         self._api_version = "/api/v2"
         self._headers = {"Content-Type": "application/json"}
-        self._session = AsyncSession()
+        self._session = Session()
         self._session.auth = (username, password)
         self._session.headers = self._headers
         self._session.verify = ssl_verify
 
-    async def get_all_groups(self) -> dict:
+    def get_all_groups(self) -> dict:
         """Get all groups
 
         :returns: Response
         """
         url = self.url_join(self._base_url, self.GROUPS_URI)
 
-        response = await self._session.get(url=url)
+        response = self._session.get(url=url)
 
         return response.json()
 
-    async def get_group(self, name: str) -> dict:
+    def get_group(self, name: str) -> dict:
         """Get all instances of a group by name
 
         :param name: The name of the group
@@ -71,11 +71,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.GROUPS_URI)
 
-        response = await self._session.get(url=url, params={"name": name})
+        response = self._session.get(url=url, params={"name": name})
 
         return response.json()
 
-    async def get_group_id(self, name: str) -> int:
+    def get_group_id(self, name: str) -> int:
         """Get the id of a group if one exists
 
         :param name: The name of the group
@@ -87,7 +87,7 @@ class AsyncAAPClient(_CommonClientNeeds):
         """
         self.is_string(value=name)
 
-        response = await self.get_group(name=name)
+        response = self.get_group(name=name)
 
         results = response["results"]
 
@@ -96,7 +96,7 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         return response[0]["id"]
 
-    async def delete_group(self, group_id: int) -> int | None:
+    def delete_group(self, group_id: int) -> int | None:
         """Delete group
 
         :param group_id: The group id
@@ -109,11 +109,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.GROUPS_URI, group_id)
 
-        response = await self._session.delete(url=url)
+        response = self._session.delete(url=url)
 
         return response.status_code
 
-    async def update_group(self, group_id: int, group: InventoryGroupRequestSchema) -> dict:
+    def update_group(self, group_id: int, group: InventoryGroupRequestSchema) -> dict:
         """Update group
 
         :param group_id: The group id
@@ -131,11 +131,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.GROUPS_URI, group_id)
 
-        response = await self._session.patch(url=url, json=group.dict())
+        response = self._session.patch(url=url, json=group.dict())
 
         return response.json()
 
-    async def add_host_to_group(self, group_id: int, host: InventoryHostRequestSchema) -> dict:
+    def add_host_to_group(self, group_id: int, host: InventoryHostRequestSchema) -> dict:
         """Add host to group
 
         :param group_id: The group id
@@ -153,21 +153,21 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.GROUPS_URI, group_id, "hosts")
 
-        response = await self._session.post(url=url, json=host.dict())
+        response = self._session.post(url=url, json=host.dict())
 
         return response.json()
 
-    async def get_all_hosts(self) -> dict:
+    def get_all_hosts(self) -> dict:
         """Get all hosts
 
         :returns: Response
         """
         url = self.url_join(self._base_url, self.HOSTS_URI)
 
-        response = await self._session.get(url=url)
+        response = self._session.get(url=url)
         return response.json()
 
-    async def get_host(self, name: str) -> dict:
+    def get_host(self, name: str) -> dict:
         """Get all instances of a host by name
 
         :param name: The name of the host
@@ -180,11 +180,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.HOSTS_URI)
 
-        response = await self._session.get(url=url, params={"name": name})
+        response = self._session.get(url=url, params={"name": name})
 
         return response.json()
 
-    async def get_host_id(self, name: str) -> int:
+    def get_host_id(self, name: str) -> int:
         """Get the id of a host if one exists
 
         :param name: The name of the host
@@ -196,7 +196,7 @@ class AsyncAAPClient(_CommonClientNeeds):
         """
         self.is_string(value=name)
 
-        response = await self.get_host(name=name)
+        response = self.get_host(name=name)
 
         results = response["results"]
 
@@ -205,7 +205,7 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         return results[0]["id"]
 
-    async def delete_host(self, host_id: int) -> None | int:
+    def delete_host(self, host_id: int) -> None | int:
         """Delete a host
 
         :param host_id: The id of the host
@@ -218,11 +218,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.HOSTS_URI, host_id)
 
-        response = await self._session.delete(url=url)
+        response = self._session.delete(url=url)
 
         return response.status_code
 
-    async def update_host(self, host_id: int, host: InventoryHostRequestSchema) -> dict:
+    def update_host(self, host_id: int, host: InventoryHostRequestSchema) -> dict:
         """Update a host
 
         :param host_id: The id of the host
@@ -240,22 +240,22 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.HOSTS_URI, host_id)
 
-        response = await self._session.patch(url=url, json=host.dict())
+        response = self._session.patch(url=url, json=host.dict())
 
         return response.json()
 
-    async def get_all_inventories(self) -> dict:
+    def get_all_inventories(self) -> dict:
         """Get all inventories
 
         :returns: Response
         """
         url = self.url_join(self._base_url, self.INVENTORIES_URI)
 
-        response = await self._session.get(url=url)
+        response = self._session.get(url=url)
 
         return response.json()
 
-    async def get_inventory(self, name: str) -> dict:
+    def get_inventory(self, name: str) -> dict:
         """Get all instances of an inventory by name
 
         :param name: The inventory name
@@ -268,11 +268,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.INVENTORIES_URI)
 
-        response = await self._session.get(url=url, params={"name": name})
+        response = self._session.get(url=url, params={"name": name})
 
         return response.json()
 
-    async def get_inventory_id(self, name: str) -> int:
+    def get_inventory_id(self, name: str) -> int:
         """Get the id of an inventory if one exists
 
         :param name: The name of the inventory
@@ -284,7 +284,7 @@ class AsyncAAPClient(_CommonClientNeeds):
         """
         self.is_string(value=name)
 
-        response = await self.get_inventory(name=name)
+        response = self.get_inventory(name=name)
 
         results = response["results"]
 
@@ -293,7 +293,7 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         return response[0]["id"]
 
-    async def delete_inventory(self, inventory_id: int) -> None | int:
+    def delete_inventory(self, inventory_id: int) -> None | int:
         """Delete inventory
 
         :param inventory_id: The inventory id
@@ -306,11 +306,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.INVENTORIES_URI, inventory_id)
 
-        response = await self._session.delete(url=url)
+        response = self._session.delete(url=url)
 
         return response.status_code
 
-    async def update_inventory(self, inventory_id: int, inventory: InventoryRequestSchema) -> dict:
+    def update_inventory(self, inventory_id: int, inventory: InventoryRequestSchema) -> dict:
         """Update inventory
 
         :param inventory_id: The inventory id
@@ -328,11 +328,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.INVENTORIES_URI, inventory_id)
 
-        response = await self._session.patch(url=url, json=inventory.dict())
+        response = self._session.patch(url=url, json=inventory.dict())
 
         return response.json()
 
-    async def create_inventory(self, inventory: InventoryRequestSchema) -> dict:
+    def create_inventory(self, inventory: InventoryRequestSchema) -> dict:
         """Create inventory
 
         :param inventory: The inventory to create
@@ -346,11 +346,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.INVENTORIES_URI)
 
-        response = await self._session.post(url=url, json=inventory.dict())
+        response = self._session.post(url=url, json=inventory.dict())
 
         return response.json()
 
-    async def add_host_to_inventory(self, inventory_id: int, host: InventoryHostRequestSchema) -> dict:
+    def add_host_to_inventory(self, inventory_id: int, host: InventoryHostRequestSchema) -> dict:
         """Add host to inventory
 
         :param inventory_id: The inventory id
@@ -367,11 +367,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.INVENTORIES_URI, inventory_id, self.HOSTS_URI)
 
-        response = await self._session.post(url=url, json=host.dict())
+        response = self._session.post(url=url, json=host.dict())
 
         return response.json()
 
-    async def add_group_to_inventory(self, inventory_id: int, group: InventoryGroupRequestSchema) -> dict:
+    def add_group_to_inventory(self, inventory_id: int, group: InventoryGroupRequestSchema) -> dict:
         """Add group to inventory
 
         :param inventory_id: The inventory id
@@ -388,22 +388,22 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.INVENTORIES_URI, inventory_id, self.GROUPS_URI)
 
-        response = await self._session.post(url=url, json=group.dict())
+        response = self._session.post(url=url, json=group.dict())
 
         return response.json()
 
-    async def get_all_job_templates(self) -> dict:
+    def get_all_job_templates(self) -> dict:
         """Get all job templates
 
         :returns: Response
         """
         url = self.url_join(self._base_url, self.JOB_TEMPLATES_URI)
 
-        response = await self._session.get(url=url)
+        response = self._session.get(url=url)
 
         return response.json()
 
-    async def get_job_template(self, name: str) -> dict:
+    def get_job_template(self, name: str) -> dict:
         """Get all instances of a job template by name
 
         :param name: The name of the job template
@@ -416,11 +416,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.JOB_TEMPLATES_URI)
 
-        response = await self._session.get(url=url, params={"name": name})
+        response = self._session.get(url=url, params={"name": name})
 
         return response.json()
 
-    async def get_job_template_id(self, name: str) -> int:
+    def get_job_template_id(self, name: str) -> int:
         """Get the id of a job template if one exists
 
         :param name: The name of the job template
@@ -432,7 +432,7 @@ class AsyncAAPClient(_CommonClientNeeds):
         """
         self.is_string(value=name)
 
-        response = await self.get_job_template(name=name)
+        response = self.get_job_template(name=name)
 
         results = response["results"]
 
@@ -441,7 +441,7 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         return results[0]["id"]
 
-    async def launch_job_template(self, job_template_id: int, **kwargs) -> dict:
+    def launch_job_template(self, job_template_id: int, **kwargs) -> dict:
         """Launch a job template
 
         :param job_template_id: The id of the job template
@@ -455,22 +455,22 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.JOB_TEMPLATES_URI, job_template_id, "launch")
 
-        response = await self._session.post(url=url, json=kwargs)
+        response = self._session.post(url=url, json=kwargs)
 
         return response.json()
 
-    async def get_all_jobs(self) -> dict:
+    def get_all_jobs(self) -> dict:
         """Get all jobs
 
         :returns: Response
         """
         url = self.url_join(self._base_url, self.JOBS_URI)
 
-        response = await self._session.get(url=url)
+        response = self._session.get(url=url)
 
         return response.json()
 
-    async def get_job(self, job_id: int) -> dict:
+    def get_job(self, job_id: int) -> dict:
         """Get a job by id
 
         :param job_id: The ID of the job
@@ -483,11 +483,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.JOBS_URI, job_id)
 
-        response = await self._session.get(url=url)
+        response = self._session.get(url=url)
 
         return response.json()
 
-    async def get_job_stdout(self, job_id: int, output_format: Literal["txt", "json", "html"] = "txt") -> None | str:
+    def get_job_stdout(self, job_id: int, output_format: Literal["txt", "json", "html"] = "txt") -> None | str:
         """Get the stdout of a job by id, this is the ansible run log
 
         :param job_id: The ID of the job
@@ -501,11 +501,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.JOBS_URI, job_id, "stdout")
 
-        response = await self._session.get(url=url, params={"format": output_format})
+        response = self._session.get(url=url, params={"format": output_format})
 
         return response.text
 
-    async def get_job_status(self, job_id: int) -> str:
+    def get_job_status(self, job_id: int) -> str:
         """Get the status of a job by id
 
         :param job_id: The ID of the job
@@ -516,22 +516,22 @@ class AsyncAAPClient(_CommonClientNeeds):
         """
         self.is_integer(value=job_id)
 
-        response = await self.get_job(job_id=job_id)
+        response = self.get_job(job_id=job_id)
 
         return response["status"]
 
-    async def get_all_organizations(self) -> dict:
+    def get_all_organizations(self) -> dict:
         """Get all organizations
 
         :returns: Response
         """
         url = self.url_join(self._base_url, self.ORGANIZATIONS_URI)
 
-        response = await self._session.get(url=url)
+        response = self._session.get(url=url)
 
         return response.json()
 
-    async def get_organization(self, name: str) -> dict:
+    def get_organization(self, name: str) -> dict:
         """Get all instances of an organization by name
 
         :param name: The name of the organization
@@ -544,11 +544,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.ORGANIZATIONS_URI)
 
-        response = await self._session.get(url=url, params={"name": name})
+        response = self._session.get(url=url, params={"name": name})
 
         return response.json()
 
-    async def get_organization_id(self, name: str) -> int:
+    def get_organization_id(self, name: str) -> int:
         """Get the id of an organization if one exists
 
         :param name: The name of the organization
@@ -560,7 +560,7 @@ class AsyncAAPClient(_CommonClientNeeds):
         """
         self.is_string(value=name)
 
-        response = await self.get_organization(name=name)
+        response = self.get_organization(name=name)
 
         results = response["results"]
 
@@ -569,7 +569,7 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         return results[0]["id"]
 
-    async def delete_organization(self, organization_id: int) -> None | int:
+    def delete_organization(self, organization_id: int) -> None | int:
         """Delete organization
 
         :param organization_id: The id of the organization
@@ -582,11 +582,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.ORGANIZATIONS_URI, organization_id)
 
-        response = await self._session.delete(url=url)
+        response = self._session.delete(url=url)
 
         return response.status_code
 
-    async def update_organization(self, organization_id: int, organization: OrganizationRequestSchema) -> dict:
+    def update_organization(self, organization_id: int, organization: OrganizationRequestSchema) -> dict:
         """Update a organization
 
         :param organization_id: The id of the OrganizationRequestSchema
@@ -606,11 +606,11 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.ORGANIZATIONS_URI, organization_id)
 
-        response = await self._session.patch(url=url, json=organization.dict())
+        response = self._session.patch(url=url, json=organization.dict())
 
         return response.json()
 
-    async def create_organization(self, organization: OrganizationRequestSchema):
+    def create_organization(self, organization: OrganizationRequestSchema):
         """Create an organization
 
         :param organization: The organization object
@@ -626,6 +626,6 @@ class AsyncAAPClient(_CommonClientNeeds):
 
         url = self.url_join(self._base_url, self.ORGANIZATIONS_URI)
 
-        response = await self._session.post(url=url, json=organization.dict())
+        response = self._session.post(url=url, json=organization.dict())
 
         return response.json()
