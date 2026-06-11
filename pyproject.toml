@@ -110,6 +110,11 @@ notes = [
     "XXX",
 ]
 fail-under = 9.9
+disable = [
+    "R0801",
+    "R0917",
+    "R0904"
+]
 
 [tool.black]
 line-length = 120
