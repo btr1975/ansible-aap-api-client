@@ -4,26 +4,18 @@ AAP Job Management
 
 from typing import Optional, Union
 import time
-from ansible_aap_api_client.inventory_management import InventoryManagement
-from ansible_aap_api_client.job_templates import JobTemplate
-from ansible_aap_api_client.jobs import Job
+from ansible_aap_api_client.aap_client import AAPClient
 from ansible_aap_api_client.interfaces.runable import Runable
 
 
-class JobManagement(Runable, InventoryManagement, JobTemplate, Job):  # pylint: disable=too-many-ancestors
+class JobManagement(Runable, AAPClient):  # pylint: disable=too-many-ancestors
     """Job management class, to run a job template against an inventory
 
-    :type base_url: str
     :param base_url: The base url to use
-    :type username: str
     :param username: The username to use
-    :type password: str
     :param password: The password to use
-    :type ssl_verify: Union[bool, str]
     :param ssl_verify: The SSL verification True or False or a path to a certificate
-    :type job_template_name: str
     :param job_template_name: The name of the job template
-    :type inventory_name: str
     :param inventory_name: The name of the inventory
 
     :raises TypeError: If job_template_name is not of type str
@@ -58,7 +50,6 @@ class JobManagement(Runable, InventoryManagement, JobTemplate, Job):  # pylint: 
 
         :param kwargs: The keyword arguments to pass to the launch_job_template method
 
-        :rtype: None
         :return: Runs the inventory builder
         """
         self.job_template_id = self.get_job_template_id(name=self.job_template_name)
@@ -70,12 +61,10 @@ class JobManagement(Runable, InventoryManagement, JobTemplate, Job):  # pylint: 
     def poll_completion(self, print_status: Optional[bool] = False, **kwargs) -> str:  # pragma: no cover
         """Run the job and poll the completion of a job
 
-        :type print_status: Optional[bool] = False
         :param print_status: Print the status of the job
 
         :param kwargs: The keyword arguments to pass to the launch_job_template method
 
-        :rtype: String
         :returns: The completed status of the job
 
         :raises TypeError: If print_status is not of type bool

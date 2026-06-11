@@ -39,8 +39,8 @@ class AsyncAAPClient(_CommonClientNeeds):
         if self.get_url_scheme(url=base_url) not in ("http", "https"):
             raise ValueError(f"invalid URL scheme: {base_url}")
 
-        self._base_url = base_url
         self._api_version = "/api/v2"
+        self._base_url = self.url_join(base_url, self._api_version)
         self._headers = {"Content-Type": "application/json"}
         self._session = AsyncSession()
         self._session.auth = (username, password)

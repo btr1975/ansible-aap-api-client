@@ -3,32 +3,16 @@ AAP API client for inventory management
 """
 
 from typing import List, Union
-from ansible_aap_api_client.inventories import Inventory
 from ansible_aap_api_client.schemas import (
     InventoryRequestSchema,
     InventoryGroupRequestSchema,
     InventoryHostRequestSchema,
 )
-from ansible_aap_api_client.hosts import Host
-from ansible_aap_api_client.groups import Group
+from ansible_aap_api_client.aap_client import AAPClient
 from ansible_aap_api_client.interfaces.runable import Runable
 
 
-class InventoryManagement(Inventory, Group, Host):
-    """Inventory management class
-
-    :type base_url: str
-    :param base_url: The base url to use
-    :type username: str
-    :param username: The username to use
-    :type password: str
-    :param password: The password to use
-    :type ssl_verify: Optional[Union[bool, str]] = True
-    :param ssl_verify: The SSL verification True or False or a path to a certificate
-    """
-
-
-class InventoryBuilder(Runable, InventoryManagement):  # pylint: disable=too-many-instance-attributes
+class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance-attributes
     """Inventory builder class, this builds an inventory with groups and hosts
 
     :type base_url: str
