@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ansible-aap-api-client"
 dynamic = ["readme"]
-version = "2.0.0"
+version = "1.0.0"
 requires-python = ">=3.10"
 description = "A client to interact with Ansible AAP REST API"
 keywords = [
