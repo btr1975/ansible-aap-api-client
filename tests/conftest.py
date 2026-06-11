@@ -169,6 +169,13 @@ def requests_single_job(requests_mock_fixture):
 
 
 @pytest.fixture
+def requests_all_jobs(requests_mock_fixture):
+    route = requests_mock_fixture.get("https://localhost:5000/api/v2/jobs/")
+    route.respond(json=json.loads(get_fixture_data("single-job-response.json")))
+    return route
+
+
+@pytest.fixture
 def requests_job_stdout(requests_mock_fixture):
     route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/jobs/35/stdout/"))
     route.respond(text=get_fixture_data("job-stdout.txt"))
