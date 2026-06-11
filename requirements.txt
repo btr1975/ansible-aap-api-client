@@ -217,6 +217,10 @@ qh3==1.7.3 ; (python_full_version < '3.12' and platform_machine == 'AMD64' and p
     --hash=sha256:ff50119681fb6074dffdc76b8ba3b12a3393ad3f97cc4bff27477ca44d3f255d \
     --hash=sha256:ffaec674a5b619c35a4b9e1e02b2c9a223e1765cc5b4f0330ac2f9b38712ece4
     # via urllib3-future
+urllib3==2.7.0 \
+    --hash=sha256:231e0ec3b63ceb14667c67be60f2f2c40a518cb38b03af60abc813da26505f4c \
+    --hash=sha256:9fb4c81ebbb1ce9531cce37674bbc6f1360472bc18ca9a553ede278ef7276897
+    # via ansible-aap-api-client
 urllib3-future==2.19.912 \
     --hash=sha256:5f9ab32138885ef8075bc891bf4fa1574f02d718d6e2d6b946f89d0d38cea97e \
     --hash=sha256:e046342ae4b2f53282f16a648fcf7ab7ae44c233173143f6edbd86bc3adaf7d5
