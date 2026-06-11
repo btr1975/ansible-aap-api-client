@@ -1,9 +1,7 @@
-import os, sys, json
+import os, sys, json, re
 import pytest
-import requests
-import requests_mock
-import niquests
-import niquests.sessions
+from niquests_mock import MockRouter
+
 
 base_path = os.path.join(os.path.abspath(os.path.dirname(__name__)))
 sys.path.append(os.path.join(base_path))
@@ -18,19 +16,8 @@ from ansible_aap_api_client import (
 
 @pytest.fixture
 def requests_mock_fixture():
-    # niquests.Session is not a subclass of requests.Session, so requests_mock
-    # cannot intercept calls made by niquests directly. Temporarily replace
-    # niquests.Session with requests.Session so that requests_mock can work.
-    _orig_session = niquests.Session
-    _orig_sessions_session = niquests.sessions.Session
-    niquests.Session = requests.Session
-    niquests.sessions.Session = requests.Session
-    try:
-        with requests_mock.Mocker() as m:
-            yield m
-    finally:
-        niquests.Session = _orig_session
-        niquests.sessions.Session = _orig_sessions_session
+    with MockRouter() as m:
+        yield m
 
 
 def get_fixture_data(file_name: str) -> str:
@@ -85,160 +72,153 @@ def inventory_host_request_schema() -> InventoryHostRequestSchema:
 
 @pytest.fixture
 def requests_get_single_inventory(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/inventories/",
-        json=json.loads(get_fixture_data("single-inventory-response.json")),
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/inventories/"))
+    route.respond(json=json.loads(get_fixture_data("single-inventory-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_get_two_inventory(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/inventories/", json=json.loads(get_fixture_data("two-inventory-response.json"))
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/inventories/"))
+    route.respond(json=json.loads(get_fixture_data("two-inventory-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_create_inventory(requests_mock_fixture):
-    return requests_mock_fixture.post(
-        "https://localhost:5000/api/v2/inventories/",
-        json=json.loads(get_fixture_data("created-inventory-response.json")),
-    )
+    route = requests_mock_fixture.post("https://localhost:5000/api/v2/inventories/")
+    route.respond(json=json.loads(get_fixture_data("created-inventory-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_add_host_inventory(requests_mock_fixture):
-    return requests_mock_fixture.post(
-        "https://localhost:5000/api/v2/inventories/38/hosts/",
-        json=json.loads(get_fixture_data("added-host-to-inventory-response.json")),
-    )
+    route = requests_mock_fixture.post("https://localhost:5000/api/v2/inventories/38/hosts/")
+    route.respond(json=json.loads(get_fixture_data("added-host-to-inventory-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_add_group_inventory(requests_mock_fixture):
-    return requests_mock_fixture.post(
-        "https://localhost:5000/api/v2/inventories/38/groups/",
-        json=json.loads(get_fixture_data("added-group-to-inventory-response.json")),
-    )
+    route = requests_mock_fixture.post("https://localhost:5000/api/v2/inventories/38/groups/")
+    route.respond(json=json.loads(get_fixture_data("added-group-to-inventory-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_delete_inventory(requests_mock_fixture):
-    return requests_mock_fixture.delete("https://localhost:5000/api/v2/inventories/2/", status_code=202)
+    route = requests_mock_fixture.delete("https://localhost:5000/api/v2/inventories/2/")
+    route.respond(status_code=202)
+    return route
 
 
 @pytest.fixture
-def requests_get_single_group(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/groups/",
-        json=json.loads(get_fixture_data("single-group-response.json")),
-    )
+def requests_get_single_group(niquests_mock):
+    route = niquests_mock.get(re.compile(r"https://localhost:5000/api/v2/groups/"))
+    route.respond(status_code=200, json=json.loads(get_fixture_data("single-group-response.json")))
+    return route
 
 
 @pytest.fixture
-def requests_delete_group(requests_mock_fixture):
-    return requests_mock_fixture.delete("https://localhost:5000/api/v2/groups/2/", status_code=202)
+def requests_delete_group(niquests_mock):
+    route = niquests_mock.delete("https://localhost:5000/api/v2/groups/2/")
+    route.respond(status_code=202)
+    return route
 
 
 @pytest.fixture
-def requests_get_two_group(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/groups/",
-        json=json.loads(get_fixture_data("two-group-response.json")),
-    )
+def requests_get_two_group(niquests_mock):
+    route = niquests_mock.get(re.compile(r"https://localhost:5000/api/v2/groups/"))
+    route.respond(status_code=200, json=json.loads(get_fixture_data("two-group-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_add_host_group(requests_mock_fixture):
-    return requests_mock_fixture.post(
-        "https://localhost:5000/api/v2/groups/2/hosts/",
-        json=json.loads(get_fixture_data("added-host-to-group-response.json")),
-    )
+    route = requests_mock_fixture.post("https://localhost:5000/api/v2/groups/2/hosts/")
+    route.respond(json=json.loads(get_fixture_data("added-host-to-group-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_get_single_host(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/hosts/",
-        json=json.loads(get_fixture_data("single-host-response.json")),
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/hosts/"))
+    route.respond(json=json.loads(get_fixture_data("single-host-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_get_two_host(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/hosts/",
-        json=json.loads(get_fixture_data("two-host-response.json")),
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/hosts/"))
+    route.respond(json=json.loads(get_fixture_data("two-host-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_delete_host(requests_mock_fixture):
-    return requests_mock_fixture.delete("https://localhost:5000/api/v2/hosts/2/", status_code=202)
+    route = requests_mock_fixture.delete("https://localhost:5000/api/v2/hosts/2/")
+    route.respond(status_code=202)
+    return route
 
 
 @pytest.fixture
 def requests_single_job(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/jobs/35/", json=json.loads(get_fixture_data("single-job-response.json"))
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/jobs/35/"))
+    route.respond(json=json.loads(get_fixture_data("single-job-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_job_stdout(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/jobs/35/stdout/", text=get_fixture_data("job-stdout.txt")
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/jobs/35/stdout/"))
+    route.respond(text=get_fixture_data("job-stdout.txt"))
+    return route
 
 
 @pytest.fixture
 def requests_get_single_organization(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/organizations/",
-        json=json.loads(get_fixture_data("single-host-response.json")),
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/organizations/"))
+    route.respond(json=json.loads(get_fixture_data("single-host-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_get_two_organization(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/organizations/",
-        json=json.loads(get_fixture_data("two-host-response.json")),
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/organizations/"))
+    route.respond(json=json.loads(get_fixture_data("two-host-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_delete_organization(requests_mock_fixture):
-    return requests_mock_fixture.delete("https://localhost:5000/api/v2/organizations/1/", status_code=202)
+    route = requests_mock_fixture.delete("https://localhost:5000/api/v2/organizations/1/")
+    route.respond(status_code=202)
+    return route
 
 
 @pytest.fixture
 def requests_create_organization(requests_mock_fixture):
-    return requests_mock_fixture.post(
-        "https://localhost:5000/api/v2/organizations/",
-        json=json.loads(get_fixture_data("created-organization-response.json")),
-    )
+    route = requests_mock_fixture.post("https://localhost:5000/api/v2/organizations/")
+    route.respond(json=json.loads(get_fixture_data("created-organization-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_get_singe_job_template(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/job_templates/",
-        json=json.loads(get_fixture_data("single-job-template-response.json")),
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/job_templates/"))
+    route.respond(json=json.loads(get_fixture_data("single-job-template-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_get_two_job_template(requests_mock_fixture):
-    return requests_mock_fixture.get(
-        "https://localhost:5000/api/v2/job_templates/",
-        json=json.loads(get_fixture_data("two-job-template-response.json")),
-    )
+    route = requests_mock_fixture.get(re.compile(r"https://localhost:5000/api/v2/job_templates/"))
+    route.respond(json=json.loads(get_fixture_data("two-job-template-response.json")))
+    return route
 
 
 @pytest.fixture
 def requests_job_template_job_launch(requests_mock_fixture):
-    return requests_mock_fixture.post(
-        "https://localhost:5000/api/v2/job_templates/7/launch/",
-        json=json.loads(get_fixture_data("job-launch-response.json")),
-    )
+    route = requests_mock_fixture.post("https://localhost:5000/api/v2/job_templates/7/launch/")
+    route.respond(json=json.loads(get_fixture_data("job-launch-response.json")))
+    return route

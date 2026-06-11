@@ -94,7 +94,7 @@ class AsyncAAPClient(_CommonClientNeeds):
         if len(results) != 1:
             raise ValueError(f"found {len(results)} groups with name {name}")
 
-        return response[0]["id"]
+        return results[0]["id"]
 
     async def delete_group(self, group_id: int) -> int | None:
         """Delete group
