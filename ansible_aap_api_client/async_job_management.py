@@ -50,7 +50,6 @@ class AsyncJobManagement(AsyncRunable, AsyncAAPClient):  # pylint: disable=too-m
 
         :param kwargs: The keyword arguments to pass to the launch_job_template method
 
-        :rtype: None
         :return: Runs the inventory builder
         """
         self.job_template_id = await self.get_job_template_id(name=self.job_template_name)
@@ -64,12 +63,9 @@ class AsyncJobManagement(AsyncRunable, AsyncAAPClient):  # pylint: disable=too-m
     async def poll_completion(self, print_status: Optional[bool] = False, **kwargs) -> str:  # pragma: no cover
         """Run the job and poll the completion of a job
 
-        :type print_status: Optional[bool] = False
         :param print_status: Print the status of the job
-
         :param kwargs: The keyword arguments to pass to the launch_job_template method
 
-        :rtype: String
         :returns: The completed status of the job
 
         :raises TypeError: If print_status is not of type bool

@@ -14,7 +14,6 @@ class _BaseSchema:
     def dict(self) -> dict:
         """Get a dict representation of the Dataclass
 
-        :rtype: dict
         :returns: A dict representation of the Dataclass
         """
         return self.__dict__
@@ -22,10 +21,8 @@ class _BaseSchema:
     def json(self, pretty=False) -> str:
         """Get a JSON representation of the Dataclass
 
-        :type pretty: bool
         :param pretty: Get pretty JSON
 
-        :rtype: str
         :returns: A JSON representation of the Dataclass
         """
         if pretty:
@@ -40,9 +37,7 @@ class _BaseSchema:
     def validate_string(name: str, value: str) -> None:
         """Validate a string
 
-        :type value: str
         :param value: Value to validate
-        :type name: str
         :param name: Name of the value
         """
         if not isinstance(value, str):
@@ -52,9 +47,7 @@ class _BaseSchema:
     def validate_boolean(name: str, value: bool) -> None:
         """Validate a boolean
 
-        :type value: bool
         :param value: Value to validate
-        :type name: str
         :param name: Name of the value
         """
         if not isinstance(value, bool):
@@ -64,9 +57,7 @@ class _BaseSchema:
     def validate_integer(name: str, value: int) -> None:
         """Validate an integer
 
-        :type value: int
         :param value: Value to validate
-        :type name: str
         :param name: Name of the value
         """
         if not isinstance(value, int):
@@ -77,19 +68,12 @@ class _BaseSchema:
 class InventoryRequestSchema(_BaseSchema):
     """Inventory Request Schema
 
-    :type name: str
     :cvar name: Name of the Inventory
-    :type description: str
     :cvar description: Description of the Inventory
-    :type organization: str
     :cvar organization: Organization the Inventory belongs to
-    :type kind: Optional[str] = ""
     :cvar kind: Kind of the Inventory
-    :type host_filter: Optional[str] = ""
     :cvar host_filter: Host filter of the Inventory
-    :type variables: Optional[Union[str, dict]] = "---"
     :cvar variables: Variables of the all group of the Inventory in JSON or YAML format
-    :type prevent_instance_group_fallback: Optional[bool] = False
     :cvar prevent_instance_group_fallback: Whether to prevent fallback
     """
 
@@ -120,15 +104,10 @@ class InventoryRequestSchema(_BaseSchema):
 class InventoryHostRequestSchema(_BaseSchema):
     """Inventory Host Request Schema
 
-    :type name: str
     :cvar name: Name of the Host
-    :type description: str
     :cvar description: Description of the Host
-    :type enabled: Optional[bool] = True
     :cvar enabled: Whether to enable the Host
-    :type instance_id: Optional[str] = ""
     :cvar instance_id: Instance ID of the Host
-    :type variables: Optional[Union[str, dict]] = "---"
     :cvar variables: Variables of the host in JSON or YAML format
     """
 
@@ -152,11 +131,8 @@ class InventoryHostRequestSchema(_BaseSchema):
 class InventoryGroupRequestSchema(_BaseSchema):
     """Inventory Group Request Schema
 
-    :type name: str
     :cvar name: Name of the Group
-    :type description: str
     :cvar description: Description of the Group
-    :type variables: Optional[Union[str, dict]] = "---"
     :cvar variables: Variables of the group in JSON or YAML format
     """
 
@@ -176,13 +152,9 @@ class InventoryGroupRequestSchema(_BaseSchema):
 class OrganizationRequestSchema(_BaseSchema):
     """Organization Request Schema
 
-    :type name: str
     :cvar name: Name of the Group
-    :type description: str
     :cvar description: Description of the Group
-    :type max_hosts: Optional[int] = 0
     :cvar max_hosts: The maximum hosts 0 means unlimited
-    :type default_environment: Optional[int] = None
     :cvar default_environment: The id of the execution environment
     """
 

@@ -15,14 +15,11 @@ from ansible_aap_api_client.interfaces.runable import Runable
 class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance-attributes
     """Inventory builder class, this builds an inventory with groups and hosts
 
-    :type base_url: str
     :param base_url: The base url to use
-    :type username: str
     :param username: The username to use
-    :type password: str
     :param password: The password to use
-    :type ssl_verify: Union[bool, str]
     :param ssl_verify: The SSL verification True or False or a path to a certificate
+    :param inventory: The inventory request schema to use
 
     :raises TypeError: If inventory is not an instance of InventoryRequestSchema
     """
@@ -91,7 +88,6 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def run(self) -> None:
         """Run the inventory builder
 
-        :rtype: None
         :return: Runs the inventory builder
         """
         self.inventory_id = self.create_inventory(inventory=self.inventory).get("id")
@@ -138,10 +134,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def _get_group_request_schema(self, nos: str) -> InventoryGroupRequestSchema:
         """Protected method to get group request schema
 
-        :type nos: str
         :param nos: The NOS to use
 
-        :rtype: InventoryGroupRequestSchema
         :return: The group request schema
 
         :raises ValueError: If the NOS is not supported
@@ -166,10 +160,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_ios_host_to_inventory(self, host: InventoryHostRequestSchema) -> None:
         """Add IOS host to inventory
 
-        :type host: InventoryHostRequestSchema
         :param host: The host to add
 
-        :rtype: None
         :return: Adds the host to the inventory
 
         :raises TypeError: If host is not an instance of InventoryHostRequestSchema
@@ -182,10 +174,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_ios_hosts_to_inventory(self, hosts: List[InventoryHostRequestSchema]) -> None:
         """Add multiple IOS hosts to inventory
 
-        :type hosts: List[InventoryHostRequestSchema]
         :param hosts: The hosts to add
 
-        :rtype: None
         :return: Adds the hosts to the inventory
 
         :raises TypeError: If hosts is not a list of InventoryHostRequestSchema
@@ -198,10 +188,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_iosxr_host_to_inventory(self, host: InventoryHostRequestSchema) -> None:
         """Add IOS-XR host to inventory
 
-        :type host: InventoryHostRequestSchema
         :param host: The host to add
 
-        :rtype: None
         :return: Adds the host to the inventory
 
         :raises TypeError: If host is not an instance of InventoryHostRequestSchema
@@ -214,10 +202,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_iosxr_hosts_to_inventory(self, hosts: List[InventoryHostRequestSchema]) -> None:
         """Add multiple IOS-XR hosts to inventory
 
-        :type hosts: List[InventoryHostRequestSchema]
         :param hosts: The hosts to add
 
-        :rtype: None
         :return: Adds the hosts to the inventory
 
         :raises TypeError: If hosts is not a list of InventoryHostRequestSchema
@@ -230,10 +216,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_nxos_host_to_inventory(self, host: InventoryHostRequestSchema) -> None:
         """Add NX-OS host to inventory
 
-        :type host: InventoryHostRequestSchema
         :param host: The host to add
 
-        :rtype: None
         :return: Adds the host to the inventory
 
         :raises TypeError: If host is not an instance of InventoryHostRequestSchema
@@ -246,10 +230,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_nxos_hosts_to_inventory(self, hosts: List[InventoryHostRequestSchema]) -> None:
         """Add multiple NX-OS hosts to inventory
 
-        :type hosts: List[InventoryHostRequestSchema]
         :param hosts: The hosts to add
 
-        :rtype: None
         :return: Adds the hosts to the inventory
 
         :raises TypeError: If hosts is not a list of InventoryHostRequestSchema
@@ -262,10 +244,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_eos_host_to_inventory(self, host: InventoryHostRequestSchema) -> None:
         """Add EOS host to inventory
 
-        :type host: InventoryHostRequestSchema
         :param host: The host to add
 
-        :rtype: None
         :return: Adds the host to the inventory
 
         :raises TypeError: If host is not an instance of InventoryHostRequestSchema
@@ -278,10 +258,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_eos_hosts_to_inventory(self, hosts: List[InventoryHostRequestSchema]) -> None:
         """Add multiple EOS hosts to inventory
 
-        :type hosts: List[InventoryHostRequestSchema]
         :param hosts: The hosts to add
 
-        :rtype: None
         :return: Adds the hosts to the inventory
 
         :raises TypeError: If hosts is not a list of InventoryHostRequestSchema
@@ -294,10 +272,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_custom_group_to_inventory(self, group: InventoryGroupRequestSchema) -> None:
         """Add custom group to inventory
 
-        :type group: InventoryGroupRequestSchema
         :param group: The group to add
 
-        :rtype: None
         :return: Adds the custom group to the inventory
 
         :raises TypeError: If group is not an instance of InventoryGroupRequestSchema
@@ -310,10 +286,8 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_custom_groups_to_inventory(self, groups: List[InventoryGroupRequestSchema]) -> None:
         """Add custom group to inventory
 
-        :type groups: List[InventoryGroupRequestSchema]
         :param groups: The groups to add
 
-        :rtype: None
         :return: Adds the custom groups to the inventory
 
         :raises TypeError: If groups is not a list of InventoryGroupRequestSchema
@@ -328,12 +302,9 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_host_to_custom_group_to_inventory(self, group_name: str, host: InventoryHostRequestSchema) -> None:
         """Add host to custom group to inventory
 
-        :type group_name: str
         :param group_name: The group name to add the host to
-        :type host: InventoryHostRequestSchema
         :param host: The host to add
 
-        :rtype: None
         :return: Adds the host to the inventory
 
         :raises TypeError: If group_name is not a string or host is not an instance of InventoryHostRequestSchema
@@ -349,12 +320,9 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
     def add_hosts_to_custom_group_to_inventory(self, group_name: str, hosts: List[InventoryHostRequestSchema]) -> None:
         """Add hosts to custom group to inventory
 
-        :type group_name: str
         :param group_name: The group name to add the hosts to
-        :type hosts: List[InventoryHostRequestSchema]
         :param hosts: The hosts to add
 
-        :rtype: None
         :return: Adds the hosts to the inventory
 
         :raises TypeError: If group_name is not a string or hosts is not a list of InventoryHostRequestSchema
