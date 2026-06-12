@@ -8,8 +8,8 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "ansible-aap-api-client"
 dynamic = ["readme"]
-version = "0.1.4"
-requires-python = ">=3.9"
+version = "1.0.0"
+requires-python = ">=3.10"
 description = "A client to interact with Ansible AAP REST API"
 keywords = [
 ]
@@ -34,7 +34,6 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3 :: Only",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
@@ -43,7 +42,8 @@ classifiers = [
 ]
 
 dependencies = [
-    "requests~=2.32.0",
+    "niquests>=3.18.6",
+    "urllib3>=2.7.0",
 ]
 
 [dependency-groups]
@@ -51,10 +51,11 @@ dev = [
     "bandit>=1.8.6",
     "black>=25.1.0",
     "myst-parser>=3.0.1",
+    "niquests-mock>=0.3.1",
     "pylint>=3.3.6",
+    "pytest-asyncio>=1.4.0",
     "pytest-cov>=6.1.1",
     "python-dotenv>=1.1.0",
-    "requests-mock>=1.12.1",
     "sphinx>=7.4.7",
     "sphinx-rtd-theme>=3.0.2",
     "sphinxcontrib-mermaid>=1.0.0",
@@ -88,6 +89,7 @@ readme = {file = "README.md", content-type = "text/markdown"}
 
 [tool.pytest.ini_options]
 addopts = "--strict-markers"
+asyncio_mode = "auto"
 markers = [
     "place_holder: marks tests as place_holder (deselect with -m 'not place_holder')",
 ]
@@ -109,9 +111,18 @@ notes = [
     "XXX",
 ]
 fail-under = 9.9
+disable = [
+    "R0801",
+    "R0917",
+    "R0904"
+]
 
 [tool.black]
 line-length = 120
+target-version = [
+    "py311",
+    "py312",
+]
 
 [tool.bandit]
 exclude_dirs = [
@@ -124,4 +135,4 @@ exclude_dirs = [
 
 [tool.uv]
 keyring-provider = "subprocess"
-native-tls = true
+system-certs = true

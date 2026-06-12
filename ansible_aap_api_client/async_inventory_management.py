@@ -1,5 +1,5 @@
 """
-AAP API client for inventory management
+Async AAP API client for inventory management
 """
 
 from typing import List, Union
@@ -8,11 +8,11 @@ from ansible_aap_api_client.schemas import (
     InventoryGroupRequestSchema,
     InventoryHostRequestSchema,
 )
-from ansible_aap_api_client.aap_client import AAPClient
-from ansible_aap_api_client.interfaces.runable import Runable
+from ansible_aap_api_client.async_aap_client import AsyncAAPClient
+from ansible_aap_api_client.interfaces.runable import AsyncRunable
 
 
-class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance-attributes
+class AsyncInventoryBuilder(AsyncRunable, AsyncAAPClient):  # pylint: disable=too-many-instance-attributes
     """Inventory builder class, this builds an inventory with groups and hosts
 
     :param base_url: The base url to use
@@ -85,51 +85,62 @@ class InventoryBuilder(Runable, AAPClient):  # pylint: disable=too-many-instance
         self.custom_groups_data = {}
         self.custom_hosts = []
 
-    def run(self) -> None:
+    async def run(self) -> None:
         """Run the inventory builder
 
+        :rtype: None
         :return: Runs the inventory builder
         """
-        self.inventory_id = self.create_inventory(inventory=self.inventory).get("id")
+        create_inventory_response = await self.create_inventory(inventory=self.inventory)
+        print(create_inventory_response)
+        self.inventory_id = create_inventory_response["id"]
 
-        self.ios_group_id = self.add_group_to_inventory(
+        add_ios_group_to_inventory_response = await self.add_group_to_inventory(
             inventory_id=self.inventory_id,
             group=self._get_group_request_schema("ios"),
-        ).get("id")
+        )
+
+        self.ios_group_id = add_ios_group_to_inventory_response["id"]
 
         for host in self.ios_hosts:
-            self.add_host_to_group(group_id=self.ios_group_id, host=host)
+            await self.add_host_to_group(group_id=self.ios_group_id, host=host)
 
-        self.iosxr_group_id = self.add_group_to_inventory(
+        add_iosxr_group_to_inventory_response = await self.add_group_to_inventory(
             inventory_id=self.inventory_id,
             group=self._get_group_request_schema("iosxr"),
-        ).get("id")
+        )
+
+        self.iosxr_group_id = add_iosxr_group_to_inventory_response["id"]
 
         for host in self.iosxr_hosts:
-            self.add_host_to_group(group_id=self.iosxr_group_id, host=host)
+            await self.add_host_to_group(group_id=self.iosxr_group_id, host=host)
 
-        self.nxos_group_id = self.add_group_to_inventory(
+        add_nxos_group_to_inventory_response = await self.add_group_to_inventory(
             inventory_id=self.inventory_id,
             group=self._get_group_request_schema("nxos"),
-        ).get("id")
+        )
+
+        self.nxos_group_id = add_nxos_group_to_inventory_response["id"]
 
         for host in self.nxos_hosts:
-            self.add_host_to_group(group_id=self.nxos_group_id, host=host)
+            await self.add_host_to_group(group_id=self.nxos_group_id, host=host)
 
-        self.eos_group_id = self.add_group_to_inventory(
+        add_eos_group_to_inventory_response = await self.add_group_to_inventory(
             inventory_id=self.inventory_id,
             group=self._get_group_request_schema("eos"),
-        ).get("id")
+        )
+
+        self.eos_group_id = add_eos_group_to_inventory_response["id"]
 
         for host in self.eos_hosts:
-            self.add_host_to_group(group_id=self.eos_group_id, host=host)
+            await self.add_host_to_group(group_id=self.eos_group_id, host=host)
 
         for group in self.custom_groups:
-            response = self.add_group_to_inventory(inventory_id=self.inventory_id, group=group)
+            response = await self.add_group_to_inventory(inventory_id=self.inventory_id, group=group)
             self.custom_groups_data[group.name] = response.get("id")
 
         for host in self.custom_hosts:
-            self.add_host_to_group(group_id=self.custom_groups_data[host["group_name"]], host=host["host"])
+            await self.add_host_to_group(group_id=self.custom_groups_data[host["group_name"]], host=host["host"])
 
     def _get_group_request_schema(self, nos: str) -> InventoryGroupRequestSchema:
         """Protected method to get group request schema

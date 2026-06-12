@@ -1,14 +1,14 @@
 """
-AAP Job Management
+Async AAP Job Management
 """
 
 from typing import Optional, Union
 import time
-from ansible_aap_api_client.aap_client import AAPClient
-from ansible_aap_api_client.interfaces.runable import Runable
+from ansible_aap_api_client.async_aap_client import AsyncAAPClient
+from ansible_aap_api_client.interfaces.runable import AsyncRunable
 
 
-class JobManagement(Runable, AAPClient):  # pylint: disable=too-many-ancestors
+class AsyncJobManagement(AsyncRunable, AsyncAAPClient):  # pylint: disable=too-many-ancestors
     """Job management class, to run a job template against an inventory
 
     :param base_url: The base url to use
@@ -45,24 +45,25 @@ class JobManagement(Runable, AAPClient):  # pylint: disable=too-many-ancestors
         self.inventory_id = None
         self.job_id = None
 
-    def run(self, **kwargs) -> None:
+    async def run(self, **kwargs) -> None:
         """Run the job management
 
         :param kwargs: The keyword arguments to pass to the launch_job_template method
 
         :return: Runs the inventory builder
         """
-        self.job_template_id = self.get_job_template_id(name=self.job_template_name)
-        self.inventory_id = self.get_inventory_id(name=self.inventory_name)
-        self.job_id = self.launch_job_template(
+        self.job_template_id = await self.get_job_template_id(name=self.job_template_name)
+        self.inventory_id = await self.get_inventory_id(name=self.inventory_name)
+        response = await self.launch_job_template(
             job_template_id=self.job_template_id, inventory=self.inventory_id, **kwargs
-        ).get("id")
+        )
 
-    def poll_completion(self, print_status: Optional[bool] = False, **kwargs) -> str:  # pragma: no cover
+        self.job_id = response.get("id")
+
+    async def poll_completion(self, print_status: Optional[bool] = False, **kwargs) -> str:  # pragma: no cover
         """Run the job and poll the completion of a job
 
         :param print_status: Print the status of the job
-
         :param kwargs: The keyword arguments to pass to the launch_job_template method
 
         :returns: The completed status of the job
@@ -73,7 +74,7 @@ class JobManagement(Runable, AAPClient):  # pylint: disable=too-many-ancestors
             raise TypeError(f"print_status must be of type bool, but received {type(print_status)}")
 
         if not self.job_id:
-            self.run(**kwargs)
+            await self.run(**kwargs)
 
         ok_statuses = ["successful", "failed", "error", "cancelled"]
 
@@ -84,7 +85,7 @@ class JobManagement(Runable, AAPClient):  # pylint: disable=too-many-ancestors
 
         while job_status not in ok_statuses:
             time.sleep(5)
-            job_status = self.get_job_status(job_id=self.job_id)
+            job_status = await self.get_job_status(job_id=self.job_id)
 
             if print_status:
                 print(f"Polling job_id {self.job_id} current status {job_status}")
