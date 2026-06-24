@@ -6,6 +6,7 @@ from typing import Optional, Union
 import time
 from ansible_aap_api_client.aap_client import AAPClient
 from ansible_aap_api_client.interfaces.runable import Runable
+from ansible_aap_api_client.schemas import JobManagementRunStatus
 
 
 class JobManagement(Runable, AAPClient):  # pylint: disable=too-many-ancestors
@@ -58,7 +59,9 @@ class JobManagement(Runable, AAPClient):  # pylint: disable=too-many-ancestors
             job_template_id=self.job_template_id, inventory=self.inventory_id, **kwargs
         ).get("id")
 
-    def poll_completion(self, print_status: Optional[bool] = False, **kwargs) -> str:  # pragma: no cover
+    def poll_completion(
+        self, print_status: Optional[bool] = False, **kwargs
+    ) -> JobManagementRunStatus:  # pragma: no cover
         """Run the job and poll the completion of a job
 
         :param print_status: Print the status of the job
@@ -95,4 +98,4 @@ class JobManagement(Runable, AAPClient):  # pylint: disable=too-many-ancestors
         if print_status:
             print(f"Polling job_id {self.job_id} completed status {job_status}")
 
-        return job_status
+        return JobManagementRunStatus(status=job_status, job_id=self.job_id)
