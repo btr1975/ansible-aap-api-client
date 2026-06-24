@@ -1,23 +1,21 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../../">
 <head>
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ansible_aap_api_client.interfaces package &mdash; ansible-aap-api-client v0.1.2 0.1.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=80d5e7a1" />
+  <title>ansible_aap_api_client.interfaces package &mdash; ansible-aap-api-client v1.0.1 1.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/my_theme.css?v=f7a27adb" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../../_static/documentation_options.js?v=92734c54"></script>
-        <script src="../../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -34,7 +32,7 @@
           
           
           <a href="../../index.html" class="icon icon-home">
-            ansible-aap-api-client v0.1.2
+            ansible-aap-api-client v1.0.1
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -53,18 +51,15 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#submodules">Submodules</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.aap_client">ansible_aap_api_client.aap_client module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.ansible_aap_api_client_cli">ansible_aap_api_client.ansible_aap_api_client_cli module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.base_connection">ansible_aap_api_client.base_connection module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.groups">ansible_aap_api_client.groups module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.hosts">ansible_aap_api_client.hosts module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.inventories">ansible_aap_api_client.inventories module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.async_aap_client">ansible_aap_api_client.async_aap_client module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.async_inventory_management">ansible_aap_api_client.async_inventory_management module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.async_job_management">ansible_aap_api_client.async_job_management module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.common_client_needs">ansible_aap_api_client.common_client_needs module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.inventory_management">ansible_aap_api_client.inventory_management module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.job_management">ansible_aap_api_client.job_management module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.job_templates">ansible_aap_api_client.job_templates module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.jobs">ansible_aap_api_client.jobs module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.organizations">ansible_aap_api_client.organizations module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.schemas">ansible_aap_api_client.schemas module</a></li>
-<li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client.version">ansible_aap_api_client.version module</a></li>
 <li class="toctree-l3"><a class="reference internal" href="ansible_aap_api_client.html#module-ansible_aap_api_client">Module contents</a></li>
 </ul>
 </li>
@@ -80,7 +75,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">ansible-aap-api-client v0.1.2</a>
+          <a href="../../index.html">ansible-aap-api-client v1.0.1</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -109,26 +104,47 @@
 <span id="ansible-aap-api-client-interfaces-runable-module"></span><h2>ansible_aap_api_client.interfaces.runable module<a class="headerlink" href="#module-ansible_aap_api_client.interfaces.runable" title="Link to this heading"></a></h2>
 <p>Runable interface</p>
 <dl class="py class">
+<dt class="sig sig-object py" id="ansible_aap_api_client.interfaces.runable.AsyncRunable">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansible_aap_api_client.interfaces.runable.</span></span><span class="sig-name descname"><span class="pre">AsyncRunable</span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/interfaces/runable.html#AsyncRunable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.interfaces.runable.AsyncRunable" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
+<p>Interface for a runable object</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.interfaces.runable.AsyncRunable.run">
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/interfaces/runable.html#AsyncRunable.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.interfaces.runable.AsyncRunable.run" title="Link to this definition"></a></dt>
+<dd><p>Abstract method to run an object asynchronously</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> – Arguments</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="ansible_aap_api_client.interfaces.runable.Runable">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansible_aap_api_client.interfaces.runable.</span></span><span class="sig-name descname"><span class="pre">Runable</span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/interfaces/runable.html#Runable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.interfaces.runable.Runable" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansible_aap_api_client.interfaces.runable.</span></span><span class="sig-name descname"><span class="pre">Runable</span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/interfaces/runable.html#Runable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.interfaces.runable.Runable" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Interface for a runable object</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.interfaces.runable.Runable.run">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/interfaces/runable.html#Runable.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.interfaces.runable.Runable.run" title="Link to this definition"></a></dt>
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/interfaces/runable.html#Runable.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.interfaces.runable.Runable.run" title="Link to this definition"></a></dt>
 <dd><p>Abstract method to run an object</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>args</strong> (<em>Tuple</em>) – Arguments</p></li>
-<li><p><strong>kwargs</strong> (<em>Dict</em>) – Keyword arguments</p></li>
+<li><p><strong>args</strong> – Arguments</p></li>
+<li><p><strong>kwargs</strong> – Keyword arguments</p></li>
 </ul>
 </dd>
-<dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p>None</p>
-</dd>
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Nothing</p>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nothing</p>
 </dd>
 </dl>
 </dd></dl>

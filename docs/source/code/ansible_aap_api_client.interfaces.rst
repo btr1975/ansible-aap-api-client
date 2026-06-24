@@ -9,13 +9,13 @@ ansible\_aap\_api\_client.interfaces.runable module
 
 .. automodule:: ansible_aap_api_client.interfaces.runable
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 Module contents
 ---------------
 
 .. automodule:: ansible_aap_api_client.interfaces
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:

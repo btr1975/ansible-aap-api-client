@@ -12,106 +12,82 @@ Subpackages
 Submodules
 ----------
 
+ansible\_aap\_api\_client.aap\_client module
+--------------------------------------------
+
+.. automodule:: ansible_aap_api_client.aap_client
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 ansible\_aap\_api\_client.ansible\_aap\_api\_client\_cli module
 ---------------------------------------------------------------
 
 .. automodule:: ansible_aap_api_client.ansible_aap_api_client_cli
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
-ansible\_aap\_api\_client.base\_connection module
--------------------------------------------------
+ansible\_aap\_api\_client.async\_aap\_client module
+---------------------------------------------------
 
-.. automodule:: ansible_aap_api_client.base_connection
+.. automodule:: ansible_aap_api_client.async_aap_client
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
-ansible\_aap\_api\_client.groups module
----------------------------------------
+ansible\_aap\_api\_client.async\_inventory\_management module
+-------------------------------------------------------------
 
-.. automodule:: ansible_aap_api_client.groups
+.. automodule:: ansible_aap_api_client.async_inventory_management
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
-ansible\_aap\_api\_client.hosts module
---------------------------------------
+ansible\_aap\_api\_client.async\_job\_management module
+-------------------------------------------------------
 
-.. automodule:: ansible_aap_api_client.hosts
+.. automodule:: ansible_aap_api_client.async_job_management
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
-ansible\_aap\_api\_client.inventories module
---------------------------------------------
+ansible\_aap\_api\_client.common\_client\_needs module
+------------------------------------------------------
 
-.. automodule:: ansible_aap_api_client.inventories
+.. automodule:: ansible_aap_api_client.common_client_needs
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 ansible\_aap\_api\_client.inventory\_management module
 ------------------------------------------------------
 
 .. automodule:: ansible_aap_api_client.inventory_management
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
 
 ansible\_aap\_api\_client.job\_management module
 ------------------------------------------------
 
 .. automodule:: ansible_aap_api_client.job_management
    :members:
-   :undoc-members:
    :show-inheritance:
-
-ansible\_aap\_api\_client.job\_templates module
------------------------------------------------
-
-.. automodule:: ansible_aap_api_client.job_templates
-   :members:
    :undoc-members:
-   :show-inheritance:
-
-ansible\_aap\_api\_client.jobs module
--------------------------------------
-
-.. automodule:: ansible_aap_api_client.jobs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-ansible\_aap\_api\_client.organizations module
-----------------------------------------------
-
-.. automodule:: ansible_aap_api_client.organizations
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 ansible\_aap\_api\_client.schemas module
 ----------------------------------------
 
 .. automodule:: ansible_aap_api_client.schemas
    :members:
-   :undoc-members:
    :show-inheritance:
-
-ansible\_aap\_api\_client.version module
-----------------------------------------
-
-.. automodule:: ansible_aap_api_client.version
-   :members:
    :undoc-members:
-   :show-inheritance:
 
 Module contents
 ---------------
 
 .. automodule:: ansible_aap_api_client
    :members:
-   :undoc-members:
    :show-inheritance:
+   :undoc-members:
