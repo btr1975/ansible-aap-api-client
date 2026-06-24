@@ -219,3 +219,19 @@ class JobTemplateRequestSchema(_BaseSchema):  # pylint: disable=too-many-instanc
     webhook_service: Optional[Literal["", "github", "gitlab", "bitbucket_dc"]] = None
     webhook_credential: Optional[int] = None
     prevent_instance_group_fallback: Optional[bool] = False
+
+
+@dataclass
+class JobManagementRunStatus(_BaseSchema):
+    """Job run status schema
+
+    :cvar status: The job status
+    :cvar job_id: The Job ID
+    """
+
+    status: str
+    job_id: int
+
+    def __post_init__(self):
+        self.validate_string("status", self.status)
+        self.validate_integer("job_id", self.job_id)

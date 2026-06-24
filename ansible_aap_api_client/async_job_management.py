@@ -6,6 +6,7 @@ from typing import Optional, Union
 import time
 from ansible_aap_api_client.async_aap_client import AsyncAAPClient
 from ansible_aap_api_client.interfaces.runable import AsyncRunable
+from ansible_aap_api_client.schemas import JobManagementRunStatus
 
 
 class AsyncJobManagement(AsyncRunable, AsyncAAPClient):  # pylint: disable=too-many-ancestors
@@ -60,7 +61,9 @@ class AsyncJobManagement(AsyncRunable, AsyncAAPClient):  # pylint: disable=too-m
 
         self.job_id = response.get("id")
 
-    async def poll_completion(self, print_status: Optional[bool] = False, **kwargs) -> str:  # pragma: no cover
+    async def poll_completion(
+        self, print_status: Optional[bool] = False, **kwargs
+    ) -> JobManagementRunStatus:  # pragma: no cover
         """Run the job and poll the completion of a job
 
         :param print_status: Print the status of the job
@@ -96,4 +99,4 @@ class AsyncJobManagement(AsyncRunable, AsyncAAPClient):  # pylint: disable=too-m
         if print_status:
             print(f"Polling job_id {self.job_id} completed status {job_status}")
 
-        return job_status
+        return JobManagementRunStatus(status=job_status, job_id=self.job_id)
