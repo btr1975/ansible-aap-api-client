@@ -6,14 +6,14 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ansible_aap_api_client package &mdash; ansible-aap-api-client v1.0.1 1.0.1 documentation</title>
+  <title>ansible_aap_api_client package &mdash; ansible-aap-api-client v1.0.2 1.0.2 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
       <link rel="stylesheet" type="text/css" href="../../_static/css/my_theme.css?v=f7a27adb" />
 
   
       <script src="../../_static/jquery.js?v=5d32c60e"></script>
       <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../../_static/documentation_options.js?v=292eb321"></script>
+      <script src="../../_static/documentation_options.js?v=1ed6394b"></script>
       <script src="../../_static/doctools.js?v=9bcbadda"></script>
       <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../../_static/js/theme.js"></script>
@@ -32,7 +32,7 @@
           
           
           <a href="../../index.html" class="icon icon-home">
-            ansible-aap-api-client v1.0.1
+            ansible-aap-api-client v1.0.2
           </a>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
@@ -73,6 +73,10 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ansible_aap_api_client.common_client_needs">ansible_aap_api_client.common_client_needs module</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-ansible_aap_api_client.enumerations">ansible_aap_api_client.enumerations module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#ansible_aap_api_client.enumerations.OrganizationDataEnum"><code class="docutils literal notranslate"><span class="pre">OrganizationDataEnum</span></code></a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="#module-ansible_aap_api_client.inventory_management">ansible_aap_api_client.inventory_management module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#ansible_aap_api_client.inventory_management.InventoryBuilder"><code class="docutils literal notranslate"><span class="pre">InventoryBuilder</span></code></a></li>
 </ul>
@@ -105,7 +109,7 @@
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu"  style="background: #2980B9" >
           <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../../index.html">ansible-aap-api-client v1.0.1</a>
+          <a href="../../index.html">ansible-aap-api-client v1.0.2</a>
       </nav>
 
       <div class="wy-nav-content">
@@ -616,6 +620,29 @@
 </dd>
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>TypeError</strong> – If name is not of type str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.aap_client.AAPClient.get_organization_data">
+<span class="sig-name descname"><span class="pre">get_organization_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.enumerations.OrganizationDataEnum" title="ansible_aap_api_client.enumerations.OrganizationDataEnum"><span class="pre">OrganizationDataEnum</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/aap_client.html#AAPClient.get_organization_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.aap_client.AAPClient.get_organization_data" title="Link to this definition"></a></dt>
+<dd><p>Get the data of an organization by organization name and data type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the organization</p></li>
+<li><p><strong>data_type</strong> – The type of data to retrieve</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The data of the organization</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If name is not of type str</p></li>
+<li><p><strong>TypeError</strong> – If data_type is not of type OrganizationDataEnum or str</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1250,6 +1277,29 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="ansible_aap_api_client.async_aap_client.AsyncAAPClient.get_organization_data">
+<em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_organization_data</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#ansible_aap_api_client.enumerations.OrganizationDataEnum" title="ansible_aap_api_client.enumerations.OrganizationDataEnum"><span class="pre">OrganizationDataEnum</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/async_aap_client.html#AsyncAAPClient.get_organization_data"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.async_aap_client.AsyncAAPClient.get_organization_data" title="Link to this definition"></a></dt>
+<dd><p>Get the data of an organization by organization name and data type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the organization</p></li>
+<li><p><strong>data_type</strong> – The type of data to retrieve</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The data of the organization</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>TypeError</strong> – If name is not of type str</p></li>
+<li><p><strong>TypeError</strong> – If data_type is not of type OrganizationDataEnum or str</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="ansible_aap_api_client.async_aap_client.AsyncAAPClient.get_organization_id">
 <em class="property"><span class="k"><span class="pre">async</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_organization_id</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="reference internal" href="../../_modules/ansible_aap_api_client/async_aap_client.html#AsyncAAPClient.get_organization_id"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.async_aap_client.AsyncAAPClient.get_organization_id" title="Link to this definition"></a></dt>
 <dd><p>Get the id of an organization if one exists</p>
@@ -1719,6 +1769,32 @@
 <section id="module-ansible_aap_api_client.common_client_needs">
 <span id="ansible-aap-api-client-common-client-needs-module"></span><h2>ansible_aap_api_client.common_client_needs module<a class="headerlink" href="#module-ansible_aap_api_client.common_client_needs" title="Link to this heading"></a></h2>
 <p>Common needs for integrations</p>
+</section>
+<section id="module-ansible_aap_api_client.enumerations">
+<span id="ansible-aap-api-client-enumerations-module"></span><h2>ansible_aap_api_client.enumerations module<a class="headerlink" href="#module-ansible_aap_api_client.enumerations" title="Link to this heading"></a></h2>
+<p>Enumerations</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="ansible_aap_api_client.enumerations.OrganizationDataEnum">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ansible_aap_api_client.enumerations.</span></span><span class="sig-name descname"><span class="pre">OrganizationDataEnum</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/ansible_aap_api_client/enumerations.html#OrganizationDataEnum"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ansible_aap_api_client.enumerations.OrganizationDataEnum" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enumeration for Organization Data</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansible_aap_api_client.enumerations.OrganizationDataEnum.INVENTORIES">
+<span class="sig-name descname"><span class="pre">INVENTORIES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'inventories'</span></em><a class="headerlink" href="#ansible_aap_api_client.enumerations.OrganizationDataEnum.INVENTORIES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansible_aap_api_client.enumerations.OrganizationDataEnum.JOB_TEMPLATES">
+<span class="sig-name descname"><span class="pre">JOB_TEMPLATES</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'job_templates'</span></em><a class="headerlink" href="#ansible_aap_api_client.enumerations.OrganizationDataEnum.JOB_TEMPLATES" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="ansible_aap_api_client.enumerations.OrganizationDataEnum.PROJECTS">
+<span class="sig-name descname"><span class="pre">PROJECTS</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'projects'</span></em><a class="headerlink" href="#ansible_aap_api_client.enumerations.OrganizationDataEnum.PROJECTS" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </section>
 <section id="module-ansible_aap_api_client.inventory_management">
 <span id="ansible-aap-api-client-inventory-management-module"></span><h2>ansible_aap_api_client.inventory_management module<a class="headerlink" href="#module-ansible_aap_api_client.inventory_management" title="Link to this heading"></a></h2>

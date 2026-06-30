@@ -60,6 +60,14 @@ ansible\_aap\_api\_client.common\_client\_needs module
    :show-inheritance:
    :undoc-members:
 
+ansible\_aap\_api\_client.enumerations module
+---------------------------------------------
+
+.. automodule:: ansible_aap_api_client.enumerations
+   :members:
+   :show-inheritance:
+   :undoc-members:
+
 ansible\_aap\_api\_client.inventory\_management module
 ------------------------------------------------------
 
