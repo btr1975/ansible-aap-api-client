@@ -15,3 +15,6 @@ from ansible_aap_api_client.schemas import (
     InventoryGroupRequestSchema,
     OrganizationRequestSchema,
 )
+from ansible_aap_api_client.enumerations import (
+    OrganizationDataEnum,
+)

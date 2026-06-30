@@ -11,6 +11,7 @@ from ansible_aap_api_client.schemas import (
     InventoryRequestSchema,
     OrganizationRequestSchema,
 )
+from ansible_aap_api_client.enumerations import OrganizationDataEnum
 
 
 class AsyncAAPClient(_CommonClientNeeds):
@@ -568,6 +569,36 @@ class AsyncAAPClient(_CommonClientNeeds):
             raise ValueError(f"found {len(results)} organizations with name {name}")
 
         return results[0]["id"]
+
+    async def get_organization_data(self, name: str, data_type: OrganizationDataEnum | str) -> dict:
+        """Get the data of an organization by organization name and data type
+
+        :param name: The name of the organization
+        :param data_type: The type of data to retrieve
+
+        :returns: The data of the organization
+
+        :raises TypeError: If name is not of type str
+        :raises TypeError: If data_type is not of type OrganizationDataEnum or str
+        """
+        self.is_string(value=name)
+
+        org_result = await self.get_organization(name=name)
+
+        if isinstance(data_type, OrganizationDataEnum):
+            uri = org_result["results"][0]["related"][data_type.value]
+
+        elif isinstance(data_type, str):
+            uri = org_result["results"][0]["related"][OrganizationDataEnum(data_type).value]
+
+        else:
+            raise TypeError(f"data_type must be of type OrganizationDataEnum or str, but received {type(data_type)}")
+
+        url = self.url_join(self._base_url, uri)
+
+        result = await self._session.get(url=url)
+
+        return result.json()
 
     async def delete_organization(self, organization_id: int) -> None | int:
         """Delete organization
